@@ -18,7 +18,7 @@ function print() {
 
 
 var write = function (x) {
-    gameRef.set({
+    gameRef.update({
         player : x
     }).then(function () {
         console.log("Alhamdulillah", x);
@@ -192,3 +192,74 @@ class cell {
         this.value = p;
     }
 }
+
+
+///////
+///////
+///////
+///////
+
+
+
+
+
+
+
+
+
+var nameArr = [];
+var p;
+var me;
+var btn = document.getElementById("btn");
+btn.addEventListener('click', myFunction);
+var writeChatName = function (x) {
+    gameRef.update({
+        name: x
+    }).then(function () {
+        console.log("Alhamdulillah", x);
+
+    }).catch(function (err) {
+        console.log("Astagfirullah", err);
+    });
+}
+
+var writeChat = function (x) {
+    gameRef.update({
+        chat: x
+    }).then(function () {
+        console.log("Alhamdulillah", x);
+
+    }).catch(function (err) {
+        console.log("Astagfirullah", err);
+    });
+}
+var readChat = function () {
+    gameRef.onSnapshot(function (doc) {
+        if (doc && doc.exists) {
+            var data = doc.data().chat;
+            p = document.createElement('p');
+            p.innerHTML = data
+            p.style.marginBottom = 6;
+            p.style.marginLeft = 6;
+            console.log("Alhamdulillah Chat", data);
+            document.body.appendChild(p);
+        }
+    })
+}
+
+function myFunction() {
+
+    if(btn.innerHTML == "Submit Name") {
+        var str = document.getElementById("myText").value;
+        document.getElementById("myText").style.visibility = 'hidden';
+        document.getElementById("chatBox").style.visibility = 'visible';
+        btn.innerHTML = "Submit";
+        nameArr.push(str);
+        writeChatName(nameArr);
+        
+    } else if (btn.innerHTML == "Submit") {
+        var str = document.getElementById("chatBox").value;
+        writeChat(str);
+    }
+}
+readChat();
