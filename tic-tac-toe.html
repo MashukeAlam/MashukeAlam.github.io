@@ -18,6 +18,18 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
 
     <title>Heaven of 'J'</title>
+
+    <style>
+        .divSquare {
+            width: 150px;
+            height: 150px;
+            margin: 2px;
+            border: 2px solid black;
+            float: left;
+            text-align: center;
+            font-size: 50px;
+        }
+    </style>
 </head>
 
 <body>
@@ -51,7 +63,58 @@
         </div>
     </nav>
     <p>Bismillah</p>
+    <!--Grid For TicTacToe-->
+    <div id="parent">
+        <div class="divSquare" id="row00"></div>
+        <div class="divSquare" id="row01"></div>
+        <div class="divSquare" id="row02"></div>
+        
+        <div style='clear:both'></div>
+        <div class="divSquare" id="row10"></div>
+        <div class="divSquare" id="row11"></div>
+        <div class="divSquare" id="row12"></div>
+        
+        <div style='clear:both'></div>
+        <div class="divSquare" id="row20"></div>
+        <div class="divSquare" id="row21"></div>
+        <div class="divSquare" id="row22"></div>
+        
+        <div style='clear:both'></div>
+        
+
+
+
+
+    <!--Alhamdulillah-->
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyADeK9kLov5ekc2arcQv7I16AGhJYm7Zh8",
+            authDomain: "tictactoe-230f0.firebaseapp.com",
+            databaseURL: "https://tictactoe-230f0.firebaseio.com",
+            projectId: "tictactoe-230f0",
+            storageBucket: "tictactoe-230f0.appspot.com",
+            messagingSenderId: "409723747128",
+            appId: "1:409723747128:web:2b86adf83e1bc23c"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+
+
+
+    </script>
+    <script src="game1.js" type="text/javascript"></script>
 
 </body>
-<script src="game1.js" type="text/javascript"></script>
+
+
+
+
 </html>
