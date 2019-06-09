@@ -8,10 +8,10 @@ function print() {
     for (var i = 0; i < 3; i++) {
         for (var j = 0; j < 3; j++) {
             var p = grid[i][j];
-            console.log(p);
-            console.log(" ");
+            ////console.log(p);
+            ////console.log(" ");
         }
-        console.log('\n');
+        //console.log('\n');
 
     }
 }
@@ -21,10 +21,10 @@ var write = function (x) {
     gameRef.update({
         player : x
     }).then(function () {
-        console.log("Alhamdulillah", x);
+        //console.log("Alhamdulillah", x);
 
     }).catch(function (err) {
-        console.log("Astagfirullah", err);
+        //console.log("Astagfirullah", err);
 
     });
 }
@@ -73,7 +73,7 @@ var read = function () {
         if (doc && doc.exists) {
             var data = doc.data().player;
             grid = data;
-            console.log(grid);
+            //console.log(grid);
             
             draw(grid);
         }
@@ -84,7 +84,7 @@ var checkAndUpdate = function (id) {
     document.getElementById(id).innerHTML = currentTurn;
     if (currentTurn === 'o') currentTurn = 'x';
     else currentTurn = 'o';
-    console.log(currentTurn);
+    //console.log(currentTurn);
 
 }
 //tictacccc
@@ -104,7 +104,7 @@ document.getElementById('row00').addEventListener("click", function () {
     write(grid)
     if (currentTurn === 'o') currentTurn = 'x';
     else currentTurn = 'o';
-    console.log(currentTurn);
+    //console.log(currentTurn);
     //print();
 
 });
@@ -114,7 +114,7 @@ document.getElementById('row01').addEventListener("click", function () {
     write(grid)
     if (currentTurn === 'o') currentTurn = 'x';
     else currentTurn = 'o';
-    console.log(currentTurn);
+    //console.log(currentTurn);
 
 });
 document.getElementById('row02').addEventListener("click", function () {
@@ -123,7 +123,7 @@ document.getElementById('row02').addEventListener("click", function () {
     write(grid)
     if (currentTurn === 'o') currentTurn = 'x';
     else currentTurn = 'o';
-    console.log(currentTurn);
+    //console.log(currentTurn);
 
 });
 document.getElementById('row10').addEventListener("click", function () {
@@ -132,7 +132,7 @@ document.getElementById('row10').addEventListener("click", function () {
     write(grid)
     if (currentTurn === 'o') currentTurn = 'x';
     else currentTurn = 'o';
-    console.log(currentTurn);
+    //console.log(currentTurn);
 
 });
 document.getElementById('row11').addEventListener("click", function () {
@@ -141,7 +141,7 @@ document.getElementById('row11').addEventListener("click", function () {
     write(grid)
     if (currentTurn === 'o') currentTurn = 'x';
     else currentTurn = 'o';
-    console.log(currentTurn);
+    //console.log(currentTurn);
 
 });
 document.getElementById('row12').addEventListener("click", function () {
@@ -150,7 +150,7 @@ document.getElementById('row12').addEventListener("click", function () {
     write(grid)
     if (currentTurn === 'o') currentTurn = 'x';
     else currentTurn = 'o';
-    console.log(currentTurn);
+    //console.log(currentTurn);
 
 });
 document.getElementById('row20').addEventListener("click", function () {
@@ -159,7 +159,7 @@ document.getElementById('row20').addEventListener("click", function () {
     write(grid)
     if (currentTurn === 'o') currentTurn = 'x';
     else currentTurn = 'o';
-    console.log(currentTurn);
+    //console.log(currentTurn);
 
 });
 document.getElementById('row21').addEventListener("click", function () {
@@ -168,7 +168,7 @@ document.getElementById('row21').addEventListener("click", function () {
     write(grid)
     if (currentTurn === 'o') currentTurn = 'x';
     else currentTurn = 'o';
-    console.log(currentTurn);
+    //console.log(currentTurn);
 
 });
 document.getElementById('row22').addEventListener("click", function () {
@@ -177,7 +177,7 @@ document.getElementById('row22').addEventListener("click", function () {
     write(grid)
     if (currentTurn === 'o') currentTurn = 'x';
     else currentTurn = 'o';
-    console.log(currentTurn);
+    //console.log(currentTurn);
     read();
 });
 write(grid)
@@ -207,7 +207,7 @@ class cell {
 
 
 
-var nameArr = [];
+
 var p;
 var me;
 var btn = document.getElementById("btn");
@@ -216,10 +216,10 @@ var writeChatName = function (x) {
     gameRef.update({
         name: x
     }).then(function () {
-        console.log("Alhamdulillah", x);
+        //console.log("Alhamdulillah", x);
 
     }).catch(function (err) {
-        console.log("Astagfirullah", err);
+        //console.log("Astagfirullah", err);
     });
 }
 
@@ -227,10 +227,10 @@ var writeChat = function (x) {
     gameRef.update({
         chat: x
     }).then(function () {
-        console.log("Alhamdulillah", x);
+        //console.log("Alhamdulillah", x);
 
     }).catch(function (err) {
-        console.log("Astagfirullah", err);
+        //console.log("Astagfirullah", err);
     });
 }
 var readChat = function () {
@@ -241,7 +241,7 @@ var readChat = function () {
             p.innerHTML = data
             p.style.marginBottom = 6;
             p.style.marginLeft = 6;
-            console.log("Alhamdulillah Chat", data);
+            //console.log("Alhamdulillah Chat", data);
             document.body.appendChild(p);
         }
     })
@@ -250,16 +250,17 @@ var readChat = function () {
 function myFunction() {
 
     if(btn.innerHTML == "Submit Name") {
-        var str = document.getElementById("myText").value;
-        document.getElementById("myText").style.visibility = 'hidden';
-        document.getElementById("chatBox").style.visibility = 'visible';
+        var person = prompt("Please enter your name", "Harry Potter");
+        if (person != null) {
+            me = person;
+        }
         btn.innerHTML = "Submit";
-        nameArr.push(str);
-        writeChatName(nameArr);
-        
+        //document.getElementById('myText').style.visibility = 'hidden';
+        document.getElementById('chatBox').style.visibility = 'visible';
+
     } else if (btn.innerHTML == "Submit") {
         var str = document.getElementById("chatBox").value;
-        writeChat(str);
+        writeChat(me + "::" + str);
     }
 }
 readChat();
