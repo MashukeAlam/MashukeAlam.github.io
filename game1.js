@@ -261,6 +261,7 @@ function myFunction() {
     } else if (btn.innerHTML == "Submit") {
         var str = document.getElementById("chatBox").value;
         writeChat(me + "::" + str);
+        document.getElementById("chatBox").value = "";
     }
 }
 readChat();
