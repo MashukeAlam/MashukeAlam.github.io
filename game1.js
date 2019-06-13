@@ -225,7 +225,7 @@ btn.addEventListener('click', function () {
 
     } else if (btn.innerHTML == "Submit") {
         var str = document.getElementById("chatBox").value;
-        writeChat(me + "::" + str);
+        writeChat(me + "::- " + str);
         document.getElementById("chatBox").value = "";
     }
 });
@@ -254,10 +254,23 @@ var readChat = function () {
     chatRef.onSnapshot(function (doc) {
         if (doc && doc.exists) {
             var data = doc.data().chat;
+            var who = data.split("::-");
+
+
             p = document.createElement('p');
             p.innerHTML = data
             p.style.marginBottom = 6;
             p.style.marginLeft = 6;
+
+            if(who[0] === me) {
+                p.style.color = "green";
+            }else {
+                console.log(who[0]);
+                
+                p.style.color = "red";
+                p.style.fontStyle = "italic";
+                p.style.fontWeight = "bold";
+            }
             //console.log("Alhamdulillah Chat", data);
             document.body.appendChild(p);
         }
