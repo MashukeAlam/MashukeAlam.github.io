@@ -210,10 +210,27 @@ class cell {
 
 var p;
 var me;
+var chatRef = database.collection('user').doc('chat');
+
 var btn = document.getElementById("btn");
-btn.addEventListener('click', myFunction);
+btn.addEventListener('click', function () {
+    if (btn.innerHTML == "Submit Name") {
+        var person = prompt("Please enter your name", "Harry Potter");
+        if (person != null) {
+            me = person;
+        }
+        btn.innerHTML = "Submit";
+        //document.getElementById('myText').style.visibility = 'hidden';
+        document.getElementById('chatBox').style.visibility = 'visible';
+
+    } else if (btn.innerHTML == "Submit") {
+        var str = document.getElementById("chatBox").value;
+        writeChat(me + "::" + str);
+        document.getElementById("chatBox").value = "";
+    }
+});
 var writeChatName = function (x) {
-    gameRef.update({
+    chatRef.update({
         name: x
     }).then(function () {
         //console.log("Alhamdulillah", x);
@@ -224,7 +241,7 @@ var writeChatName = function (x) {
 }
 
 var writeChat = function (x) {
-    gameRef.update({
+    chatRef.update({
         chat: x
     }).then(function () {
         //console.log("Alhamdulillah", x);
@@ -234,7 +251,7 @@ var writeChat = function (x) {
     });
 }
 var readChat = function () {
-    gameRef.onSnapshot(function (doc) {
+    chatRef.onSnapshot(function (doc) {
         if (doc && doc.exists) {
             var data = doc.data().chat;
             p = document.createElement('p');
@@ -247,6 +264,8 @@ var readChat = function () {
     })
 }
 
+
+/*
 function myFunction() {
 
     if(btn.innerHTML == "Submit Name") {
@@ -263,5 +282,5 @@ function myFunction() {
         writeChat(me + "::" + str);
         document.getElementById("chatBox").value = "";
     }
-}
+}*/
 readChat();
