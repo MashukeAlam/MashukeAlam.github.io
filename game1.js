@@ -211,8 +211,28 @@ class cell {
 var p;
 var me;
 var chatRef = database.collection('user').doc('chat');
-
+var box = document.getElementById('chatBox');
 var btn = document.getElementById("btn");
+
+box.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        if (btn.innerHTML == "Submit Name") {
+            var person = prompt("Please enter your name", "Harry Potter");
+            if (person != null) {
+                me = person;
+            }
+            btn.innerHTML = "Submit";
+            //document.getElementById('myText').style.visibility = 'hidden';
+            document.getElementById('chatBox').style.visibility = 'visible';
+
+        } else if (btn.innerHTML == "Submit") {
+            var str = document.getElementById("chatBox").value;
+            writeChat(me + "::- " + str);
+            document.getElementById("chatBox").value = "";
+        }
+    }
+});
+
 btn.addEventListener('click', function () {
     if (btn.innerHTML == "Submit Name") {
         var person = prompt("Please enter your name", "Harry Potter");
@@ -273,6 +293,7 @@ var readChat = function () {
             }
             //console.log("Alhamdulillah Chat", data);
             document.body.appendChild(p);
+            window.scrollTo(0, document.body.scrollHeight);
         }
     })
 }
