@@ -265,7 +265,7 @@ function makeTable(a) {
         p.style.marginBottom = 6;
         p.style.marginLeft = 6;
         p.style.fontSize = 12;
-        p.innerHTML = "Name: " + a[i].name + "    Score: " + a[i].score;
+        p.innerHTML ="Rank #" + a.length - i + 1 +  "Name: " + a[i].name + "    Score: " + a[i].score;
         if(a.length - i <= 3) {
                 p.style.color = "green";
                 p.style.fontStyle = "italic";
