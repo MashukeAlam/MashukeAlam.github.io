@@ -1,5 +1,5 @@
 console.log('alhamdulillah');
-
+let LIMIT = 100;
 
 
 //FIREBASE
@@ -19,20 +19,20 @@ c.fillStyle = "#0099ff";
 
 let WIDTH = innerWidth;
 let HEIGHT = innerHeight;
-
+let PERSON;
 while(true) {
-    let PERSON = prompt("Please enter your name", "");
+    PERSON = prompt("Please enter your name", "");
     if(PERSON != null) {
-        var data2Push = {
-            name: PERSON,
-            browser: navigator.userAgent
-        }
-        REF.push(data2Push);
+        
         break;
     }
 
 }
-
+//player
+function Player(name, score) {
+    this.name = name;
+    this.score = score;
+}
 //food
 function Food(x, y) {
     this.x = x;
@@ -65,9 +65,11 @@ function Snake() {
         //console.log(temp.pop());
         //this.y += 10;
         //this.y += 10;
+        var left = LIMIT - Math.floor(TIME);
         c.font = "19px Arial";
         c.fillStyle = "white";
-        c.fillText("" + SCORE, canvasW - 30, 30);
+        c.fillText("Score: " + SCORE, canvasW - 180, 60);
+        c.fillText("Time left: " + left + " seconds", canvasW - 200, 30)
         for (var i = 0; i < this.body.length; i++) {
             var piece = this.body[i];
             c.fillStyle = 'lightgreen';
@@ -104,11 +106,11 @@ function Snake() {
         
         this.body.pop();
         if (headX > canvasW) {
-            headX = headX - canvasW;
+            headX = 0;
         } else if (headX < 0) {
             headX = canvasW;
         } else if (headY > canvasH) {
-            headY = headY - canvasH;
+            headY = 0;
         } else if (headY < 0) {
             headY = canvasH;
         }
@@ -197,10 +199,13 @@ var s = new Snake();
 
 s.lenUpdate();
 s.lenUpdate();
+let TIME = 0;
+var id = null;
 function animate() {
-    setTimeout(function () {
+    
+    id = setTimeout(function () {
         requestAnimationFrame(animate);
-
+        TIME += 0.1;
     }, 1000 / FPS);
     //console.log('animating');
     c.fillStyle = "green";
@@ -208,7 +213,71 @@ function animate() {
     //s.lenUpdate();
     s.draw();
     s.game();
+    if(TIME > LIMIT) {
+        clearTimeout(id);
+        //requestAnimationFrame(null)
+        submitScore(SCORE);
+    }
+    //TIME++;
+    console.log(TIME);
+    
+}
+var playersInfo =  [];
+function submitScore(x) {
+    var data2Push = {
+        name: PERSON,
+        browser: navigator.userAgent,
+        score: x
+    }
+    REF.push(data2Push); 
+    REF.on('value', gotdata, errdata);
+    
+    function gotdata(data) {
+        var s = data.val();
+        var keys = Object.keys(s);
+        console.log(keys);
+
+        for(var i = 0; i < keys.length; i++) {
+            var k = keys[i];
+            var name = s[k].name;
+            var point = s[k].score;
+            console.log(name, point);
+            var p = new Player(name, point);
+            playersInfo.push(p);
+        }
+        
+        playersInfo.sort(comp);
+        console.log(playersInfo);
+        makeTable(playersInfo);        
+    }
+
+    function errdata(err) {
+        console.log(err);
+        
+    }
 }
 
-
+function makeTable(a) {
+    console.log(a);
+    
+    for(var i = a.length - 1; i >= 0; i--) {
+        var p = document.createElement('p');
+        p.style.marginBottom = 6;
+        p.style.marginLeft = 6;
+        p.style.fontSize = 12;
+        p.innerHTML = "Name: " + a[i].name + "    Score: " + a[i].score;
+        if(a.length - i <= 3) {
+                p.style.color = "green";
+                p.style.fontStyle = "italic";
+                p.style.fontWeight = "bold";
+        }
+        document.body.appendChild(p);
+    }
+   
+}
+function comp(a, b) {
+    if(a.score > b.score) return 1;
+    if(a.score > b.score) return -1;
+    return 0;
+}
 animate();
