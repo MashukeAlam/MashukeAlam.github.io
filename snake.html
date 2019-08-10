@@ -24,7 +24,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Heaven of 'J'</a>
+                <a class="navbar-brand" href="index.html">Heaven of 'J'</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="index.html">Home</a></li>
@@ -36,16 +36,55 @@
                         <li><a href="git-link-2.html">Kid's Code (Earlier Life)</a></li>
                         <li><a href="#">Youtube Video Syncing within Friends</a></li>
                         <li><a href="#">Game (Not yet implemented)</a></li>
+                        <li><a href="room-together.html">RoomTogether</a></li>
+                        <li><a href="fb.html">FB--</a></li>
+                        <li><a href="photoseasy.html">Google Photots</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Games
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="tic-tac-toe.html">Tic Tac Toe</a></li>
+                        <li><a href="tetris.html">Tetris</a></li>
+                        <li><a href="snake.html">Tetris</a></li>
+                        
                     </ul>
                 </li>
                 <li><a href="contact.html">Contacts</a></li>
             </ul>
         </div>
     </nav>
-    <!--Below Nav Head-->
-    
+    <p>Bismillah</p>
+    <canvas id="canvas_board">Sorry use a good browser</canvas>
+
+  <!--Alhamdulillah-->
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
+
+  <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+          apiKey: "AIzaSyADeK9kLov5ekc2arcQv7I16AGhJYm7Zh8",
+          authDomain: "tictactoe-230f0.firebaseapp.com",
+          databaseURL: "https://tictactoe-230f0.firebaseio.com",
+          projectId: "tictactoe-230f0",
+          storageBucket: "tictactoe-230f0.appspot.com",
+          messagingSenderId: "409723747128",
+          appId: "1:409723747128:web:2b86adf83e1bc23c"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+
+
+
+  </script>
+  
 </body>
-<script src="app.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="snake.js"></script>
 </html>
-
-
