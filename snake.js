@@ -194,13 +194,9 @@ function press(e) {
 
 init();
 var s = new Snake();
-var l = new Snake();
-l.y = 300;
 
 s.lenUpdate();
 s.lenUpdate();
-l.lenUpdate();
-l.lenUpdate();
 function animate() {
     setTimeout(function () {
         requestAnimationFrame(animate);
@@ -212,9 +208,6 @@ function animate() {
     //s.lenUpdate();
     s.draw();
     s.game();
-    //s.lenUpdate();
-    l.draw();
-    l.game();
 }
 
 
