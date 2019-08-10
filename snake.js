@@ -1,10 +1,11 @@
+console.log('alhamdulillah');
+
+
 
 //FIREBASE
-const database = firebase.firestore();
-var snakeRef = database.collection('user').doc('snake');
+var db = firebase.database();
+var REF = db.ref('scores');
 //
-
-console.log('alhamdulillah');
 let DIR = 'RIGHT';
 let FPS = 10;
 let SCORE = 0;
@@ -19,7 +20,19 @@ c.fillStyle = "#0099ff";
 let WIDTH = innerWidth;
 let HEIGHT = innerHeight;
 
-let PERSON = prompt("Please enter your name", "");
+while(true) {
+    let PERSON = prompt("Please enter your name", "");
+    if(PERSON != null) {
+        var data2Push = {
+            name: PERSON,
+            browser: navigator.userAgent
+        }
+        REF.push(data2Push);
+        break;
+    }
+
+}
+
 //food
 function Food(x, y) {
     this.x = x;
@@ -206,41 +219,3 @@ function animate() {
 
 
 animate();
-
-
-
-//SERVER FIREBASE WRITE READ
-var names;
-var jim = ["ss", "ff"];
-var write = function (x) {
-    console.log('ssssssssssss');
-    read();
-    snakeRef.update({
-        who: x
-    }).then(function () {
-    }).catch(function (err) {
-    });
-}
-var read = function () {
-    var arr;
-    snakeRef.onSnapshot(function (doc) {
-        if(doc && doc.exists) {
-            var arr = doc.data().who;
-            
-                
-        }
-    });
-
-    //console.log(names);
-    
-    
-}
- 
-function doSomething(a) {
-    names = a;
-    console.log(a, names);
-    names.push(PERSON);
-    
-}
-
-
