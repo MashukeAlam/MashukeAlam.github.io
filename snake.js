@@ -169,7 +169,10 @@ function randomFoodPos() {
         var randomX = Math.ceil(Math.random() * 50 )  * 10;
         var randomY = Math.ceil(Math.random() * 50 ) * 10;
         //console.log(randomX, randomY);
-        
+        if(randomX < 20 && randomY < 20) {
+            randomX += 20;
+            randomY += 20;
+        }
         return [randomX, randomY];
 }
 
@@ -265,7 +268,8 @@ function makeTable(a) {
         p.style.marginBottom = 6;
         p.style.marginLeft = 6;
         p.style.fontSize = 12;
-        p.innerHTML ="Rank #" + a.length - i + 1 +  "Name: " + a[i].name + "    Score: " + a[i].score;
+        var rank = a.length - i;
+        p.innerHTML ="Rank #: " + rank +  " |Name: " + a[i].name + "    Score: " + a[i].score;
         if(a.length - i <= 3) {
                 p.style.color = "green";
                 p.style.fontStyle = "italic";
