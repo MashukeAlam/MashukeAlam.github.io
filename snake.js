@@ -166,13 +166,15 @@ function init() {
 function randomFoodPos() {
     var min = 0;
         var max = canvasW;
-        var randomX = Math.ceil(Math.random() * 50 )  * 10;
-        var randomY = Math.ceil(Math.random() * 50 ) * 10;
+        var randomX = Math.ceil(Math.random() * 45 )  * 10;
+        var randomY = Math.ceil(Math.random() * 45 ) * 10;
         //console.log(randomX, randomY);
-        if(randomX < 20 && randomY < 20) {
-            randomX += 20;
-            randomY += 20;
+        if(randomX < 40 && randomY < 40) {
+            randomX += 50;
+            randomY += 50;
         }
+        console.log(randomX, randomY);
+        
         return [randomX, randomY];
 }
 
@@ -222,7 +224,7 @@ function animate() {
         submitScore(SCORE);
     }
     //TIME++;
-    console.log(TIME);
+    //console.log(TIME);
     
 }
 var playersInfo =  [];
@@ -269,6 +271,9 @@ function makeTable(a) {
         p.style.marginLeft = 6;
         p.style.fontSize = 12;
         var rank = a.length - i;
+        if(a[i].name == PERSON) {
+            p.style.backgroundColor = "pink";
+        } else p.style.backgroundColor = "white";
         p.innerHTML ="Rank #: " + rank +  " |Name: " + a[i].name + "    Score: " + a[i].score;
         if(a.length - i <= 3) {
                 p.style.color = "green";
