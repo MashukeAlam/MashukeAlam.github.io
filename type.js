@@ -46,6 +46,8 @@ var db = firebase.database();
 var REF = db.ref('scores_typing');
 var playersInfo = [];
 
+box.value = "";
+box.style.width = window.innerWidth;
 function Player(name, score) {
     this.name = name;
     this.score = score;
@@ -58,45 +60,23 @@ function init() {
     selectedQuote = QUOTES[indx].split(" ");
     currentIndx = 0;
     currentWord = selectedQuote[currentIndx];
+    box.focus();
 }
 
 box.onkeyup = function (e) {
     var key = e.keyCode;
 
-    console.log('alhamdulillah');
+    //console.log('alhamdulillah');
 
-    if (key == SPACE || key == RETURN) {
+    if (key == RETURN) {
 
-        if (key == SPACE) {
-            var matched = str == currentWord;
-            console.log(matched, currentWord, str);
-
-
-            if (matched) {
-                typed.innerHTML += " " + str;
-                typed.style.fontSize = 15;
-                typed.style.color = "green";
-                str = "";
-                box.value = "";
-
-                currentIndx++;
-                if (currentIndx == selectedQuote.length) {
-                    clearInterval(timer);
-                    let wpm = Math.floor(selectedQuote.length / (TIME / 60));
-                    PERSON = prompt("Done! \nYour performance was " + wpm + " WPM", "");
-                    if(PERSON != null) {
-                        submitScoreBabe(wpm);
-                    } 
-                }
-                currentWord = selectedQuote[currentIndx];
-            } else {
-                typed.style.color = "red";
-            }
-        } else {
-            var finalType;
-            if (selectedQuote[selectedQuote.length - 1] == str) {
-                finalType = typed.innerHTML;
-                finalType += " " + str;
+        
+            var finalType = str;
+            finalType = finalType.replace(/\s+$/, '');
+            //console.log(finalType);
+            
+            if (finalType == p.innerHTML) {
+                typed.innerHTML = "";
                 typed.style.color = "green";
                 str = "";
                 box.value = "";
@@ -108,11 +88,23 @@ box.onkeyup = function (e) {
                     submitScoreBabe(wpm);
                 } 
             } else {
-                typed.style.color = "red";
+                var end = finalType.split(" ");
+                for(var i =0; i < selectedQuote.length; i++) {
+                    var matched = end[i] == selectedQuote[i];
+                    if(!matched) {
+                        //console.log(end[i], selectedQuote[i]);
+                        var color = "red";
+                        var errSpan = "<span style = 'background-color: " + color + ";'>" + selectedQuote[i] + "</span>";
+                        //break;
+                        typed.innerHTML += errSpan + " ";
+                    }else {
+                        typed.innerHTML += end[i] + " ";
+                    }
+                }
             }
             //console.log(finalType);
 
-        }
+        
     } else {
         str = this.value;
     }
@@ -127,8 +119,17 @@ function clicked() {
     }, 1000);
 }
 
+function humiliate() {
+    typed.style.backgroundColor = "red";
+    typed.style.fontStyle = "bold | italic";
+    typed.innerHTML = "Hey cheater! Don't copy paste damn it!\nThis page will reload after 5 seconds.";
+    setTimeout(() => {
+        window.location.reload(false);
+    }, 5000);
+    return false;
+}
 function submitScoreBabe(x) {
-    console.log('here');
+    //console.log('here');
     
     var data2Push = {
         name: PERSON,
@@ -141,19 +142,19 @@ function submitScoreBabe(x) {
     function gotdata(data) {
         var s = data.val();
         var keys = Object.keys(s);
-        console.log(keys);
+        //console.log(keys);
 
         for(var i = 0; i < keys.length; i++) {
             var k = keys[i];
             var name = s[k].name;
             var point = s[k].score;
-            console.log(name, point);
+            //console.log(name, point);
             var p = new Player(name, point);
             playersInfo.push(p);
         }
         
         playersInfo.sort(comp);
-        console.log(playersInfo);
+        //console.log(playersInfo);
         makeTable(playersInfo);        
     }
 
@@ -164,7 +165,7 @@ function submitScoreBabe(x) {
 }
 
 function makeTable(a) {
-    console.log(a);
+    //console.log(a);
     
     for(var i = a.length - 1; i >= 0; i--) {
         var p = document.createElement('p');
@@ -172,7 +173,12 @@ function makeTable(a) {
         p.style.marginLeft = 6;
         p.style.fontSize = 12;
         var rank = a.length - i;
-        p.innerHTML ="Rank #" + rank +  ": |Name: " + a[i].name + "   | Score: " + a[i].score;
+        if(a[i].name == PERSON) {
+            p.style.backgroundColor = "pink";
+        } else {
+            p.style.backgroundColor = "white";
+        }
+        p.innerHTML ="Rank #" + rank +  ": |Name: " + a[i].name + "   | Score: " + a[i].score + "WPM";
         if(a.length - i <= 3) {
                 p.style.color = "green";
                 p.style.fontStyle = "italic";

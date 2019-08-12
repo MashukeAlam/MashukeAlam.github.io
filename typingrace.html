@@ -63,7 +63,7 @@
         <button id="btn" onclick="clicked()">Start Race</button>
         <p id="quotes2Type"></p>
         <form>
-            <input id="typebox" type="text" name="type" onkeypress="return event.keyCode != 13">
+            <input id="typebox" type="text" name="type" onkeypress="return event.keyCode != 13" oncopy="return false" onpaste="humiliate()">
         </form>
         <p id="typed"></p>
     </div>    
