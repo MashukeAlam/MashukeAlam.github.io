@@ -10,6 +10,13 @@ let DIR = 'RIGHT';
 let FPS = 10;
 let SCORE = 0;
 
+//colors
+var colors = [["green", "lightgreen", "yellow"], ["blue", "lightblue", "orange"], ["red", "orange", "green"], ["purple", "yellow", "white"]];
+var colorIndx = 0;
+var boardColor = colors[colorIndx][0];
+var snakeColor = colors[colorIndx][1];
+var foodColor = colors[colorIndx][2];
+
 document.addEventListener("keydown", press);
 
 var canvas = document.getElementById("canvas_board");
@@ -20,14 +27,7 @@ c.fillStyle = "#0099ff";
 let WIDTH = innerWidth;
 let HEIGHT = innerHeight;
 let PERSON;
-while(true) {
-    PERSON = prompt("Please enter your name", "");
-    if(PERSON != null) {
-        
-        break;
-    }
 
-}
 //player
 function Player(name, score) {
     this.name = name;
@@ -72,16 +72,16 @@ function Snake() {
         c.fillText("Time left: " + left + " seconds", canvasW - 200, 30)
         for (var i = 0; i < this.body.length; i++) {
             var piece = this.body[i];
-            c.fillStyle = 'lightgreen';
-            c.strokestyle = 'darkgreen';
+            c.fillStyle = snakeColor;
+            c.strokestyle = snakeColor;
             c.strokeRect(piece.x, piece.y, 10, 10);
             c.fillRect(piece.x, piece.y, 10, 10);
         }
 
-        c.strokestyle = "lightred";
-        c.fillStyle = "darkred";
+        c.strokestyle = foodColor;
+        c.fillStyle = foodColor;
         c.fillRect(food.x, food.y, 10, 10);
-        
+
     }
 
     this.game = function () {
@@ -90,20 +90,20 @@ function Snake() {
         var headX = this.body[0].x;
         var headY = this.body[0].y;
         //console.log(this.eat(headX, headY));
-        
-        if(this.eat(headX, headY)) {
+
+        if (this.eat(headX, headY)) {
             //console.log('alhamdulillah');
-            
+
             var pos = randomFoodPos();
             food.x = pos[0];
             food.y = pos[1];
             //console.log(food.x, food.y);
             this.lenUpdate();
             SCORE++;
-            
+
         }
 
-        
+
         this.body.pop();
         if (headX > canvasW) {
             headX = 0;
@@ -135,22 +135,22 @@ function Snake() {
         //console.log(headX, headY);
         //this.draw();
 
-        
+
 
     }
 
-    this.eat = function(x, y) {
-        if(x == food.x && y == food.y) {
+    this.eat = function (x, y) {
+        if (x == food.x && y == food.y) {
             //console.log('Alhamdulillah yeah');
             return true;
-        }else return false;
+        } else return false;
     }
 
-    this.collision = function(x, y) {
+    this.collision = function (x, y) {
         //console.log(x, y);
-        
-        for(var i = 0; i < this.body.length; i++) {
-            if(x == this.body[i].x && y == this.body[i].y) return true;
+
+        for (var i = 0; i < this.body.length; i++) {
+            if (x == this.body[i].x && y == this.body[i].y) return true;
         }
         return false;
     }
@@ -165,17 +165,17 @@ function init() {
 
 function randomFoodPos() {
     var min = 0;
-        var max = canvasW;
-        var randomX = Math.ceil(Math.random() * 45 )  * 10;
-        var randomY = Math.ceil(Math.random() * 45 ) * 10;
-        //console.log(randomX, randomY);
-        if(randomX < 40 && randomY < 40) {
-            randomX += 50;
-            randomY += 50;
-        }
-        console.log(randomX, randomY);
-        
-        return [randomX, randomY];
+    var max = canvasW;
+    var randomX = Math.ceil(Math.random() * 45) * 10;
+    var randomY = Math.ceil(Math.random() * 45) * 10;
+    //console.log(randomX, randomY);
+    if (randomX < 40 && randomY < 40) {
+        randomX += 50;
+        randomY += 50;
+    }
+    console.log(randomX, randomY);
+
+    return [randomX, randomY];
 }
 
 function press(e) {
@@ -196,7 +196,7 @@ function press(e) {
     else if (keyCode == 39 && DIR != 'LEFT') {
         //console.log('D');
         DIR = 'RIGHT';
-    } 
+    }
 }
 
 init();
@@ -207,86 +207,105 @@ s.lenUpdate();
 let TIME = 0;
 var id = null;
 function animate() {
-    
+
     id = setTimeout(function () {
         requestAnimationFrame(animate);
         TIME += 0.1;
     }, 1000 / FPS);
     //console.log('animating');
-    c.fillStyle = "green";
+    c.fillStyle = boardColor;
     c.fillRect(0, 0, canvasW, canvasH);
     //s.lenUpdate();
     s.draw();
     s.game();
-    if(TIME > LIMIT) {
+    if (TIME > LIMIT) {
         clearTimeout(id);
         //requestAnimationFrame(null)
+        getName();
         submitScore(SCORE);
     }
     //TIME++;
     //console.log(TIME);
-    
+
 }
-var playersInfo =  [];
+var playersInfo = [];
 function submitScore(x) {
     var data2Push = {
         name: PERSON,
         browser: navigator.userAgent,
         score: x
     }
-    REF.push(data2Push); 
+    REF.push(data2Push);
     REF.on('value', gotdata, errdata);
-    
+
     function gotdata(data) {
         var s = data.val();
         var keys = Object.keys(s);
-        console.log(keys);
 
-        for(var i = 0; i < keys.length; i++) {
+        for (var i = 0; i < keys.length; i++) {
             var k = keys[i];
             var name = s[k].name;
             var point = s[k].score;
-            console.log(name, point);
             var p = new Player(name, point);
             playersInfo.push(p);
         }
-        
+
         playersInfo.sort(comp);
-        console.log(playersInfo);
-        makeTable(playersInfo);        
+        makeTable(playersInfo);
     }
 
     function errdata(err) {
         console.log(err);
-        
+
     }
 }
 
 function makeTable(a) {
-    console.log(a);
-    
-    for(var i = a.length - 1; i >= 0; i--) {
+
+    for (var i = a.length - 1; i >= 0; i--) {
         var p = document.createElement('p');
         p.style.marginBottom = 6;
         p.style.marginLeft = 6;
         p.style.fontSize = 12;
         var rank = a.length - i;
-        if(a[i].name == PERSON) {
+        if (a[i].name == PERSON) {
             p.style.backgroundColor = "pink";
         } else p.style.backgroundColor = "white";
-        p.innerHTML ="Rank #: " + rank +  " |Name: " + a[i].name + "    Score: " + a[i].score;
-        if(a.length - i <= 3) {
-                p.style.color = "green";
-                p.style.fontStyle = "italic";
-                p.style.fontWeight = "bold";
+        p.innerHTML = "Rank #: " + rank + " |Name: " + a[i].name + "    Score: " + a[i].score;
+        if (a.length - i <= 3) {
+            p.style.color = "green";
+            p.style.fontStyle = "italic";
+            p.style.fontWeight = "bold";
         }
         document.body.appendChild(p);
     }
-   
+
 }
 function comp(a, b) {
-    if(a.score > b.score) return 1;
-    if(a.score < b.score) return -1;
+    if (a.score > b.score) return 1;
+    if (a.score < b.score) return -1;
     return 0;
+}
+
+function change_color() {
+    colorIndx++;
+    if (colorIndx > 3) {
+        colorIndx = 0;
+    }
+
+    boardColor = colors[colorIndx][0];
+    snakeColor = colors[colorIndx][1];
+    foodColor = colors[colorIndx][2];
+}
+
+function getName() {
+
+    while (true) {
+        PERSON = prompt("Please enter your name", "");
+        if (PERSON != null) {
+
+            break;
+        }
+    }
 }
 animate();
