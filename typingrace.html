@@ -21,74 +21,83 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html">Heaven of 'J'</a>
-                    </div>
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Projects
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="git-link-2.html">Kid's Code (Earlier Life)</a></li>
-                                <li><a href="rain.html">Rains</a></li>
-                                <li><a href="nointernet.html">No Internet</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Games
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="tic-tac-toe.html">Tic Tac Toe</a></li>
-                                <li><a href="tetris.html">Tetris</a></li>
-                                <li><a href="snake.html">Snake</a></li>
-                                <li><a href="typingrace.html">Tping Boss</a></li>
-                                
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Contacts</a></li>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">Heaven of 'J'</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Projects
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="git-link-2.html">Kid's Code (Earlier Life)</a></li>
+                        <li><a href="rain.html">Rains</a></li>
+                        <li><a href="nointernet.html">No Internet</a></li>
                     </ul>
-                </div>
-            </nav><p>Bismillah</p>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Games
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="tic-tac-toe.html">Tic Tac Toe</a></li>
+                        <li><a href="tetris.html">Tetris</a></li>
+                        <li><a href="snake.html">Snake</a></li>
+                        <li><a href="typingrace.html">Tping Boss</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contacts</a></li>
+            </ul>
+        </div>
+    </nav>
+    <p>Bismillah</p>
+
+    <h3>Typing Race <small>Also has a leaderboard !</small></h3>
+    <p class="bg-info">This game user a setInterval method to measure time you took to type a string</p>
+    <p class="bg-info">This game also has the leaderboard</p>
+    <p class="bg-info">Check it out ! <a href="typingrace.html">TicTacToe</a><br></p>
+
     <h4>Type Fast!</h4>
     <p id="seconds"></p>
     <div>
         <button id="btn" onclick="clicked()">Start Race</button>
         <p id="quotes2Type"></p>
         <form>
-            <input id="typebox" type="text" name="type" onkeypress="return event.keyCode != 13" oncopy="return false" onpaste="humiliate()">
+            <input id="typebox" type="text" name="type" onkeypress="return event.keyCode != 13" oncopy="return false"
+                onpaste="humiliate()">
         </form>
         <p id="typed"></p>
-    </div>    
+    </div>
 
-  <!--Alhamdulillah-->
-  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+    <!--Alhamdulillah-->
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
 
-  <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
- 
- <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-          apiKey: "AIzaSyADeK9kLov5ekc2arcQv7I16AGhJYm7Zh8",
-          authDomain: "tictactoe-230f0.firebaseapp.com",
-          databaseURL: "https://tictactoe-230f0.firebaseio.com",
-          projectId: "tictactoe-230f0",
-          storageBucket: "tictactoe-230f0.appspot.com",
-          messagingSenderId: "409723747128",
-          appId: "1:409723747128:web:2b86adf83e1bc23c"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-  </script>
-  
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyADeK9kLov5ekc2arcQv7I16AGhJYm7Zh8",
+            authDomain: "tictactoe-230f0.firebaseapp.com",
+            databaseURL: "https://tictactoe-230f0.firebaseio.com",
+            projectId: "tictactoe-230f0",
+            storageBucket: "tictactoe-230f0.appspot.com",
+            messagingSenderId: "409723747128",
+            appId: "1:409723747128:web:2b86adf83e1bc23c"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
 </body>
 
 <script type="text/javascript" src="type.js"></script>
+
 </html>
