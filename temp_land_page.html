@@ -1,0 +1,155 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./temp_lp_style.css">
+
+  <title>Jim | Welcome | ♥♥♥</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="./images/LOGO_FINAL_2_GREEN.png" width="40px" alt="BrandLogo" srcset="">
+    <span style="padding: 10;"></span>
+    <a class="navbar-brand" href="./about.html">Jim</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Projects
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="git-link-2.html">Kid's Code (Earlier Life)</a>
+        <a class="dropdown-item" href="rain.html">Rains</a>
+        <li><a class="dropdown-item" href="nointernet.html">No Internet</a></li>
+        <li><a class="dropdown-item" href="votings.html">Your Belief</a></li>
+        <li><a class="dropdown-item" href="passwordgenerator.html">Password Generator</a></li>
+        <li><a class="dropdown-item" href="assist.html">Say !</a></li>
+        <li><a class="dropdown-item" href="./Special_Dates/index.html">Love Bangladesh ! </a></li>
+        <li><a class="dropdown-item" href="ben10.html">Ben 10 Timer</a></li>
+        <li><a class="dropdown-item" href="pi_approx.html">PI</a></li>
+        <li><a class="dropdown-item" href="./7_segment/index.html">7 segment</a></li>
+        <li><a class="dropdown-item" href="./Wave_sim/index.html">Wave Simulator</a></li>
+
+
+      </div>
+    </div>
+    <div style="margin: 10px;"></div>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Games
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+        <li><a class="dropdown-item" href="tic-tac-toe.html">Tic Tac Toe</a></li>
+        <li><a class="dropdown-item" href="tetris.html">Tetris</a></li>
+        <li><a class="dropdown-item" href="snake.html">Snake</a></li>
+        <li><a class="dropdown-item" href="typingrace.html">Tping Boss</a></li>
+        <li><a class="dropdown-item" href="game_math.html">Fast Math</a></li>
+        <li><a class="dropdown-item" href="./Mines/index.html">Minesweeper</a></li>
+
+
+
+
+      </div>
+    </div>
+
+    <div style="margin: 10px;"></div>
+
+
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Algorithms
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+        <li><a class="dropdown-item" href="a_star.html">A* & Dhikstra Algo</a></li>
+
+
+
+
+      </div>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="./Youtube_Videos/index.html">Youtube <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+
+
+<div id="visitor-count">0</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--Alhamdulillah-->
+  <!-- Firebase Stuffs -->
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyADeK9kLov5ekc2arcQv7I16AGhJYm7Zh8",
+      authDomain: "tictactoe-230f0.firebaseapp.com",
+      databaseURL: "https://tictactoe-230f0.firebaseio.com",
+      projectId: "tictactoe-230f0",
+      storageBucket: "tictactoe-230f0.appspot.com",
+      messagingSenderId: "409723747128",
+      appId: "1:409723747128:web:2b86adf83e1bc23c"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+
+</body>
+
+
+
+<script src="./temp_lp_script.js"></script>
+
+</html>

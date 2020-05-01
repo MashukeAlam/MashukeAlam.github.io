@@ -1,0 +1,41 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ben10 Timer</title>
+    <link rel="stylesheet" href="ben10_style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <audio id="timeUp">
+        <source src="./audio/fadeup.wav" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+
+      <audio id="recharge">
+        <source src="./audio/recharge.wav" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+    <div class="watch_face" id="watch_face"></div>
+    <div class="select_time">
+        <button class="time_btn" id="min15" onclick="click15()">15 min</button>
+        <button class="time_btn" id="min25" onclick="click25()">25 min</button>
+        <button class="time_btn" id="min30" onclick="click30()">30 min</button>
+        <button class="time_btn" id="min40" onclick="click40()">40 min</button>
+
+        <div class="remaining">
+            <h2 class="text" id="remaining_time">Press on button twice to start</h2>
+        </div>
+        <button id="break" class="time_btn" onclick="breakTime()">Break</button>
+    </div>
+    <div class="circle_timer">
+    </div>
+    
+
+</body>
+<script src="ben10_script.js"></script>
+
+</html>

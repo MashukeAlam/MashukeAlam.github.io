@@ -1,0 +1,54 @@
+  
+body {
+	background-color: #009c56;
+	color: #fff;
+	display: flex;
+	font-family: 'Muli', sans-serif;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	min-height: 100vh;
+}
+
+.clock_center {
+	background-color: rgba(0, 0, 0, 0.4);
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+	font-size: 18px;
+	letter-spacing: 1px;
+	padding: 12px 10px;
+	height: 50px;
+	width: 100%;
+	margin: 2px;
+
+}
+
+.ques{
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding: 12px 10px;
+    height: 50px;
+    width: 100%;
+    margin: 2px;
+}
+
+.clock_comp {
+    font-size: 40 ;
+}
+
+p{
+    display:inline;
+    word-wrap: break-word;
+}
+
+#pnts {
+    font-weight: bold;
+}

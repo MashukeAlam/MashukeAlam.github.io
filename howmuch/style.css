@@ -1,0 +1,17 @@
+table,
+th,
+td {
+    /* border: 0px solid black; */
+    border-collapse: separate;
+    border-spacing: 4px;
+    /* margin: 5px; */
+    align-self: center;
+}
+th,
+td {
+    padding: 20px;
+    text-align: left;
+    /* margin: 5px; */
+}
+
+

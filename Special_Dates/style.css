@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(0, 0, 0);
+	color: #fff;
+	display: flex;
+	font-family: 'Muli', sans-serif;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+    min-height: 100vh;
+    transition: 1s;
+}
+
+
+.container {
+    text-align: center;
+}
+.container #declare {
+    font-size: 60px;
+    color: rgb(18, 215, 255);
+    transition: 1s;
+}
+
+.container #declare:hover {
+    font-size: 63px;
+    color: rgb(81, 216, 243);
+}

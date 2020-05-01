@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+	font-family: 'Muli', sans-serif;
+	align-items: center;
+	justify-content: center;
+    padding: 0px;
+    margin: 0px;
+    min-height: 100vh;
+    transition: 1s;
+}
+
+.watch_face {
+    /* The image used */
+  background-image: url("./images/ben10-yellow.png");
+  
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  
+  /* Full height */
+  height: 100%; 
+  
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.select_time {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+}
+
+.text  {
+    font-size: 30px;
+    color: rgb(8, 123, 146);
+    transition: 1s;
+}
+
+.text:hover {
+    font-size: 33px;
+    color: rgb(167, 226, 238);
+}
+
+#break {
+    display: none;
+}
+
+.time_btn {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Green */
+    font-size: 20px;
+    border-radius: 2px;
+    padding: 15px 32px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.time_btn:hover {
+    background-color: rgba(255, 255, 255, .4);
+    color:rgb(151, 228, 243);
+    border: 2px solid #4CAF50; /* Green */
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 2px;
+    padding: 15px 32px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

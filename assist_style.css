@@ -1,0 +1,64 @@
+  
+body {
+	background-color: rgb(50, 50, 50);
+	color: #fff;
+	display: flex;
+	font-family: 'Muli', sans-serif;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+    min-height: 100vh;
+    transition: 1s;
+}
+
+.allow {
+    background-color: black;
+    font-family: 'Times New Roman', Times, serif;
+    position: absolute;
+    top: 0;
+    right: -999;
+    color: blueviolet;
+    border: 3px solid grey;
+    border-radius: 7px;
+    transition: 1s;
+}
+
+.instruction {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.instruction #heading {
+    font-size: 60px;
+    color: rgb(18, 215, 255);
+    transition: 1s;
+}
+
+.instruction #heading:hover {
+    font-size: 63px;
+    color: rgb(81, 216, 243);
+}
+
+.instruction .ins {
+    font-size: 30px;
+    color: rgb(18, 215, 255);
+    transition: .5s;
+}
+
+.instruction .ins:hover {
+    font-size: 33px;
+    color: rgb(231, 41, 231);
+}
+
+.instruction #must {
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(250, 44, 44);
+    transition: 1s;
+}
+
+.instruction #must:hover {
+    font-weight: bold;
+    font-size: 28px;
+    color: rgb(255, 104, 104);
+}
