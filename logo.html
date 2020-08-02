@@ -8,12 +8,37 @@
 </head>
 <body>
     <input type="text" name="" id="fname" placeholder="Write your first name...">
-    <input type="text" name="" id="lname" placeholder="Write your second name...">
+    <!-- <input type="text" name="" id="lname" placeholder="Write your second name..."> -->
     <button onclick="process()">Submit</button>
+</br>
+<label>Font Color: </label>
+    <select id="fcolor" onchange="changeFontColor()">
+        <option value="black">Black</option>
+        <option value="white">White</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="red">Red</option>
+        <option value="orange">Orange</option>
+        <option value="#ffffff00">Transparent</option>
+      </select>
+<label>Background Color: </label>
+    <select id="bgcolor" onchange="changeBgColor()">
+        <option value="white">White</option>
+        <option value="black">Black</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="red">Red</option>
+        <option value="orange">Orange</option>
+        <option value="#ffffff00">Transparent</option>
+
+      </select>
+      <label>Capitalize 1st letter</label><input type="checkbox" name="" id="capitalize" onchange="capitalize()">
     <canvas id="canvas"></canvas>
     <button style="display: none;" id="btnDl" onclick="download()">Download Now!</button>
 </body>
 <script>
+    let fontColor = "black";
+    let _bgColor = "white";
     console.log('Alhamdulillah');
 
 const canvas = document.getElementById("canvas");
@@ -28,17 +53,12 @@ CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r, text, co
     if (h < 2 * r) r = h / 2;
     r *= .7;
     var txtColor, bgColor, sharpLeft, sharpRight;
-    if(color === "yw") {
-        txtColor = "black";
-        bgColor = "#ff9801";
-        sharpLeft = 0;
-        sharpRight = r;
-    } else {
-        txtColor = "white";
-        bgColor = "black";
+    
+        txtColor = fontColor;
+        bgColor = _bgColor;
         sharpRight = 0;
         sharpLeft = r;
-    }
+    
 
     
 
@@ -62,17 +82,17 @@ const process = () => {
     // ctx.fillStyle = "white";
     // ctx.fillRect(0, 0, canvas.width, canvas.height);
     var fn = document.getElementById('fname').value;
-    var ln = document.getElementById('lname').value;
+    // var ln = document.getElementById('lname').value;
     fn = capitalizeFirst(fn);
-    ln = capitalizeFirst(ln);
+    // ln = capitalizeFirst(ln);
     var firstWidth = determineLen(fn);
-    var lastWidth = determineLen(ln);
-    canvas.width = firstWidth + lastWidth;
-    canvas.height = 40
-    ctx.roundRect(0, 0, firstWidth, 40, 5, fn, "bw");
-    ctx.roundRect(firstWidth, 0, lastWidth, 40, 5, ln, "yw");
+    // var lastWidth = determineLen(ln);
+    canvas.width = firstWidth;
+    canvas.height = 50
+    ctx.roundRect(0, 0, firstWidth, 50, 5, fn, "bw");
+    // ctx.roundRect(firstWidth, 0, lastWidth, 40, 5, ln, "yw");
     document.getElementById('btnDl').style.display = "block";
-    fileName = fn + ln + '.png';
+    fileName = fn + '.png';
 }
 
 const determineLen = (str) => {
@@ -80,16 +100,28 @@ const determineLen = (str) => {
     return Math.ceil(ctx.measureText(str).width) + OFFSET;
 }
 
+const changeFontColor = () => {
+    var x = document.getElementById("fcolor").value;
+    fontColor = x;
+}
+const changeBgColor = () => {
+    var x = document.getElementById("bgcolor").value;
+    _bgColor = x;
+}
 
-
-var download = function(){
+const download = () => {
   var link = document.createElement('a');
   link.download = fileName;
   link.href = document.getElementById('canvas').toDataURL();
   link.click();
 }
 
+const capitalize = () => {
+    return document.getElementById('capitalize').checked;
+}
+
 const capitalizeFirst = (str) => {
+    if (capitalize() == false) return str;
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
