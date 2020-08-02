@@ -2,14 +2,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./utility_functions/bootstrap.min.css"> -->
     <title>Name Logo</title>
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></head>
+<style>
+    * {
+        padding: 5px;
+        margin: 5px;
+    }
+</style>
 <body>
     <input type="text" name="" id="fname" placeholder="Write your first name...">
     <!-- <input type="text" name="" id="lname" placeholder="Write your second name..."> -->
-    <button onclick="process()">Submit</button>
+    <button class="btn btn-outline-info" onclick="process()">Submit</button>
 </br>
 <label>Font Color: </label>
     <select id="fcolor" onchange="changeFontColor()">
@@ -23,6 +29,7 @@
       </select>
 <label>Background Color: </label>
     <select id="bgcolor" onchange="changeBgColor()">
+        <option value="#ffffff00">Transparent</option>
         <option value="white">White</option>
         <option value="black">Black</option>
         <option value="green">Green</option>
@@ -32,13 +39,23 @@
         <option value="#ffffff00">Transparent</option>
 
       </select>
-      <label>Capitalize 1st letter</label><input type="checkbox" name="" id="capitalize" onchange="capitalize()">
+      <label>Capitalize 1st letter</label><input type="checkbox" name="" id="capitalize" onchange="capitalize()"></br></br></br>
     <canvas id="canvas"></canvas>
-    <button style="display: none;" id="btnDl" onclick="download()">Download Now!</button>
+    <button class="btn btn-outline-success" style="display: none;" id="btnDl" onclick="download()">Download Now!</button>
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 <script>
     let fontColor = "black";
-    let _bgColor = "white";
+    let _bgColor = "#ffffff00";
     console.log('Alhamdulillah');
 
 const canvas = document.getElementById("canvas");
