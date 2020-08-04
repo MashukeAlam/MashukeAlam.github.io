@@ -3,8 +3,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="./utility_functions/bootstrap.min.css"> -->
-    <title>Name Logo</title>
+    <title>Text to PNG  ✔✔</title>
     <!-- Latest compiled and minified CSS -->
+    <link rel="shortcut icon" href="./utility_functions/icon_16x16.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></head>
 <style>
     * {
@@ -13,7 +14,7 @@
     }
 </style>
 <body>
-    <input type="text" name="" id="fname" placeholder="Write your first name...">
+    <input oninput="process()" onchange="process()" onkeyup="process()" type="text" name="" id="fname" placeholder="Write your first name...">
     <!-- <input type="text" name="" id="lname" placeholder="Write your second name..."> -->
     <button class="btn btn-outline-info" onclick="process()">Submit</button>
 </br>
@@ -39,7 +40,7 @@
         <option value="#ffffff00">Transparent</option>
 
       </select>
-      <label>Capitalize 1st letter</label><input type="checkbox" name="" id="capitalize" onchange="capitalize()"></br></br></br>
+      <label>Capitalize 1st letter</label><input type="checkbox" name="" id="capitalize" onchange="process()"></br></br></br>
     <canvas id="canvas"></canvas>
     <button class="btn btn-outline-success" style="display: none;" id="btnDl" onclick="download()">Download Now!</button>
 
@@ -109,7 +110,7 @@ const process = () => {
     ctx.roundRect(0, 0, firstWidth, 50, 5, fn, "bw");
     // ctx.roundRect(firstWidth, 0, lastWidth, 40, 5, ln, "yw");
     document.getElementById('btnDl').style.display = "block";
-    fileName = fn + '.png';
+    fileName = fn.replace(/[^0-9a-z]/gi, "").toLowerCase() + new Date().getMilliseconds() + '.png';
 }
 
 const determineLen = (str) => {
@@ -120,10 +121,12 @@ const determineLen = (str) => {
 const changeFontColor = () => {
     var x = document.getElementById("fcolor").value;
     fontColor = x;
+    process();
 }
 const changeBgColor = () => {
     var x = document.getElementById("bgcolor").value;
     _bgColor = x;
+    process();
 }
 
 const download = () => {
