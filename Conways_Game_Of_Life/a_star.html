@@ -4,23 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>A* </title>
+    <title>Game of Life</title>
     <link rel="stylesheet" href="a_star_style.css">
 </head>
 
 <body>
     </br></br></br>
-    Click on cell to create obstacle then start algorithm
+    
     <div class="algo_board">
         <canvas id="grid">Sorry use a good browser</canvas></br>
-        <button class="btn_settings" id="start_a_star" onclick="a_star_start()">Visualize A*!</button class="btn_settings">
-        <button class="btn_settings" id="start_a_star" onclick="dhix_start()">Visualize Dhikstra!</button>
-        <button class="btn_settings" id="start_a_star" onclick="stop_anim()">Stop</button>
-        <button class="btn_settings" id="start_a_star" onclick="reset_board()">Reset</button></br>
-        <button class="btn_settings" id="start_a_star" onclick="select_s()">Select Start Cell</button></br>
-        <button class="btn_settings" id="start_a_star" onclick="select_e()">Selet End Cell</button></br>
         <button class="btn_settings" id="" onclick="start_life()">Start Game of Life</button></br>
-        Speed: <input onchange="changeFPS()" type="range" name="" id="animation_speed" class="slider" max="150" min="10">
     </div>
 </body>
 <script src="a_star.js"></script>
