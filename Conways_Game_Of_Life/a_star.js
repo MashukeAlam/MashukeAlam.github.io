@@ -38,7 +38,7 @@ function createGrid(x, y) {
             grid[i][j] = new Point(i, j);
         }
     }
-    
+
     return grid;
 }
 
@@ -63,20 +63,8 @@ function Point(x, y) {
     // this.obstacle = (Math.random() > 0.3) ? false : true;
     this.alive = false;
 
-    
 
-    this.createNeighbors = function () {
-        var i = this.x;
-        var j = this.y;
 
-        try { if (grid[i + 1][j] != undefined) { this.neightbours.push(grid[i + 1][j]); } } catch (err) { }
-        try { if (grid[i - 1][j] != undefined) { this.neightbours.push(grid[i - 1][j]); } } catch (err) { }
-        try { if (grid[i][j + 1] != undefined) { this.neightbours.push(grid[i][j + 1]); } } catch (err) { }
-        try { if (grid[i][j - 1] != undefined) { this.neightbours.push(grid[i][j - 1]); } } catch (err) { }
-        try { if (grid[i + 1][j + 1] != undefined) { this.neightbours.push(grid[i+1][j + 1]); } } catch (err) { }
-        try { if (grid[i - 1][j - 1] != undefined) { this.neightbours.push(grid[i-1][j - 1]); } } catch (err) { }
-
-    }
 
     this.show = function (color) {
         c.fillStyle = color;
@@ -97,27 +85,30 @@ function Point(x, y) {
 
 function reset_board() {
     window.location.reload();
-    
+
 }
 
 const next_gen = () => {
     // console.log('here');
     // let future_gen = grid;
     let future_gen = createGrid(800, 800);
-    for (let row = 1; row < grid.length; row++) {
-        for (let col = 1; col < grid[row].length; col++) {
+    for (let row = 1; row < grid.length - 1; row++) {
+        for (let col = 1; col < grid[row].length - 1; col++) {
             let currPoint = grid[row][col];
             let currIsAlive = currPoint.obstacle;
             // console.log(currPoint.neightbours);
             let numberOfAliveNeighbors = 0;
 
-            for (let n = 0; n < currPoint.neightbours.length; n++) {
-                // console.log(currPoint.neightbours[n].obstacle);
-                if (currPoint.neightbours[n].obstacle) {
-                    // console.log(11);
-                    numberOfAliveNeighbors++;
-                } 
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    // console.log(row + i, col + j);
+                    if (grid[row + i][col + j].obstacle) {
+
+                        numberOfAliveNeighbors++;
+                    }
+                }
             }
+            grid[row][col].obstacle ? numberOfAliveNeighbors-- : numberOfAliveNeighbors;
             // console.log(numberOfAliveNeighbors);
             if (currIsAlive && numberOfAliveNeighbors < 2) {
                 future_gen[row][col].obstacle = false;
@@ -132,46 +123,47 @@ const next_gen = () => {
         }
     }
 
+
     for (let row = 0; row < grid.length; row++) {
         for (let col = 0; col < grid[row].length; col++) {
             // console.log(grid[row][col].obstacle);
             grid[row][col].obstacle = future_gen[row][col].obstacle;
         }
     }
-    
+
 }
 
 function animate_begin() {
     setTimeout(() => {
         if (dontAnimateBlank != 1) {
             // console.log('animating blank');
-    
+
             requestAnimationFrame(animate_begin);
             c.fillStyle = 'white';
             c.fillRect(0, 0, 800, 800);
-    
+
             // next_gen();
-    
+
             if (LIFE) {
                 next_gen();
             }
-    
+
             for (var i = 0; i < grid.length; i++) {
                 for (var j = 0; j < grid[i].length; j++) {
                     if (grid[i][j].obstacle) {
-    
+
                         grid[i][j].show(obstacleColor)
-    
+
                     }
                     else {
                         grid[i][j].show(boardColor);
                     }
-    
+
                 }
             }
         }
     }, 700);
-    
+
 }
 animate_begin();
 
@@ -191,15 +183,15 @@ feild.addEventListener('click', event => {
     //console.log(x, y);
     //console.log(x/25, y/25);
 
-    if(select == 33) {
+    if (select == 33) {
         select = 0;
         start = grid[x - 1][y - 1];
         grid[x - 1][y - 1].show(startColor);
-    }else if(select == 66) {
+    } else if (select == 66) {
         select = 0;
         end = grid[x - 1][y - 1];
         grid[x - 1][y - 1].show(endColor);
-    }else {
+    } else {
         grid[x - 1][y - 1].obstacle = !grid[x - 1][y - 1].obstacle;
         // grid[x - 1][y - 1].alive = !grid[x - 1][y - 1].alive;
 
@@ -210,11 +202,7 @@ feild.addEventListener('click', event => {
 
 
 const start_life = () => {
-    for (var i = 0; i < grid.length; i++) {
-        for (var j = 0; j < grid[i].length; j++) {
-            grid[i][j].createNeighbors();
-        }
-    }
+  
     LIFE = true;
     animate_begin();
 }
