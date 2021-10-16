@@ -18,12 +18,13 @@ const pendingColor = 'rgba(14, 230, 14, 1.0)';
 const startColor = 'rgb(252, 3, 198)';
 const endColor = 'rgb(252, 111, 3)';
 const processedColor = 'red';
-const boardColor = 'lightblue';
-const obstacleColor = 'black';
+const boardColor = 'rgb(85, 85, 240)';
+const obstacleColor = 'rgb(120, 0, 24)';
 let speed = 70;
 var pendingPoints = [];
 var processedPoints = [];
 let LIFE = false;
+let ifMouseDown = false;
 
 var final_path = [];
 
@@ -162,7 +163,7 @@ function animate_begin() {
                 }
             }
         }
-    }, 700);
+    }, 250);
 
 }
 animate_begin();
@@ -198,6 +199,75 @@ feild.addEventListener('click', event => {
     }
 
 
+});
+
+feild.addEventListener('mousedown', event => {
+    let bound = feild.getBoundingClientRect();
+
+    let x = Math.ceil((event.clientX - bound.left - feild.clientLeft) / forMouseClick);
+    let y = Math.ceil((event.clientY - bound.top - feild.clientTop) / forMouseClick);
+    console.log('mousedown');
+    ifMouseDown = true;
+    //console.log(x/25, y/25);
+
+    if (select == 33) {
+        select = 0;
+        start = grid[x - 1][y - 1];
+        grid[x - 1][y - 1].show(startColor);
+    } else if (select == 66) {
+        select = 0;
+        end = grid[x - 1][y - 1];
+        grid[x - 1][y - 1].show(endColor);
+    } else {
+        grid[x - 1][y - 1].obstacle = !grid[x - 1][y - 1].obstacle;
+        // grid[x - 1][y - 1].alive = !grid[x - 1][y - 1].alive;
+
+    }
+
+
+});
+
+feild.addEventListener('mouseup', event => {
+    let bound = feild.getBoundingClientRect();
+
+    let x = Math.ceil((event.clientX - bound.left - feild.clientLeft) / forMouseClick);
+    let y = Math.ceil((event.clientY - bound.top - feild.clientTop) / forMouseClick);
+    console.log('mouseup');
+    ifMouseDown = false;
+    //console.log(x/25, y/25);
+
+    if (select == 33) {
+        select = 0;
+        start = grid[x - 1][y - 1];
+        grid[x - 1][y - 1].show(startColor);
+    } else if (select == 66) {
+        select = 0;
+        end = grid[x - 1][y - 1];
+        grid[x - 1][y - 1].show(endColor);
+    } else {
+        grid[x - 1][y - 1].obstacle = !grid[x - 1][y - 1].obstacle;
+        // grid[x - 1][y - 1].alive = !grid[x - 1][y - 1].alive;
+
+    }
+
+
+});
+
+feild.addEventListener('mousemove', event => {
+    let bound = feild.getBoundingClientRect();
+
+    let x = Math.ceil((event.clientX - bound.left - feild.clientLeft) / forMouseClick);
+    let y = Math.ceil((event.clientY - bound.top - feild.clientTop) / forMouseClick);
+    console.log(x, y);
+    //console.log(x/25, y/25);
+
+  if(ifMouseDown) {
+      grid[x - 1][y - 1].obstacle = !grid[x - 1][y - 1].obstacle;
+  } else if(!grid[x - 1][y - 1].obstacle) {
+
+      grid[x - 1][y - 1].show('rgb(99, 99, 250)');
+  }
+   
 });
 
 
