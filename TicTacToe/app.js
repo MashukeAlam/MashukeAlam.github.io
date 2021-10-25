@@ -57,6 +57,28 @@ const result = () => {
 }
 
 
+const minimax = (depth, isMax) => {
+    const res = result();
+
+    if (result) {
+        if (res == human) {
+            return -1;
+        } else if (res == ai) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    if (isMax) {
+        let bestScore = -Infinity;
+
+        for (let i = 0; i < 9; i++) {
+            if 
+        }
+    }
+}
+
 
 var final_path = [];
 
