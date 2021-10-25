@@ -28,55 +28,7 @@ let ifMouseDown = false;
 let board = ['X', '', '', '', '', '', '', '', ''];
 
 
-const result = () => {
-    let states = []
-    states.push(board.slice(0, 3).join());
-    states.push(board.slice(3, 6).join());
-    states.push(board.slice(6, 9).join());
-    states.push(board[0] + board[3] + board[6]);
-    states.push(board[1] + board[4] + board[7]);
-    states.push(board[2] + board[5] + board[8]);
-    states.push(board[0] + board[4] + board[8]);
-    states.push(board[2] + board[4] + board[6]);
 
-    states.forEach(el => {
-        if (el === 'XXX'){
-            return 'X'
-        } else if (el === 'OOO') {
-            return 'O'
-        }
-    });
-
-    board.forEach(el => {
-        if (el === '') {
-            return 'tie';
-        }
-    });
-
-    return null;
-}
-
-const minimax = (depth, isMax) => {
-    const res = result();
-
-    if (result) {
-        if (res == human) {
-            return -1;
-        } else if (res == ai) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    if (isMax) {
-        let bestScore = -Infinity;
-
-        for (let i = 0; i < 9; i++) {
-            if 
-        }
-    }
-}
 
 var final_path = [];
 
