@@ -116,6 +116,12 @@ const aiMove = () => {
     return bestMove;
 }
 
+const put = (position, turn) => {
+    if (board[position] == '') {
+        board[position] = turn;
+    }
+}
+
 var final_path = [];
 
 function createGrid(x, y) {
@@ -183,14 +189,10 @@ function animate_begin() {
 
             for (var i = 0; i < grid.length; i++) {
                 for (var j = 0; j < grid[i].length; j++) {
-                    if (grid[i][j].obstacle) {
-
-                        grid[i][j].show(obstacleColor)
-
-                    }
-                    else {
+                    
+                    
                         grid[i][j].show(boardColor);
-                    }
+                    
 
                 }
             }
