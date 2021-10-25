@@ -2,11 +2,12 @@ var start, end;
 var select = 0;
 const feild = document.getElementById('grid');
 const slider = document.getElementById('animation_speed');
+const resP = document.getElementById('result');
 var c = feild.getContext("2d");
 c.fillStyle = "#0099ff";
 var DONE = 0;
 let dontAnimateBlank = 0;
-let animation_go_on = 1;
+
 let WIDTH = innerWidth;
 let HEIGHT = innerHeight;
 feild.width = feild.height = 800;
@@ -25,42 +26,79 @@ var pendingPoints = [];
 var processedPoints = [];
 let LIFE = false;
 let ifMouseDown = false;
-let board = ['X', '', '', '', '', '', '', '', ''];
-let turn = (ai == 'X') ? ai : human; 
+let board = ['', '', '', '', '', '', '', '', ''];
+
+
+let ai = 'X';
+    let human = 'O';
+    let turn = (ai == 'X') ? ai : human; 
+    let animation_go_on = 0;
+    const popupDiv = document.querySelector('.popup');
+const overlayDiv = document.getElementById('overlay');
+const openpop = () => {
+    popupDiv.classList.add('active');
+    overlayDiv.classList.add('active');
+}
+
+const closepop = () => {
+    // console.log(454545);
+    popupDiv.classList.remove('active');
+    overlayDiv.classList.remove('active');
+    animation_go_on = 1;
+    animate_begin();
+}
+
+overlayDiv.addEventListener('click', () => {
+    closepop();
+});
+
+const humanX = (f) => {
+    // ;console.log(4545798213);
+    if (f === 'X') {
+        human = 'X';
+        ai = 'O';
+    } else {
+        ai = 'X';
+        human = 'O';
+    }
+     turn = (ai == 'X') ? ai : human; 
+    closepop();
+}
 
 const result = () => {
     let states = []
-    states.push(board.slice(0, 3).join());
-    states.push(board.slice(3, 6).join());
-    states.push(board.slice(6, 9).join());
-    states.push(board[0] + board[3] + board[6]);
-    states.push(board[1] + board[4] + board[7]);
-    states.push(board[2] + board[5] + board[8]);
-    states.push(board[0] + board[4] + board[8]);
-    states.push(board[2] + board[4] + board[6]);
+    states.push(board.slice(0, 3).join(''));
+    states.push(board.slice(3, 6).join(''));
+    states.push(board.slice(6, 9).join(''));
+    states.push((board[0] + board[3] + board[6]));
+    states.push((board[1] + board[4] + board[7]));
+    states.push((board[2] + board[5] + board[8]));
+    states.push((board[0] + board[4] + board[8]));
+    states.push((board[2] + board[4] + board[6]));
 
-    states.forEach(el => {
-        if (el === 'XXX'){
-            return 'X'
-        } else if (el === 'OOO') {
-            return 'O'
-        }
-    });
+    // console.log(states);
 
+    for (let i = 0; i < 8; i++) {
+        if (states[i] === 'XXX') return 'X';
+        if (states[i] === 'OOO') return 'O';
+    }
+    let count = 0;
     board.forEach(el => {
+        // console.log(el, el === '');
         if (el === '') {
-            return 'tie';
+            count ++;
         }
     });
 
-    return null;
+    return (count === 0) ? 'tie' : undefined;
 }
 
 
 const minimax = (depth, isMax) => {
     const res = result();
 
-    if (result) {
+    if (res) {
+        // console.log(res, 454545);
         if (res == human) {
             return -1;
         } else if (res == ai) {
@@ -78,7 +116,7 @@ const minimax = (depth, isMax) => {
                 board[i] = ai;
                 const score = minimax(depth + 1, false);
                 board[i] = '';
-                bestScore = max(bestScore, score);
+                bestScore = Math.max(bestScore, score);
             }
         }
         return bestScore;
@@ -90,7 +128,7 @@ const minimax = (depth, isMax) => {
                 board[i] = human;
                 const score = minimax(depth + 1, true);
                 board[i] = '';
-                bestScore = min(bestScore, score);
+                bestScore = Math.min(bestScore, score);
             }
         }
         return bestScore;
@@ -106,6 +144,7 @@ const aiMove = () => {
             board[i] = ai;
             const score = minimax(0, false);
             board[i] = '';
+            // console.log(score, i);
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = i;
@@ -179,13 +218,27 @@ function reset_board() {
 
 function animate_begin() {
     setTimeout(() => {
-        if (dontAnimateBlank != 1) {
+        if (dontAnimateBlank != 1 && animation_go_on === 1) {
 
             requestAnimationFrame(animate_begin);
             c.fillStyle = 'white';
             c.fillRect(0, 0, 800, 800);
 
-            
+            const res = result();
+            if (res) {
+                if (res === ai) {
+                    resP.innerHTML = 'AI wins!';
+                } else if (res === human) {
+                    resP.innerHTML = 'Human wins!';
+                } else  {
+                    resP.innerHTML = 'Match tied!';
+                }
+                animation_go_on = 0;
+            }
+
+            if (turn == ai) {
+                put(aiMove(), ai);
+            }
 
             for (var i = 0; i < grid.length; i++) {
                 for (var j = 0; j < grid[i].length; j++) {
@@ -200,7 +253,7 @@ function animate_begin() {
     }, 250);
 
 }
-animate_begin();
+
 
 
 feild.addEventListener('click', event => {
@@ -234,10 +287,11 @@ feild.addEventListener('mousedown', event => {
     let x = Math.ceil((event.clientX - bound.left - feild.clientLeft) / forMouseClick);
     let y = Math.ceil((event.clientY - bound.top - feild.clientTop) / forMouseClick);
     ifMouseDown = true;
-    console.log(3 * (y - 1) + (x - 1));
+    // console.log(3 * (y - 1) + (x - 1));
 
     if (turn == human) {
-        board[3 * (y - 1) + (x - 1)] = human;
+        put(3 * (y - 1) + (x - 1), human);
+        // board[3 * (y - 1) + (x - 1)] = human;
         turn = ai;
     }
 
@@ -262,11 +316,7 @@ feild.addEventListener('mouseup', event => {
         select = 0;
         end = grid[x - 1][y - 1];
         grid[x - 1][y - 1].show(endColor);
-    } else {
-        grid[x - 1][y - 1].obstacle = !grid[x - 1][y - 1].obstacle;
-        // grid[x - 1][y - 1].alive = !grid[x - 1][y - 1].alive;
-
-    }
+    } 
 
 
 });
@@ -280,9 +330,6 @@ feild.addEventListener('mousemove', event => {
 
   if(ifMouseDown) {
       grid[x - 1][y - 1].obstacle = !grid[x - 1][y - 1].obstacle;
-  } else if(!grid[x - 1][y - 1].obstacle) {
-
-      grid[x - 1][y - 1].show('rgb(99, 99, 250)');
   }
    
 });
