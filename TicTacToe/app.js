@@ -26,7 +26,7 @@ var processedPoints = [];
 let LIFE = false;
 let ifMouseDown = false;
 let board = ['X', '', '', '', '', '', '', '', ''];
-
+let turn = (ai == 'X') ? ai : human; 
 
 const result = () => {
     let states = []
@@ -74,11 +74,47 @@ const minimax = (depth, isMax) => {
         let bestScore = -Infinity;
 
         for (let i = 0; i < 9; i++) {
-            if 
+            if (board[i] == '') {
+                board[i] = ai;
+                const score = minimax(depth + 1, false);
+                board[i] = '';
+                bestScore = max(bestScore, score);
+            }
         }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+
+        for (let i = 0; i < 9; i++) {
+            if (board[i] == '') {
+                board[i] = human;
+                const score = minimax(depth + 1, true);
+                board[i] = '';
+                bestScore = min(bestScore, score);
+            }
+        }
+        return bestScore;
     }
 }
 
+const aiMove = () => {
+    let bestScore = -Infinity;
+    let bestMove = null;
+
+    for (let i = 0; i < 9; i++) {
+        if (board[i] == '') {
+            board[i] = ai;
+            const score = minimax(0, false);
+            board[i] = '';
+            if (score > bestScore) {
+                bestScore = score;
+                bestMove = i;
+            }
+        }
+    }
+    turn = human;
+    return bestMove;
+}
 
 var final_path = [];
 
@@ -123,8 +159,7 @@ function Point(x, y) {
         c.textBaseLine = 'middle';
         c.fillStyle = 'black';
         c.font = `${160}px Verdana`;
-        console.log(board[this.x + this.y]);
-        c.fillText(board[this.x + this.y], this.x * w + w/2, this.y * h + h/2);
+        c.fillText(board[this.x + (this.y * 3)], this.x * w + w/2, this.y * h + h/2);
     }
 
     
@@ -196,23 +231,15 @@ feild.addEventListener('mousedown', event => {
 
     let x = Math.ceil((event.clientX - bound.left - feild.clientLeft) / forMouseClick);
     let y = Math.ceil((event.clientY - bound.top - feild.clientTop) / forMouseClick);
-    console.log('mousedown');
     ifMouseDown = true;
-    //console.log(x/25, y/25);
+    console.log(3 * (y - 1) + (x - 1));
 
-    if (select == 33) {
-        select = 0;
-        start = grid[x - 1][y - 1];
-        grid[x - 1][y - 1].show(startColor);
-    } else if (select == 66) {
-        select = 0;
-        end = grid[x - 1][y - 1];
-        grid[x - 1][y - 1].show(endColor);
-    } else {
-        grid[x - 1][y - 1].obstacle = !grid[x - 1][y - 1].obstacle;
-        // grid[x - 1][y - 1].alive = !grid[x - 1][y - 1].alive;
-
+    if (turn == human) {
+        board[3 * (y - 1) + (x - 1)] = human;
+        turn = ai;
     }
+
+    
 
 
 });
@@ -222,7 +249,6 @@ feild.addEventListener('mouseup', event => {
 
     let x = Math.ceil((event.clientX - bound.left - feild.clientLeft) / forMouseClick);
     let y = Math.ceil((event.clientY - bound.top - feild.clientTop) / forMouseClick);
-    console.log('mouseup');
     ifMouseDown = false;
     //console.log(x/25, y/25);
 
@@ -248,7 +274,6 @@ feild.addEventListener('mousemove', event => {
 
     let x = Math.ceil((event.clientX - bound.left - feild.clientLeft) / forMouseClick);
     let y = Math.ceil((event.clientY - bound.top - feild.clientTop) / forMouseClick);
-    console.log(x, y);
     //console.log(x/25, y/25);
 
   if(ifMouseDown) {
