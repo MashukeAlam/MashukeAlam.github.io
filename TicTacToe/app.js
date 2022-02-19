@@ -28,7 +28,6 @@ let LIFE = false;
 let ifMouseDown = false;
 let board = ['', '', '', '', '', '', '', '', ''];
 
-
 let ai = 'X';
     let human = 'O';
     let turn = (ai == 'X') ? ai : human; 
