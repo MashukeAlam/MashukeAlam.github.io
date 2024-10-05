@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Tab - Time & Weather</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Background gradient for light mode */
+    .bg-light {
+      background: linear-gradient(to bottom, #f0f0f0dc, #10B981); /* Off-white to green */
+      color: #333;
+    }
+
+    /* Background gradient for dark mode */
+    .bg-dark {
+      background: linear-gradient(to bottom, #333, #10B981); /* Dark gray to green */
+      color: azure;
+    }
+  </style>
+</head>
+<body class="text-center">
+  <div class="container max-w-lg mx-auto">
+    <div class="header mb-6">
+      <div id="time" class="text-7xl font-bold text-black-500">
+        <span></span>
+      </div>
+      <div id="weather" class="text-2xl mt-3">
+        Loading weather...
+      </div>
+    </div>
+
+    <div class="search-box mt-6 flex flex-col items-center">
+      <input type="text" id="searchQuery" placeholder="And you wanna know..."
+        class="w-full p-3 text-lg border-2 border-gray-300 rounded-lg focus:outline-none focus:border-gray-500 mb-4 dark:bg-gray-700 dark:text-white dark:border-gray-500">
+      <div class="search-buttons flex justify-between gap-2">
+        <button onclick="search('google')" class="w-64 bg-green-600 text-white py-3 px-6 rounded hover:bg-green-700">Google</button>
+        <button onclick="search('duckduckgo')" class="w-64 bg-orange-500 text-white py-3 px-6 rounded hover:bg-orange-700">DuckDuckGo</button>
+        <button onclick="search('wikipedia')" class="w-64 bg-gray-900 text-white py-3 px-6 rounded hover:bg-black">Wikipedia</button>
+        <button onclick="search('startpage')" class="w-64 bg-cyan-500 text-white py-3 px-6 rounded hover:bg-cyan-700">StartPage</button>
+        <button onclick="search('youtube')" class="w-64 bg-red-500 text-white py-3 px-6 rounded hover:bg-red-700">YouTube</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-5 right-5">
+    <select id="colorAccent" class="p-2 border border-gray-300 rounded-lg dark:bg-gray-700 dark:text-white">
+      <option value="green" selected>Green</option>
+      <option value="blue">Blue</option>
+      <option value="red">Red</option>
+      <option value="purple">Purple</option>
+    </select>
+  </div>
+
+  <script>
+    // Time display function (hiding seconds)
+    function updateTime() {
+      const timeElem = document.getElementById('time').querySelector('span');
+      const now = new Date();
+      timeElem.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    // Weather fetch function using wttr.in
+    function updateWeather() {
+      const weatherElem = document.getElementById('weather');
+      const url = 'https://wttr.in/Dhaka?format=%C+%t'; // Fetch weather in text format
+
+      fetch(url)
+        .then(response => response.text())
+        .then(data => {
+          weatherElem.innerHTML = `Dhaka: ${data}`;
+        })
+        .catch(() => {
+          weatherElem.textContent = 'Failed to load weather.';
+        });
+    }
+
+    // Detect dark mode preference and set initial theme
+    function detectDarkMode() {
+      const body = document.body;
+      const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (isDarkMode) {
+        body.classList.add('bg-dark');
+      } else {
+        body.classList.add('bg-light');
+      }
+    }
+
+    // Search functionality
+    function search(engine) {
+      const query = document.getElementById('searchQuery').value;
+      let url = '';
+
+      switch(engine) {
+        case 'google':
+          url = `https://www.google.com/search?q=${query}`;
+          break;
+        case 'duckduckgo':
+          url = `https://duckduckgo.com/?q=${query}`;
+          break;
+        case 'wikipedia':
+          url = `https://en.wikipedia.org/wiki/Special:Search?search=${query}`;
+          break;
+        case 'startpage':
+          url = `https://www.startpage.com/do/dsearch?query=${query}`;
+          break;
+        case 'youtube':
+          url = `https://www.youtube.com/results?search_query=${query}`;
+          break;
+      }
+
+      window.open(url, '_blank');
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', () => {
+      detectDarkMode();
+      updateTime();
+      updateWeather();
+      setInterval(updateTime, 60000); // Update time every minute
+    });
+
+    // Function to change accent color dynamically
+    document.getElementById('colorAccent').addEventListener('change', function() {
+      const selectedColor = this.value;
+      const body = document.body;
+
+      // Update the gradient background with the selected accent color
+      if (selectedColor === 'green') {
+        body.style.background = 'linear-gradient(to bottom, #f0f0f0, #10B981)';
+      } else if (selectedColor === 'blue') {
+        body.style.background = 'linear-gradient(to bottom, #f0f0f0, #3B82F6)';
+      } else if (selectedColor === 'red') {
+        body.style.background = 'linear-gradient(to bottom, #f0f0f0, #EF4444)';
+      } else if (selectedColor === 'purple') {
+        body.style.background = 'linear-gradient(to bottom, #f0f0f0, #8B5CF6)';
+      }
+
+      // For dark mode, we also adjust the gradient
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        if (selectedColor === 'green') {
+          body.style.background = 'linear-gradient(to bottom, #333, #10B981)';
+        } else if (selectedColor === 'blue') {
+          body.style.background = 'linear-gradient(to bottom, #333, #3B82F6)';
+        } else if (selectedColor === 'red') {
+          body.style.background = 'linear-gradient(to bottom, #333, #EF4444)';
+        } else if (selectedColor === 'purple') {
+          body.style.background = 'linear-gradient(to bottom, #333, #8B5CF6)';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
