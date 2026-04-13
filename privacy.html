@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lazycopy — Privacy Policy</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.7;
+      padding: 0;
+      margin: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: #fff;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #475569;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 15px;
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 12px;
+    }
+
+    ul li {
+      font-size: 15px;
+      color: #475569;
+      padding: 6px 0 6px 24px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 14px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #6366f1;
+    }
+
+    a {
+      color: #6366f1;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ecfdf5;
+      color: #047857;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .badge.no-collection {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .last-updated {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 24px 16px 48px;
+      }
+
+      section {
+        padding: 20px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📖 lazycopy</h1>
+    <p>Privacy Policy</p>
+  </header>
+
+  <main>
+    <p class="last-updated">Last Updated: April 13, 2026</p>
+
+    <!-- Overview -->
+    <section>
+      <span class="badge">Privacy-First</span>
+      <h2>Overview</h2>
+      <p>lazycopy is a lightweight Chrome extension designed with your privacy in mind. It operates entirely within your browser — no data is ever sent to external servers owned by us. This policy explains what data the extension accesses, how it is used, and what we do not do with your information.</p>
+    </section>
+
+    <!-- Information We Do NOT Collect -->
+    <section>
+      <span class="badge no-collection">No Data Collection</span>
+      <h2>Information We Do NOT Collect or Store</h2>
+      <ul>
+        <li>We do not collect any personally identifiable information (PII).</li>
+        <li>We do not collect, store, or transmit the text you select on web pages.</li>
+        <li>We do not track your browsing history, habits, or behavior.</li>
+        <li>We do not use cookies, analytics, or any tracking technologies.</li>
+        <li>We do not sell, share, or distribute any user data to third parties.</li>
+      </ul>
+    </section>
+
+    <!-- How the Extension Works -->
+    <section>
+      <h2>How the Extension Works</h2>
+      <p>When you highlight text on any webpage, lazycopy shows a small popup with two options:</p>
+      <ul>
+        <li><strong>Copy</strong> — Copies the selected text directly to your clipboard. The text never leaves your browser.</li>
+        <li><strong>Dictionary</strong> — Sends the selected word to the Free Dictionary API (<a href="https://api.dictionaryapi.dev" target="_blank" rel="noopener noreferrer">api.dictionaryapi.dev</a>) to fetch its definition. Only the selected word is sent; no additional context, URL, or personal data is included.</li>
+      </ul>
+      <p>Dictionary results are cached temporarily in memory to improve responsiveness. This cache is cleared when you close the tab or reload the page.</p>
+    </section>
+
+    <!-- Permissions Explained -->
+    <section>
+      <h2>Permissions Explained</h2>
+
+      <h3><code>activeTab</code></h3>
+      <p>This permission allows lazycopy to interact with the currently active tab only when you explicitly invoke the extension. It follows the principle of least privilege — access is granted temporarily and only on user action.</p>
+
+      <h3><code>&lt;all_urls&gt;</code> (Content Script)</h3>
+      <p>lazycopy injects a content script into all web pages so that it can detect text selection and display the popup wherever you are browsing. This does not mean we read or transmit page contents — the script runs locally in your browser and only processes text you actively highlight.</p>
+    </section>
+
+    <!-- Third-Party Services -->
+    <section>
+      <h2>Third-Party Services</h2>
+      <p>The extension uses the following external API:</p>
+      <ul>
+        <li><strong>Free Dictionary API</strong> — <a href="https://api.dictionaryapi.dev" target="_blank" rel="noopener noreferrer">https://api.dictionaryapi.dev</a>. When you click the dictionary button, only the selected word is sent to this service. We are not affiliated with this service and encourage you to review their <a href="https://dictionaryapi.dev/" target="_blank" rel="noopener noreferrer">privacy policy</a>.</li>
+      </ul>
+    </section>
+
+    <!-- Data Security -->
+    <section>
+      <h2>Data Security</h2>
+      <p>All processing happens locally on your device. The extension does not have a backend, database, or server. No authentication is required, and no data persists beyond your current browser session.</p>
+    </section>
+
+    <!-- Children's Privacy -->
+    <section>
+      <h2>Children's Privacy</h2>
+      <p>lazycopy does not knowingly collect any information from anyone. Since we do not collect any data whatsoever, this applies universally to all users regardless of age.</p>
+    </section>
+
+    <!-- Changes to This Policy -->
+    <section>
+      <h2>Changes to This Policy</h2>
+      <p>We may update this privacy policy from time to time. Any changes will be reflected in the "Last Updated" date above. Significant changes will be communicated through the extension's update notes in the Chrome Web Store.</p>
+    </section>
+
+    <!-- Contact -->
+    <section>
+      <h2>Contact</h2>
+      <p>If you have any questions or concerns about this privacy policy, please reach out through the extension's listing on the Chrome Web Store or contact the developer directly.</p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2026 lazycopy. All processing happens locally on your device.
+  </footer>
+
+</body>
+</html>
