@@ -1,170 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mashuke Alam Jim | Senior Software Engineer</title>
+  <meta name="description" content="Senior Software Engineer specializing in backend systems, distributed architectures, and full-stack web applications.">
+  <meta name="theme-color" content="#09090b">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mashuke Alam Jim | Senior Software Engineer">
+  <meta property="og:description" content="Senior Software Engineer specializing in backend systems, distributed architectures, and full-stack web applications.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mashukealam.github.io/">
 
-        #container {
-            display: flex;
-        }
-
-        #profile {
-            width: 30%;
-            padding: 20px;
-            height: fit-content;
-        }
-
-        #profile img {
-            width: 60%;
-            height: 60%;
-            border-radius: 10px;
-            /* Apply circular mask */
-            overflow: hidden;
-            /* Hide overflowing parts */
-        }
-
-        #content {
-            flex: 1;
-            padding: 20px;
-        }
-
-        #navbar {
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-weight: bold;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            background: linear-gradient(90deg, #6cbe46, #e87ef6);
-            -webkit-background-clip: text;
-            color: transparent;
-            display: inline-block;
-        }
-    </style>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">Portfolio</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showContent('about')">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showContent('projects')">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showContent('contact')">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div id="container">
-        <div id="profile">
-            <img src="pic_rect.jpeg" alt="Profile Picture" style="max-width: 100%;">
-            <div style="padding: 10px;">
-                <a href="https://www.linkedin.com/in/mashukjim/" target="_blank">LinkedIn</a><br>
-                <a href="https://www.facebook.com/mashuk.jim99/" target="_blank">Facebook</a><br>
-                <a href="https://github.com/MashukeAlam" target="_blank">GitHub</a>
-            </div>
-        </div>
-        <div id="content">
-            <div id="about">
-                <h2></h2>
-                <p>Mashuke Alam Jim was born in 2000 in Sylhet, Bangladesh, and currently resides in Dhaka. A dedicated
-                    software engineer, Mashuke graduated in Computer Science and Engineering from United International
-                    University. With a passion for technology and innovation, Mashuke is committed to crafting solutions
-                    that shape the digital landscape. With a strong foundation in both theoretical knowledge and
-                    practical application, Mashuke strives to make a meaningful impact in the ever-evolving field of
-                    software engineering.</p>
-            </div>
-            <div id="projects" style="display: none;">
-                <h2>Projects</h2>
-                <p>Here are some of my projects that are somewhat worthy of being displayed. Remember this list may not
-                    be updated and some links may very definitely break. For latest updates please visit my <a
-                        href="https://github.com/MashukeAlam" target="_blank">GitHub</a></p>
-                <div class="project">
-                    <h3>SkyDrop</h3>
-                    <p>A peer-to-peer image sharing website built with SocketIO, NodeJS, and ReactJS. SkyDrop
-                        facilitates seamless image transfer between users by establishing a direct connection.
-                        Currently, it operates within the same IP address.</p>
-                    <a href="https://skydrop.onrender.com/">GitHub</a>
-                </div>
-
-                <div class="project">
-                    <h3>Price Tracker Web</h3>
-                    <p>Developed as a group project using NodeJS, the Price Tracker Web is a platform that displays
-                        trends in game prices. It utilizes cron jobs to scrape price data and presents it in graphical
-                        format, providing users with valuable insights.</p>
-                    <a href="https://github.com/jameszaman/price_tracker_web">GitHub</a>
-                </div>
-
-                <div class="project">
-                    <h3>StudySense</h3>
-                    <p>StudySense is a desktop application designed to automate login processes for UIU ELMS and UCAM
-                        platforms. It checks for the latest material uploads, enhancing user convenience. Note:
-                        StudySense is optimized for older versions of UIU's websites.</p>
-                    <a href="https://github.com/MashukeAlam/Studysense">GitHub</a>
-                </div>
-
-                <div class="project">
-                    <h3>Discord Bot</h3>
-                    <p>Created using NodeJS, the Discord Bot was developed for marketing purposes as per client
-                        requirements. This bot facilitates the scheduled posting of product links to specific Discord
-                        channels. Overcoming challenges of hosting and maintaining on Heroku free hosting, it ensures
-                        timely delivery of promotional content.</p>
-                    <a href="https://github.com/MashukeAlam/fiverr_disc_bot">GitHub</a>
-                </div>
-
-                <div class="project">
-                    <h3>Softmax Visualization</h3>
-                    <p>Created using ReactJS to visualize how values change if pushed into Softmax Algorithm. It was a nice way to learn about various ReactJS facilities.</p>
-                    <a href="softmax.html">Link</a>
-                </div>
-                <div class="project">
-                    <h3>Weeks passed since Birthday</h3>
-                    <p>This was a easy project but with a purpose to visualize how fast our days are numbered even if we live for a long eighty year life.</p>
-                    <a href="weeks-left.html">Link</a>
-                </div>
-            </div>
-            <div id="contact" style="display: none;">
-                <h2>Contact</h2>
-                <p>Email (Personal) jimmashuke@gmail.com</p>
-                <p>Email (Official) mashuke@nascenia.com</p>
-            </div>
-        </div>
+  <!-- Sticky Glassmorphic Header -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#" class="brand-logo">
+        <span class="brand-badge">J</span>
+        <span>Mashuke Alam Jim</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#lab">The Lab</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <script>
-        function showContent(id) {
-            var contentDivs = document.querySelectorAll('#content > div');
-            contentDivs.forEach(function (div) {
-                if (div.id === id) {
-                    div.style.display = 'block';
-                } else {
-                    div.style.display = 'none';
-                }
-            });
-        }
-    </script>
+  <main class="container">
+    
+    <!-- Hero Section -->
+    <section id="about" class="hero-section">
+      <div class="hero-status">
+        <span class="status-dot"></span>
+        <span>Available for technical discussions & collaboration</span>
+      </div>
+      <h1 class="hero-title">
+        Building high-performance <span class="gradient-text">software & systems</span>.
+      </h1>
+      <p class="hero-role">&gt; Senior Software Engineer</p>
+      <p class="hero-bio">
+        Passionate about scalable backend architectures, high-throughput web frameworks, distributed systems, and crafting responsive, intuitive user experiences.
+      </p>
+      <div class="hero-actions">
+        <a href="mailto:jimmashuke@gmail.com" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          Get in Touch
+        </a>
+        <a href="https://github.com/MashukeAlam" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/mashukjim/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projects" class="section">
+      <div class="section-header">
+        <span class="section-tag">// Engineering & Code</span>
+        <h2 class="section-title">Featured Projects</h2>
+      </div>
+
+      <div class="projects-grid">
+        
+        <!-- Project 1: marshallgo (Featured wide) -->
+        <div class="project-card featured">
+          <div class="project-header">
+            <h3 class="project-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              marshallgo
+            </h3>
+            <div class="project-links">
+              <a href="https://github.com/MashukeAlam/marshallgo" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Source on GitHub">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-desc">
+            A high-performance Golang web framework engineered for rapid backend development, clean routing abstractions, and minimal overhead for microservices and API gateways.
+          </p>
+          <div class="project-tech-tags">
+            <span class="tech-tag highlight">Go</span>
+            <span class="tech-tag">Web Framework</span>
+            <span class="tech-tag">REST APIs</span>
+            <span class="tech-tag">High Concurrency</span>
+          </div>
+        </div>
+
+        <!-- Project 2: skydrop -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">SkyDrop</h3>
+            <div class="project-links">
+              <a href="https://github.com/MashukeAlam/skydrop" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Source on GitHub">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Peer-to-peer real-time image and file sharing platform built with WebRTC, Socket.IO, Node.js, and React for direct local transfers.
+          </p>
+          <div class="project-tech-tags">
+            <span class="tech-tag highlight">Node.js</span>
+            <span class="tech-tag">Socket.IO</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">WebSockets</span>
+          </div>
+        </div>
+
+        <!-- Project 3: driftworld -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">driftworld</h3>
+            <div class="project-links">
+              <a href="https://driftworld.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Live Preview">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+              <a href="https://github.com/MashukeAlam/driftworld" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Source on GitHub">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-desc">
+            An interactive modern web experience exploring responsive typography and layout mechanics built with TypeScript and deployed on Vercel.
+          </p>
+          <div class="project-tech-tags">
+            <span class="tech-tag highlight">TypeScript</span>
+            <span class="tech-tag">Vercel</span>
+            <span class="tech-tag">Frontend</span>
+          </div>
+        </div>
+
+        <!-- Project 4: manimations -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">manimations</h3>
+            <div class="project-links">
+              <a href="https://github.com/MashukeAlam/manimations" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Source on GitHub">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Mathematical animation engine built with Python and Manim, creating programmatic visualizations of mathematical proofs, algorithms, and geometry.
+          </p>
+          <div class="project-tech-tags">
+            <span class="tech-tag highlight">Python</span>
+            <span class="tech-tag">Manim</span>
+            <span class="tech-tag">Graphics</span>
+            <span class="tech-tag">Algorithms</span>
+          </div>
+        </div>
+
+        <!-- Project 5: IdealMumin -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">IdealMumin</h3>
+            <div class="project-links">
+              <a href="https://github.com/MashukeAlam/IdealMumin" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Source on GitHub">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-desc">
+            Cross-platform mobile application delivering Quranic resources, recitations, and translation APIs developed using React Native and Expo.
+          </p>
+          <div class="project-tech-tags">
+            <span class="tech-tag highlight">React Native</span>
+            <span class="tech-tag">Expo</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Mobile</span>
+          </div>
+        </div>
+
+        <!-- Project 6: express-discord-freedb -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">discord-freedb</h3>
+            <div class="project-links">
+              <a href="https://express-discord-freedb.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Live Preview">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+              <a href="https://github.com/MashukeAlam/express-discord-freedb" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="View Source on GitHub">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-desc">
+            A creative serverless document database adapter turning Discord webhook channels into persistent cloud document stores with full CRUD operations.
+          </p>
+          <div class="project-tech-tags">
+            <span class="tech-tag highlight">Node.js</span>
+            <span class="tech-tag">Express</span>
+            <span class="tech-tag">Database</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- The CS Lab / Retro Sandbox Section -->
+    <section id="lab" class="section">
+      <div class="section-header">
+        <span class="section-tag">// Explorations & Archive</span>
+        <h2 class="section-title">The Interactive CS Lab</h2>
+        <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+          A collection of live algorithms, canvas physics simulations, and browser-based experiments built from scratch.
+        </p>
+      </div>
+
+      <div class="lab-grid">
+        
+        <a href="Wave_sim/index.html" class="lab-card">
+          <div class="lab-icon">🌊</div>
+          <h3 class="lab-title">Wave Simulator</h3>
+          <p class="lab-desc">Physics simulation of propagating longitudinal and transverse wave particles on HTML5 Canvas.</p>
+        </a>
+
+        <a href="Conways_Game_Of_Life/a_star.html" class="lab-card">
+          <div class="lab-icon">📍</div>
+          <h3 class="lab-title">A* & Dijkstra Visualizer</h3>
+          <p class="lab-desc">Interactive pathfinding grid exploring heuristic search algorithm traversals and obstacle avoidance.</p>
+        </a>
+
+        <a href="softmax.html" class="lab-card">
+          <div class="lab-icon">🔢</div>
+          <h3 class="lab-title">Softmax Visualizer</h3>
+          <p class="lab-desc">Visualizer demonstrating probability distribution transformations in neural network activation.</p>
+        </a>
+
+        <a href="Mines/index.html" class="lab-card">
+          <div class="lab-icon">💣</div>
+          <h3 class="lab-title">Canvas Minesweeper</h3>
+          <p class="lab-desc">Pure JavaScript canvas implementation of the classic grid-based logic and deduction game.</p>
+        </a>
+
+        <a href="7_segment/index.html" class="lab-card">
+          <div class="lab-icon">⏱️</div>
+          <h3 class="lab-title">7-Segment Display</h3>
+          <p class="lab-desc">Interactive digital logic simulator emulating electronic seven-segment display units.</p>
+        </a>
+
+        <a href="weeks-left.html" class="lab-card">
+          <div class="lab-icon">🗓️</div>
+          <h3 class="lab-title">Weeks of Life</h3>
+          <p class="lab-desc">Perspective visualizer graphing elapsed and remaining weeks across a human lifetime.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Skills & Toolkit Section -->
+    <section id="skills" class="section">
+      <div class="section-header">
+        <span class="section-tag">// Technical Matrix</span>
+        <h2 class="section-title">Skills &amp; Technologies</h2>
+      </div>
+
+      <div class="skills-wrapper">
+        <div class="skill-category">
+          <h3 class="skill-cat-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            Languages &amp; Runtimes
+          </h3>
+          <div class="skill-pills">
+            <span class="skill-pill">Go (Golang)</span>
+            <span class="skill-pill">TypeScript</span>
+            <span class="skill-pill">JavaScript (Node.js)</span>
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">C# / .NET</span>
+            <span class="skill-pill">Ruby</span>
+            <span class="skill-pill">C++</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="skill-cat-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Frontend, Mobile &amp; Frameworks
+          </h3>
+          <div class="skill-pills">
+            <span class="skill-pill">React</span>
+            <span class="skill-pill">Next.js</span>
+            <span class="skill-pill">React Native / Expo</span>
+            <span class="skill-pill">HTML5 Canvas</span>
+            <span class="skill-pill">Tailwind CSS</span>
+            <span class="skill-pill">Express.js</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="skill-cat-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+            Architecture, Data &amp; Infrastructure
+          </h3>
+          <div class="skill-pills">
+            <span class="skill-pill">PostgreSQL</span>
+            <span class="skill-pill">MongoDB</span>
+            <span class="skill-pill">Redis</span>
+            <span class="skill-pill">WebSockets / WebRTC</span>
+            <span class="skill-pill">RESTful &amp; GraphQL APIs</span>
+            <span class="skill-pill">Docker</span>
+            <span class="skill-pill">Git &amp; CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <section id="contact" class="section">
+      <div class="contact-card">
+        <h3>Let's build something together.</h3>
+        <p>
+          Whether you want to discuss distributed systems, collaborate on open-source projects, or connect for opportunities, my inbox is open.
+        </p>
+        <a href="mailto:jimmashuke@gmail.com" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          jimmashuke@gmail.com
+        </a>
+      </div>
+
+      <footer class="footer">
+        <div>
+          <span>&copy; 2026 Mashuke Alam Jim. All rights reserved.</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/MashukeAlam" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/mashukjim/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:jimmashuke@gmail.com">Email</a>
+        </div>
+      </footer>
+    </section>
+
+  </main>
 
 </body>
-
 </html>
