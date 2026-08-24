@@ -1,0 +1,231 @@
+{
+  "meta": {
+    "title": "Mashuke Alam Jim | Senior Software Engineer",
+    "description": "Senior Software Engineer specializing in backend systems, distributed architectures, and full-stack web applications.",
+    "themeColor": "#09090b",
+    "canonicalUrl": "https://mashukealam.github.io/"
+  },
+  "brand": {
+    "badgeText": "J",
+    "name": "Mashuke Alam Jim"
+  },
+  "nav": [
+    { "label": "About", "href": "#about" },
+    { "label": "Projects", "href": "#projects" },
+    { "label": "The Lab", "href": "#lab" },
+    { "label": "Skills", "href": "#skills" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "hero": {
+    "status": "Available for technical discussions & collaboration",
+    "headline": "Building high-performance <span class=\"gradient-text\">software & systems</span>.",
+    "role": "> Senior Software Engineer",
+    "bio": "Passionate about scalable backend architectures, high-throughput web frameworks, distributed systems, and crafting responsive, intuitive user experiences.",
+    "actions": [
+      {
+        "label": "Get in Touch",
+        "href": "mailto:jimmashuke@gmail.com",
+        "primary": true,
+        "type": "email"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/MashukeAlam",
+        "primary": false,
+        "type": "github"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/mashukjim/",
+        "primary": false,
+        "type": "linkedin"
+      }
+    ]
+  },
+  "projects": {
+    "sectionTag": "// Engineering & Code",
+    "sectionTitle": "Featured Projects",
+    "items": [
+      {
+        "title": "marshallgo",
+        "featured": true,
+        "icon": "bolt",
+        "description": "A high-performance Golang web framework engineered for rapid backend development, clean routing abstractions, and minimal overhead for microservices and API gateways.",
+        "githubUrl": "https://github.com/MashukeAlam/marshallgo",
+        "liveUrl": "",
+        "techTags": [
+          { "name": "Go", "highlight": true },
+          { "name": "Web Framework", "highlight": false },
+          { "name": "REST APIs", "highlight": false },
+          { "name": "High Concurrency", "highlight": false }
+        ]
+      },
+      {
+        "title": "SkyDrop",
+        "featured": false,
+        "icon": "box",
+        "description": "Peer-to-peer real-time image and file sharing platform built with WebRTC, Socket.IO, Node.js, and React for direct local transfers.",
+        "githubUrl": "https://github.com/MashukeAlam/skydrop",
+        "liveUrl": "",
+        "techTags": [
+          { "name": "Node.js", "highlight": true },
+          { "name": "Socket.IO", "highlight": false },
+          { "name": "React", "highlight": false },
+          { "name": "WebSockets", "highlight": false }
+        ]
+      },
+      {
+        "title": "driftworld",
+        "featured": false,
+        "icon": "box",
+        "description": "An interactive modern web experience exploring responsive typography and layout mechanics built with TypeScript and deployed on Vercel.",
+        "githubUrl": "https://github.com/MashukeAlam/driftworld",
+        "liveUrl": "https://driftworld.vercel.app",
+        "techTags": [
+          { "name": "TypeScript", "highlight": true },
+          { "name": "Vercel", "highlight": false },
+          { "name": "Frontend", "highlight": false }
+        ]
+      },
+      {
+        "title": "manimations",
+        "featured": false,
+        "icon": "box",
+        "description": "Mathematical animation engine built with Python and Manim, creating programmatic visualizations of mathematical proofs, algorithms, and geometry.",
+        "githubUrl": "https://github.com/MashukeAlam/manimations",
+        "liveUrl": "",
+        "techTags": [
+          { "name": "Python", "highlight": true },
+          { "name": "Manim", "highlight": false },
+          { "name": "Graphics", "highlight": false },
+          { "name": "Algorithms", "highlight": false }
+        ]
+      },
+      {
+        "title": "IdealMumin",
+        "featured": false,
+        "icon": "box",
+        "description": "Cross-platform mobile application delivering Quranic resources, recitations, and translation APIs developed using React Native and Expo.",
+        "githubUrl": "https://github.com/MashukeAlam/IdealMumin",
+        "liveUrl": "",
+        "techTags": [
+          { "name": "React Native", "highlight": true },
+          { "name": "Expo", "highlight": false },
+          { "name": "TypeScript", "highlight": false },
+          { "name": "Mobile", "highlight": false }
+        ]
+      },
+      {
+        "title": "discord-freedb",
+        "featured": false,
+        "icon": "box",
+        "description": "A creative serverless document database adapter turning Discord webhook channels into persistent cloud document stores with full CRUD operations.",
+        "githubUrl": "https://github.com/MashukeAlam/express-discord-freedb",
+        "liveUrl": "https://express-discord-freedb.vercel.app",
+        "techTags": [
+          { "name": "Node.js", "highlight": true },
+          { "name": "Express", "highlight": false },
+          { "name": "Database", "highlight": false }
+        ]
+      }
+    ]
+  },
+  "lab": {
+    "sectionTag": "// Explorations & Archive",
+    "sectionTitle": "The Interactive CS Lab",
+    "description": "A collection of live algorithms, canvas physics simulations, and browser-based experiments built from scratch.",
+    "items": [
+      {
+        "icon": "🌊",
+        "title": "Wave Simulator",
+        "description": "Physics simulation of propagating longitudinal and transverse wave particles on HTML5 Canvas.",
+        "url": "Wave_sim/index.html"
+      },
+      {
+        "icon": "📍",
+        "title": "A* & Dijkstra Visualizer",
+        "description": "Interactive pathfinding grid exploring heuristic search algorithm traversals and obstacle avoidance.",
+        "url": "Conways_Game_Of_Life/a_star.html"
+      },
+      {
+        "icon": "🔢",
+        "title": "Softmax Visualizer",
+        "description": "Visualizer demonstrating probability distribution transformations in neural network activation.",
+        "url": "softmax.html"
+      },
+      {
+        "icon": "💣",
+        "title": "Canvas Minesweeper",
+        "description": "Pure JavaScript canvas implementation of the classic grid-based logic and deduction game.",
+        "url": "Mines/index.html"
+      },
+      {
+        "icon": "⏱️",
+        "title": "7-Segment Display",
+        "description": "Interactive digital logic simulator emulating electronic seven-segment display units.",
+        "url": "7_segment/index.html"
+      },
+      {
+        "icon": "🗓️",
+        "title": "Weeks of Life",
+        "description": "Perspective visualizer graphing elapsed and remaining weeks across a human lifetime.",
+        "url": "weeks-left.html"
+      }
+    ]
+  },
+  "skills": {
+    "sectionTag": "// Technical Matrix",
+    "sectionTitle": "Skills & Technologies",
+    "categories": [
+      {
+        "title": "Languages & Runtimes",
+        "icon": "code",
+        "items": [
+          "Go (Golang)",
+          "TypeScript",
+          "JavaScript (Node.js)",
+          "Python",
+          "C# / .NET",
+          "Ruby",
+          "C++"
+        ]
+      },
+      {
+        "title": "Frontend, Mobile & Frameworks",
+        "icon": "layers",
+        "items": [
+          "React",
+          "Next.js",
+          "React Native / Expo",
+          "HTML5 Canvas",
+          "Tailwind CSS",
+          "Express.js"
+        ]
+      },
+      {
+        "title": "Architecture, Data & Infrastructure",
+        "icon": "database",
+        "items": [
+          "PostgreSQL",
+          "MongoDB",
+          "Redis",
+          "WebSockets / WebRTC",
+          "RESTful & GraphQL APIs",
+          "Docker",
+          "Git & CI/CD"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "headline": "Let's build something together.",
+    "description": "Whether you want to discuss distributed systems, collaborate on open-source projects, or connect for opportunities, my inbox is open.",
+    "email": "jimmashuke@gmail.com",
+    "footerCopy": "© 2026 Mashuke Alam Jim. All rights reserved.",
+    "socials": [
+      { "label": "GitHub", "url": "https://github.com/MashukeAlam" },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/mashukjim/" },
+      { "label": "Email", "url": "mailto:jimmashuke@gmail.com" }
+    ]
+  }
+}
