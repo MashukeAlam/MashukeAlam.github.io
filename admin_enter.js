@@ -2,17 +2,16 @@ console.log('Admin_Enter.js Loaded');
 
 let time = -1;
 
-setInterval(seeIfAdmin(event), 1000);
+document.addEventListener('keydown', function(event) {
+    seeIfAdmin(event);
+});
 
 function seeIfAdmin(event) {
-    
-    if(event.ctrlKey) {
-        if(time == -1) {
+    if (!event) return;
+    if (event.ctrlKey) {
+        if (time === -1) {
             time = new Date().getTime();
-            //console.log(time);
         }
-        //console.log(new Date().getMilliseconds());
-        
         console.log(new Date().getTime() - time);
-    }    
+    }
 }

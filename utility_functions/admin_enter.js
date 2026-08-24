@@ -4,20 +4,23 @@ let count = 0;
 
 
 
-setInterval(seeIfAdmin(event), 1000);
+document.addEventListener('keydown', function(event) {
+    seeIfAdmin(event);
+});
 
 function seeIfAdmin(event) {
-    if(event == undefined) return;
-    if(event.ctrlKey) {
+    if (!event) return;
+    if (event.ctrlKey) {
         count++;
-        if(count >= 5) {
+        if (count >= 5) {
             console.log('done');
             var passkey = prompt("Please enter your key:", "");
             count = 0;
-            
-            console.log(sha256(passkey) == "2535b47cb581920efef5d547d473ca02f9c0d493508f98aaf1f75c0de6a9cd57")
+            if (passkey) {
+                console.log(sha256(passkey) == "2535b47cb581920efef5d547d473ca02f9c0d493508f98aaf1f75c0de6a9cd57");
+            }
         }
-    }    
+    }
 }
 
 
