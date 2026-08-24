@@ -1,16 +1,11 @@
 {
-  "name": "web",
-  "version": "1.0.0",
-  "description": "personal web of mine",
-  "main": "game1.js",
+  "name": "mashukealam.github.io",
+  "version": "2.0.0",
+  "description": "Personal portfolio of Mashuke Alam Jim",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx serve .",
+    "start": "npx serve ."
   },
-  "author": "ME",
-  "license": "ISC",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "cherio": "^1.0.0-rc.2",
-    "request": "^2.88.0"
-  }
+  "author": "Mashuke Alam Jim",
+  "license": "MIT"
 }
