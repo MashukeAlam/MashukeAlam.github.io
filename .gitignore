@@ -63,3 +63,21 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.env.*
+!.env.example
+
+# Private keys, certificates, and credentials
+*.pem
+*.key
+*.p12
+*.pfx
+*serviceAccountKey*.json
+
+# OS and Desktop junk
+Desktop.ini
+Thumbs.db
+*.lnk
+.DS_Store
+
+# Extension packages
+*.crx

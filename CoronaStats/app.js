@@ -1,5 +1,5 @@
 // var statRes;
-
+//
 // var settingsStat = {
 //   async: true,
 //   crossDomain: true,
@@ -7,7 +7,7 @@
 //   method: 'GET',
 //   headers: {
 //     'x-rapidapi-host': 'covid-193.p.rapidapi.com',
-//     'x-rapidapi-key': '90d317fc49msh564e16f50b822d3p1aaee0jsnc63c76e50fb6'
+//     'x-rapidapi-key': 'YOUR_RAPIDAPI_KEY'
 //   }
 // }
 // var settingsHist = {
@@ -17,7 +17,7 @@
 //   method: 'GET',
 //   headers: {
 //     'x-rapidapi-host': 'covid-193.p.rapidapi.com',
-//     'x-rapidapi-key': '90d317fc49msh564e16f50b822d3p1aaee0jsnc63c76e50fb6'
+//     'x-rapidapi-key': 'YOUR_RAPIDAPI_KEY'
 //   }
 // }
 // var settingsCountr = {
@@ -27,7 +27,7 @@
 //   method: 'GET',
 //   headers: {
 //     'x-rapidapi-host': 'covid-193.p.rapidapi.com',
-//     'x-rapidapi-key': '90d317fc49msh564e16f50b822d3p1aaee0jsnc63c76e50fb6'
+//     'x-rapidapi-key': 'YOUR_RAPIDAPI_KEY'
 //   }
 // }
 

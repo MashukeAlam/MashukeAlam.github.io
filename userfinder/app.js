@@ -9,12 +9,7 @@ $(document).ready(() => {
         let un = e.target.value;
 
         $.ajax({
-            url: 'https://api.github.com/users/' + un,
-
-            data: {
-                client_id: 'd18957fc25f7390f3ce5',
-                client_secret: 'b9c53668c6159f8cdefb618fe8fc9147242432ef'
-            }
+            url: 'https://api.github.com/users/' + un
         }).done((user) => {
             console.log(user);
             $('#name').html(`  <div class="panel panel-defalut">
