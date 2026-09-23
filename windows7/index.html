@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Windows 7 Aero - Web Mockup</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%231b67b2' stroke='%2348b3ff' stroke-width='2'/%3E%3Cpath d='M7 15.5c2.5-3 5.5-1 8-2.5 0-3.5 0-5.5 0-5.5s-4.5.5-8 4v4zm9-2.5c2.5-1.5 5.5.5 8-2.5v-4s-3.5-3.5-8 1v5.5zm0 2.5c-2.5 1.5-5.5-.5-8 2.5v4s3.5 3.5 8-1v-5.5zm1 0v5.5s4.5-.5 8-4v-4c-2.5 3-5.5 1-8 2.5z' fill='%23fff'/%3E%3C/svg%3E">
+</head>
+<body class="theme-default">
+
+  <!-- Desktop Surface -->
+  <div id="desktop" class="desktop" oncontextmenu="return false;">
+    
+    <!-- Desktop Icons Container -->
+    <div id="desktop-icons" class="desktop-icons">
+      <!-- Generated dynamically by script.js -->
+    </div>
+
+    <!-- Rubberband Selection Box -->
+    <div id="selection-box" class="selection-box"></div>
+
+    <!-- Desktop Gadgets Container -->
+    <div id="gadgets-container" class="gadgets-container">
+      <!-- Analog Clock Gadget -->
+      <div class="gadget clock-gadget" id="gadget-clock" title="Windows 7 Clock Gadget">
+        <div class="gadget-close" onclick="toggleGadget('clock')">&times;</div>
+        <div class="clock-face">
+          <div class="clock-center"></div>
+          <div class="clock-hand hour-hand" id="gadget-hour"></div>
+          <div class="clock-hand minute-hand" id="gadget-minute"></div>
+          <div class="clock-hand second-hand" id="gadget-second"></div>
+          <div class="clock-dial">
+            <span>12</span><span>3</span><span>6</span><span>9</span>
+          </div>
+        </div>
+        <div class="gadget-title">Clock</div>
+      </div>
+
+      <!-- CPU Meter Gadget -->
+      <div class="gadget cpu-gadget" id="gadget-cpu" title="Windows 7 CPU Meter">
+        <div class="gadget-close" onclick="toggleGadget('cpu')">&times;</div>
+        <div class="meter-gauges">
+          <div class="gauge">
+            <div class="gauge-dial">
+              <div class="gauge-needle" id="cpu-needle"></div>
+            </div>
+            <div class="gauge-label">CPU <span id="cpu-percent">18%</span></div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-dial ram-dial">
+              <div class="gauge-needle" id="ram-needle"></div>
+            </div>
+            <div class="gauge-label">RAM <span id="ram-percent">42%</span></div>
+          </div>
+        </div>
+        <div class="gadget-title">CPU Meter</div>
+      </div>
+    </div>
+
+    <!-- Aero Snap Ghost Preview -->
+    <div id="aero-snap-preview" class="aero-snap-preview"></div>
+
+    <!-- Windows Container -->
+    <div id="windows-container" class="windows-container">
+
+      <!-- ================= NOTEPAD WINDOW ================= -->
+      <div id="window-notepad" class="aero-window" data-appid="notepad" style="width: 580px; height: 420px; top: 70px; left: 180px;">
+        <div class="window-border-highlight"></div>
+        <div class="window-titlebar" ondblclick="toggleMaximize('notepad')">
+          <div class="titlebar-left">
+            <span class="window-icon notepad-icon-small"></span>
+            <span class="window-title" id="notepad-window-title">Untitled - Notepad</span>
+          </div>
+          <div class="titlebar-controls">
+            <button class="win-btn win-btn-minimize" onclick="minimizeWindow('notepad')" title="Minimize">&#9472;</button>
+            <button class="win-btn win-btn-maximize" onclick="toggleMaximize('notepad')" title="Maximize">&#9634;</button>
+            <button class="win-btn win-btn-close" onclick="closeWindow('notepad')" title="Close">&#10005;</button>
+          </div>
+        </div>
+
+        <div class="window-menubar">
+          <div class="menu-item" onclick="openWindowMenu(event, 'notepad-file-menu')">File
+            <div class="dropdown-menu" id="notepad-file-menu">
+              <div class="menu-row" onclick="notepadNewFile()"><span>New</span><span class="menu-shortcut">Ctrl+N</span></div>
+              <div class="menu-row" onclick="notepadOpenFilePrompt()"><span>Open...</span><span class="menu-shortcut">Ctrl+O</span></div>
+              <div class="menu-row" onclick="notepadSaveFile()"><span>Save</span><span class="menu-shortcut">Ctrl+S</span></div>
+              <div class="menu-row" onclick="notepadSaveAsFile()"><span>Save As...</span></div>
+              <div class="menu-divider"></div>
+              <div class="menu-row" onclick="closeWindow('notepad')"><span>Exit</span></div>
+            </div>
+          </div>
+          <div class="menu-item" onclick="openWindowMenu(event, 'notepad-edit-menu')">Edit
+            <div class="dropdown-menu" id="notepad-edit-menu">
+              <div class="menu-row" onclick="notepadEdit('undo')"><span>Undo</span><span class="menu-shortcut">Ctrl+Z</span></div>
+              <div class="menu-divider"></div>
+              <div class="menu-row" onclick="notepadEdit('cut')"><span>Cut</span><span class="menu-shortcut">Ctrl+X</span></div>
+              <div class="menu-row" onclick="notepadEdit('copy')"><span>Copy</span><span class="menu-shortcut">Ctrl+C</span></div>
+              <div class="menu-row" onclick="notepadEdit('paste')"><span>Paste</span><span class="menu-shortcut">Ctrl+V</span></div>
+              <div class="menu-row" onclick="notepadEdit('delete')"><span>Delete</span><span class="menu-shortcut">Del</span></div>
+              <div class="menu-divider"></div>
+              <div class="menu-row" onclick="notepadEdit('selectall')"><span>Select All</span><span class="menu-shortcut">Ctrl+A</span></div>
+              <div class="menu-row" onclick="notepadInsertDate()"><span>Time/Date</span><span class="menu-shortcut">F5</span></div>
+            </div>
+          </div>
+          <div class="menu-item" onclick="openWindowMenu(event, 'notepad-format-menu')">Format
+            <div class="dropdown-menu" id="notepad-format-menu">
+              <div class="menu-row" onclick="notepadToggleWordWrap()"><span id="notepad-wordwrap-check">&#10003; Word Wrap</span></div>
+              <div class="menu-row" onclick="notepadToggleMonospace()"><span>Toggle Monospace / Sans</span></div>
+            </div>
+          </div>
+          <div class="menu-item" onclick="openWindowMenu(event, 'notepad-view-menu')">View
+            <div class="dropdown-menu" id="notepad-view-menu">
+              <div class="menu-row" onclick="notepadToggleStatusBar()"><span id="notepad-statusbar-check">&#10003; Status Bar</span></div>
+            </div>
+          </div>
+          <div class="menu-item" onclick="openWindowMenu(event, 'notepad-help-menu')">Help
+            <div class="dropdown-menu" id="notepad-help-menu">
+              <div class="menu-row" onclick="showAboutDialog('Notepad')"><span>About Notepad</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="window-content notepad-content">
+          <textarea id="notepad-textarea" spellcheck="false" placeholder=""></textarea>
+          <div class="notepad-statusbar" id="notepad-statusbar">
+            <span class="sb-item" id="notepad-cursor-pos">Ln 1, Col 1</span>
+            <span class="sb-item">100%</span>
+            <span class="sb-item">Windows (CRLF)</span>
+            <span class="sb-item">UTF-8</span>
+          </div>
+        </div>
+
+        <!-- Resize Handles -->
+        <div class="resize-handle res-n"></div>
+        <div class="resize-handle res-s"></div>
+        <div class="resize-handle res-e"></div>
+        <div class="resize-handle res-w"></div>
+        <div class="resize-handle res-nw"></div>
+        <div class="resize-handle res-ne"></div>
+        <div class="resize-handle res-sw"></div>
+        <div class="resize-handle res-se"></div>
+      </div>
+
+      <!-- ================= CALCULATOR WINDOW ================= -->
+      <div id="window-calculator" class="aero-window" data-appid="calculator" style="width: 254px; height: 350px; top: 120px; left: 450px;">
+        <div class="window-border-highlight"></div>
+        <div class="window-titlebar">
+          <div class="titlebar-left">
+            <span class="window-icon calculator-icon-small"></span>
+            <span class="window-title">Calculator</span>
+          </div>
+          <div class="titlebar-controls">
+            <button class="win-btn win-btn-minimize" onclick="minimizeWindow('calculator')" title="Minimize">&#9472;</button>
+            <button class="win-btn win-btn-maximize disabled" title="Maximize disabled">&#9634;</button>
+            <button class="win-btn win-btn-close" onclick="closeWindow('calculator')" title="Close">&#10005;</button>
+          </div>
+        </div>
+
+        <div class="window-menubar">
+          <div class="menu-item" onclick="openWindowMenu(event, 'calc-view-menu')">View
+            <div class="dropdown-menu" id="calc-view-menu">
+              <div class="menu-row active-check"><span>&#8226; Standard</span></div>
+              <div class="menu-row" onclick="alert('Scientific mode is standard in Windows 7 Ultimate!')"><span>Scientific</span></div>
+              <div class="menu-divider"></div>
+              <div class="menu-row" onclick="calcHistoryToggle()"><span>History</span></div>
+            </div>
+          </div>
+          <div class="menu-item" onclick="openWindowMenu(event, 'calc-edit-menu')">Edit
+            <div class="dropdown-menu" id="calc-edit-menu">
+              <div class="menu-row" onclick="calcCopy()"><span>Copy</span><span class="menu-shortcut">Ctrl+C</span></div>
+              <div class="menu-row" onclick="calcPaste()"><span>Paste</span><span class="menu-shortcut">Ctrl+V</span></div>
+            </div>
+          </div>
+          <div class="menu-item" onclick="openWindowMenu(event, 'calc-help-menu')">Help
+            <div class="dropdown-menu" id="calc-help-menu">
+              <div class="menu-row" onclick="showAboutDialog('Calculator')"><span>About Calculator</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="window-content calculator-content">
+          <div class="calc-display-wrap">
+            <div class="calc-history" id="calc-history">&nbsp;</div>
+            <div class="calc-main-display" id="calc-display">0</div>
+          </div>
+
+          <div class="calc-keypad">
+            <!-- Memory Row -->
+            <button class="calc-btn calc-mem" onclick="calcMem('MC')">MC</button>
+            <button class="calc-btn calc-mem" onclick="calcMem('MR')">MR</button>
+            <button class="calc-btn calc-mem" onclick="calcMem('MS')">MS</button>
+            <button class="calc-btn calc-mem" onclick="calcMem('M+')">M+</button>
+            <button class="calc-btn calc-mem" onclick="calcMem('M-')">M-</button>
+
+            <!-- Row 1 -->
+            <button class="calc-btn calc-func" onclick="calcBackspace()">&#8592;</button>
+            <button class="calc-btn calc-func" onclick="calcCE()">CE</button>
+            <button class="calc-btn calc-func" onclick="calcC()">C</button>
+            <button class="calc-btn calc-func" onclick="calcNegate()">&#177;</button>
+            <button class="calc-btn calc-func" onclick="calcSqrt()">&#8730;</button>
+
+            <!-- Row 2 -->
+            <button class="calc-btn calc-num" onclick="calcInput('7')">7</button>
+            <button class="calc-btn calc-num" onclick="calcInput('8')">8</button>
+            <button class="calc-btn calc-num" onclick="calcInput('9')">9</button>
+            <button class="calc-btn calc-op" onclick="calcOp('/')">/</button>
+            <button class="calc-btn calc-func" onclick="calcPercent()">%</button>
+
+            <!-- Row 3 -->
+            <button class="calc-btn calc-num" onclick="calcInput('4')">4</button>
+            <button class="calc-btn calc-num" onclick="calcInput('5')">5</button>
+            <button class="calc-btn calc-num" onclick="calcInput('6')">6</button>
+            <button class="calc-btn calc-op" onclick="calcOp('*')">*</button>
+            <button class="calc-btn calc-func" onclick="calcReciprocal()">1/x</button>
+
+            <!-- Row 4 & 5 grid layout -->
+            <button class="calc-btn calc-num" onclick="calcInput('1')">1</button>
+            <button class="calc-btn calc-num" onclick="calcInput('2')">2</button>
+            <button class="calc-btn calc-num" onclick="calcInput('3')">3</button>
+            <button class="calc-btn calc-op" onclick="calcOp('-')">-</button>
+            <button class="calc-btn calc-equals" id="calc-btn-eq" onclick="calcEqual()">=</button>
+
+            <button class="calc-btn calc-num calc-zero" onclick="calcInput('0')">0</button>
+            <button class="calc-btn calc-num" onclick="calcInput('.')">.</button>
+            <button class="calc-btn calc-op" onclick="calcOp('+')">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= FILE MANAGER / EXPLORER WINDOW ================= -->
+      <div id="window-explorer" class="aero-window" data-appid="explorer" style="width: 720px; height: 490px; top: 50px; left: 100px;">
+        <div class="window-border-highlight"></div>
+        <div class="window-titlebar" ondblclick="toggleMaximize('explorer')">
+          <div class="titlebar-left">
+            <span class="window-icon explorer-icon-small"></span>
+            <span class="window-title" id="explorer-window-title">Computer</span>
+          </div>
+          <div class="titlebar-controls">
+            <button class="win-btn win-btn-minimize" onclick="minimizeWindow('explorer')" title="Minimize">&#9472;</button>
+            <button class="win-btn win-btn-maximize" onclick="toggleMaximize('explorer')" title="Maximize">&#9634;</button>
+            <button class="win-btn win-btn-close" onclick="closeWindow('explorer')" title="Close">&#10005;</button>
+          </div>
+        </div>
+
+        <!-- Explorer Navigation & Address Header -->
+        <div class="explorer-header">
+          <div class="explorer-nav-buttons">
+            <button class="exp-nav-btn" id="exp-btn-back" onclick="explorerGoBack()" title="Back">&#9664;</button>
+            <button class="exp-nav-btn" id="exp-btn-forward" onclick="explorerGoForward()" title="Forward">&#9654;</button>
+            <button class="exp-nav-btn exp-nav-recent" onclick="explorerShowRecent(event)" title="Recent Locations">&#9662;</button>
+          </div>
+
+          <div class="explorer-address-bar" id="explorer-address-bar">
+            <span class="address-icon" id="address-icon"></span>
+            <div class="address-breadcrumbs" id="address-breadcrumbs">
+              <!-- Dynamically populated breadcrumbs -->
+            </div>
+            <button class="address-dropdown-btn">&#9662;</button>
+            <button class="address-refresh-btn" onclick="explorerRefresh()" title="Refresh">&#8635;</button>
+          </div>
+
+          <div class="explorer-search-bar">
+            <span class="search-icon">&#128269;</span>
+            <input type="text" id="explorer-search-input" placeholder="Search" oninput="explorerOnSearch(this.value)">
+          </div>
+        </div>
+
+        <!-- Explorer Command Bar -->
+        <div class="explorer-commandbar">
+          <div class="cmd-group">
+            <button class="cmd-btn" onclick="explorerToggleOrganizeMenu(event)">Organize &#9662;</button>
+            <button class="cmd-btn" onclick="explorerCreateNewFolder()">New folder</button>
+            <button class="cmd-btn" onclick="explorerOpenSelected()">Open</button>
+            <button class="cmd-btn" onclick="explorerDeleteSelected()">Delete</button>
+          </div>
+          <div class="cmd-views">
+            <button class="cmd-view-btn active" id="view-mode-icons" onclick="explorerSetViewMode('icons')" title="Large Icons">&#9638;</button>
+            <button class="cmd-view-btn" id="view-mode-details" onclick="explorerSetViewMode('details')" title="Details">&#9776;</button>
+          </div>
+        </div>
+
+        <!-- Explorer Main Split Area -->
+        <div class="window-content explorer-body">
+          <!-- Left Navigation Pane (Sidebar) -->
+          <div class="explorer-sidebar" id="explorer-sidebar">
+            <div class="tree-section-header">&#9662; Favorites</div>
+            <div class="tree-item" onclick="explorerNavigateTo('C:/Users/Mashuke/Desktop')">
+              <span class="tree-icon icon-desktop-small"></span>Desktop
+            </div>
+            <div class="tree-item" onclick="explorerNavigateTo('C:/Users/Mashuke/Downloads')">
+              <span class="tree-icon icon-downloads-small"></span>Downloads
+            </div>
+            <div class="tree-item" onclick="explorerNavigateTo('C:/Users/Mashuke')">
+              <span class="tree-icon icon-recent-small"></span>User Folder
+            </div>
+
+            <div class="tree-section-header">&#9662; Libraries</div>
+            <div class="tree-item" onclick="explorerNavigateTo('C:/Users/Mashuke/Documents')">
+              <span class="tree-icon icon-documents-small"></span>Documents
+            </div>
+            <div class="tree-item" onclick="explorerNavigateTo('C:/Users/Mashuke/Pictures')">
+              <span class="tree-icon icon-pictures-small"></span>Pictures
+            </div>
+            <div class="tree-item" onclick="explorerNavigateTo('C:/Users/Mashuke/Music')">
+              <span class="tree-icon icon-music-small"></span>Music
+            </div>
+
+            <div class="tree-section-header">&#9662; Computer</div>
+            <div class="tree-item" onclick="explorerNavigateTo('Computer')">
+              <span class="tree-icon icon-computer-small"></span>Computer
+            </div>
+            <div class="tree-item tree-sub" onclick="explorerNavigateTo('C:')">
+              <span class="tree-icon icon-drive-small"></span>Local Disk (C:)
+            </div>
+            <div class="tree-item tree-sub" onclick="explorerNavigateTo('D:')">
+              <span class="tree-icon icon-drive-small"></span>Data (D:)
+            </div>
+
+            <div class="tree-section-header">&#9662; Network</div>
+            <div class="tree-item" onclick="alert('Network discovery: 3 local devices found.')">
+              <span class="tree-icon icon-network-small"></span>Network
+            </div>
+          </div>
+
+          <!-- Vertical Splitter -->
+          <div class="explorer-splitter"></div>
+
+          <!-- Right Content Pane -->
+          <div class="explorer-content-view" id="explorer-file-list" onclick="explorerContentClick(event)" oncontextmenu="explorerContentContextMenu(event)">
+            <!-- Files & Folders Rendered Dynamically -->
+          </div>
+        </div>
+
+        <!-- Explorer Bottom Details Bar -->
+        <div class="explorer-detailsbar" id="explorer-detailsbar">
+          <div class="det-preview-icon" id="det-preview-icon"></div>
+          <div class="det-info">
+            <span class="det-name" id="det-name">Computer</span>
+            <span class="det-meta" id="det-meta">System Folder</span>
+          </div>
+          <div class="det-count" id="det-count">0 items</div>
+        </div>
+
+        <!-- Resize Handles -->
+        <div class="resize-handle res-n"></div>
+        <div class="resize-handle res-s"></div>
+        <div class="resize-handle res-e"></div>
+        <div class="resize-handle res-w"></div>
+        <div class="resize-handle res-nw"></div>
+        <div class="resize-handle res-ne"></div>
+        <div class="resize-handle res-sw"></div>
+        <div class="resize-handle res-se"></div>
+      </div>
+
+      <!-- ================= PERSONALIZE WINDOW ================= -->
+      <div id="window-personalize" class="aero-window" data-appid="personalize" style="width: 600px; height: 440px; top: 90px; left: 240px; display: none;">
+        <div class="window-border-highlight"></div>
+        <div class="window-titlebar">
+          <div class="titlebar-left">
+            <span class="window-icon personalize-icon-small"></span>
+            <span class="window-title">Personalization</span>
+          </div>
+          <div class="titlebar-controls">
+            <button class="win-btn win-btn-minimize" onclick="minimizeWindow('personalize')">&#9472;</button>
+            <button class="win-btn win-btn-maximize" onclick="toggleMaximize('personalize')">&#9634;</button>
+            <button class="win-btn win-btn-close" onclick="closeWindow('personalize')">&#10005;</button>
+          </div>
+        </div>
+        <div class="window-content personalize-content">
+          <h3 class="pers-heading">Change the visuals and sounds on your computer</h3>
+          <p class="pers-sub">Click an Aero Theme to change desktop background, window color, and sounds all at once.</p>
+          
+          <div class="themes-grid">
+            <div class="theme-card active" onclick="setWallpaperTheme('default', this)">
+              <div class="theme-thumb thumb-win7"></div>
+              <div class="theme-title">Windows 7 (Default)</div>
+            </div>
+            <div class="theme-card" onclick="setWallpaperTheme('nature', this)">
+              <div class="theme-thumb thumb-nature"></div>
+              <div class="theme-title">Nature</div>
+            </div>
+            <div class="theme-card" onclick="setWallpaperTheme('architecture', this)">
+              <div class="theme-thumb thumb-architecture"></div>
+              <div class="theme-title">Architecture</div>
+            </div>
+            <div class="theme-card" onclick="setWallpaperTheme('dark', this)">
+              <div class="theme-thumb thumb-dark"></div>
+              <div class="theme-title">Aero Night</div>
+            </div>
+          </div>
+
+          <div class="pers-options">
+            <label class="pers-check">
+              <input type="checkbox" id="check-aero-glass" checked onchange="toggleAeroGlass(this.checked)">
+              Enable Aero Glass Transparency
+            </label>
+            <label class="pers-check">
+              <input type="checkbox" id="check-sounds" checked onchange="toggleSoundSystem(this.checked)">
+              Play Windows 7 Sound Effects
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ABOUT WINDOW ================= -->
+      <div id="window-about" class="aero-window dialog-window" data-appid="about" style="width: 380px; height: 230px; top: 160px; left: 320px; display: none;">
+        <div class="window-border-highlight"></div>
+        <div class="window-titlebar">
+          <div class="titlebar-left">
+            <span class="window-title" id="about-window-title">About Windows 7</span>
+          </div>
+          <div class="titlebar-controls">
+            <button class="win-btn win-btn-close" onclick="closeWindow('about')">&#10005;</button>
+          </div>
+        </div>
+        <div class="window-content about-content">
+          <div class="about-logo-row">
+            <div class="about-logo-graphic"></div>
+            <div>
+              <h2 style="margin: 0; font-size: 16px; font-weight: normal; color: #1b4d75;">Windows 7 Ultimate</h2>
+              <div style="font-size: 11px; color: #555; margin-top: 3px;">Microsoft Windows Mockup</div>
+              <div style="font-size: 11px; color: #666; margin-top: 1px;">Version 6.1 (Build 7601: Service Pack 1)</div>
+            </div>
+          </div>
+          <div class="about-desc" id="about-desc-text">
+            Crafted with authentic Aero Glass, interactive File Explorer, Calculator, Notepad, and dynamic Context Menus.
+          </div>
+          <div class="dialog-buttons">
+            <button class="dialog-btn" onclick="closeWindow('about')">OK</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /windows-container -->
+
+    <!-- ================= CONTEXT MENUS ================= -->
+    <!-- Desktop Context Menu -->
+    <div id="desktop-context-menu" class="win7-context-menu">
+      <div class="ctx-item has-sub">
+        <span>View</span><span class="ctx-arrow">&#9656;</span>
+        <div class="ctx-submenu">
+          <div class="ctx-item" onclick="setDesktopIconSize('large')"><span>Large icons</span></div>
+          <div class="ctx-item active-check" id="ctx-icon-medium" onclick="setDesktopIconSize('medium')"><span>&#8226; Medium icons</span></div>
+          <div class="ctx-item" onclick="setDesktopIconSize('small')"><span>Small icons</span></div>
+          <div class="ctx-divider"></div>
+          <div class="ctx-item" onclick="toggleDesktopIcons()"><span id="ctx-show-icons-check">&#10003; Show desktop icons</span></div>
+        </div>
+      </div>
+      <div class="ctx-item has-sub">
+        <span>Sort by</span><span class="ctx-arrow">&#9656;</span>
+        <div class="ctx-submenu">
+          <div class="ctx-item" onclick="sortDesktopIcons('name')"><span>Name</span></div>
+          <div class="ctx-item" onclick="sortDesktopIcons('size')"><span>Size</span></div>
+          <div class="ctx-item" onclick="sortDesktopIcons('type')"><span>Item type</span></div>
+        </div>
+      </div>
+      <div class="ctx-item" onclick="refreshDesktop()">
+        <span>Refresh</span>
+      </div>
+      <div class="ctx-divider"></div>
+      <div class="ctx-item disabled"><span>Paste</span></div>
+      <div class="ctx-item disabled"><span>Paste shortcut</span></div>
+      <div class="ctx-divider"></div>
+      <div class="ctx-item has-sub">
+        <span>New</span><span class="ctx-arrow">&#9656;</span>
+        <div class="ctx-submenu">
+          <div class="ctx-item" onclick="createNewDesktopItem('folder')">
+            <span class="ctx-icon icon-folder-mini"></span><span>Folder</span>
+          </div>
+          <div class="ctx-item" onclick="createNewDesktopItem('text')">
+            <span class="ctx-icon icon-text-mini"></span><span>Text Document</span>
+          </div>
+        </div>
+      </div>
+      <div class="ctx-divider"></div>
+      <div class="ctx-item" onclick="openWindow('gadgets-flyout')">
+        <span>Gadgets</span>
+      </div>
+      <div class="ctx-item bold" onclick="openWindow('personalize')">
+        <span>Personalize</span>
+      </div>
+    </div>
+
+    <!-- File / Icon Context Menu -->
+    <div id="file-context-menu" class="win7-context-menu">
+      <div class="ctx-item bold" onclick="ctxActionOpen()"><span>Open</span></div>
+      <div class="ctx-item" id="ctx-item-edit" onclick="ctxActionEdit()"><span>Edit</span></div>
+      <div class="ctx-divider"></div>
+      <div class="ctx-item" onclick="ctxActionCut()"><span>Cut</span></div>
+      <div class="ctx-item" onclick="ctxActionCopy()"><span>Copy</span></div>
+      <div class="ctx-divider"></div>
+      <div class="ctx-item" onclick="ctxActionDelete()"><span>Delete</span></div>
+      <div class="ctx-item" onclick="ctxActionRename()"><span>Rename</span></div>
+      <div class="ctx-divider"></div>
+      <div class="ctx-item" onclick="ctxActionProperties()"><span>Properties</span></div>
+    </div>
+
+    <!-- Taskbar Context Menu -->
+    <div id="taskbar-context-menu" class="win7-context-menu">
+      <div class="ctx-item" onclick="taskbarCascade()"><span>Cascade windows</span></div>
+      <div class="ctx-item" onclick="taskbarTileHorizontal()"><span>Show windows stacked</span></div>
+      <div class="ctx-item" onclick="taskbarTileVertical()"><span>Show windows side by side</span></div>
+      <div class="ctx-item" onclick="toggleShowDesktop()"><span>Show the desktop</span></div>
+      <div class="ctx-divider"></div>
+      <div class="ctx-item" onclick="alert('Task Manager: All systems normal. CPU: 12%, Memory: 42%')"><span>Start Task Manager</span></div>
+      <div class="ctx-divider"></div>
+      <div class="ctx-item" onclick="openWindow('personalize')"><span>Properties</span></div>
+    </div>
+
+    <!-- Volume Popup Flyout -->
+    <div id="volume-popup" class="flyout-popup">
+      <div class="vol-title">Speakers</div>
+      <input type="range" min="0" max="100" value="80" orient="vertical" id="master-volume-slider" oninput="updateVolume(this.value)">
+      <div class="vol-label" id="vol-label">80%</div>
+      <div class="vol-mute-btn" onclick="toggleMute()" id="vol-mute-btn" title="Mute">&#128266;</div>
+    </div>
+
+    <!-- Calendar Popup Flyout -->
+    <div id="calendar-popup" class="flyout-popup">
+      <div class="cal-header">
+        <span class="cal-title" id="cal-month-year">September 2026</span>
+        <div class="cal-arrows">
+          <button onclick="calPrevMonth()">&#9664;</button>
+          <button onclick="calNextMonth()">&#9654;</button>
+        </div>
+      </div>
+      <div class="cal-days-header">
+        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <div class="cal-footer">
+        <a href="#" onclick="calGoToday(); return false;">Change date and time settings...</a>
+      </div>
+    </div>
+
+    <!-- ================= START MENU ================= -->
+    <div id="start-menu" class="start-menu" onclick="event.stopPropagation()">
+      <div class="start-menu-inner">
+        <!-- Left Pane: Programs and Search -->
+        <div class="start-left-pane">
+          <div class="start-pinned-list" id="start-pinned-list">
+            <div class="start-item" onclick="openWindow('notepad'); closeStartMenu();">
+              <span class="start-item-icon notepad-icon-small"></span>
+              <span class="start-item-text"><strong>Notepad</strong><br><small>Text Editor</small></span>
+            </div>
+            <div class="start-item" onclick="openWindow('calculator'); closeStartMenu();">
+              <span class="start-item-icon calculator-icon-small"></span>
+              <span class="start-item-text"><strong>Calculator</strong><br><small>Perform calculations</small></span>
+            </div>
+            <div class="start-item" onclick="openWindow('explorer'); closeStartMenu();">
+              <span class="start-item-icon explorer-icon-small"></span>
+              <span class="start-item-text"><strong>Windows Explorer</strong><br><small>Browse files and folders</small></span>
+            </div>
+            <div class="start-item" onclick="openWindow('personalize'); closeStartMenu();">
+              <span class="start-item-icon personalize-icon-small"></span>
+              <span class="start-item-text"><strong>Personalization</strong><br><small>Themes and Wallpapers</small></span>
+            </div>
+            <div class="start-item" onclick="playStartupSound();">
+              <span class="start-item-icon sound-icon-small"></span>
+              <span class="start-item-text"><strong>Play Windows Sound</strong><br><small>Windows 7 Logon Chime</small></span>
+            </div>
+          </div>
+
+          <div class="start-all-programs" onclick="toggleAllPrograms()">
+            <span class="all-prog-arrow">&#9654;</span> All Programs
+          </div>
+
+          <div class="start-search-box">
+            <span class="start-search-icon">&#128269;</span>
+            <input type="text" id="start-search-input" placeholder="Search programs and files" oninput="filterStartSearch(this.value)" onkeydown="if(event.key==='Enter') executeStartSearch();">
+          </div>
+        </div>
+
+        <!-- Right Pane: User Folders and System Links -->
+        <div class="start-right-pane">
+          <div class="start-user-avatar">
+            <div class="avatar-frame">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%23e0ecf8' stroke='%2389a9c4' stroke-width='2'/%3E%3Ccircle cx='20' cy='15' r='7' fill='%232b5b84'/%3E%3Cpath d='M8 34c0-7 5.4-11 12-11s12 4 12 11' fill='%232b5b84'/%3E%3C/svg%3E" alt="Mashuke">
+            </div>
+          </div>
+
+          <div class="start-links">
+            <div class="start-link bold" onclick="explorerNavigateTo('C:/Users/Mashuke'); openWindow('explorer'); closeStartMenu();">Mashuke</div>
+            <div class="start-link bold" onclick="explorerNavigateTo('C:/Users/Mashuke/Documents'); openWindow('explorer'); closeStartMenu();">Documents</div>
+            <div class="start-link bold" onclick="explorerNavigateTo('C:/Users/Mashuke/Pictures'); openWindow('explorer'); closeStartMenu();">Pictures</div>
+            <div class="start-link bold" onclick="explorerNavigateTo('C:/Users/Mashuke/Music'); openWindow('explorer'); closeStartMenu();">Music</div>
+            <div class="start-pane-divider"></div>
+            <div class="start-link" onclick="explorerNavigateTo('Computer'); openWindow('explorer'); closeStartMenu();">Computer</div>
+            <div class="start-link" onclick="openWindow('personalize'); closeStartMenu();">Control Panel</div>
+            <div class="start-link" onclick="alert('Devices and Printers: HP LaserJet, Mouse, Keyboard connected.')">Devices and Printers</div>
+            <div class="start-link" onclick="showAboutDialog('Windows 7')">Help and Support</div>
+          </div>
+
+          <div class="start-shutdown-bar">
+            <button class="shutdown-btn" onclick="simulateShutdown()">Shut down</button>
+            <button class="shutdown-flyout-btn" onclick="toggleShutdownFlyout(event)">&#9656;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /desktop -->
+
+  <!-- ================= TASKBAR ================= -->
+  <div id="taskbar" class="taskbar" oncontextmenu="openTaskbarContextMenu(event); return false;">
+    
+    <!-- Start Button / Orb -->
+    <div id="start-orb" class="start-orb" onclick="toggleStartMenu(event)" title="Start">
+      <div class="orb-inner">
+        <svg class="win-logo-svg" viewBox="0 0 36 36">
+          <!-- Windows 7 Colored Flag Logo -->
+          <path d="M6 16.5 C9 13.5 13 15 17 13.5 L17 6 C13 7.5 9 6 6 9.5 Z" fill="#eb3c24" />
+          <path d="M19 13 C23 11.5 27 13 30 10 L30 17 C27 20 23 18.5 19 20 Z" fill="#4cb050" />
+          <path d="M6 19 C9 16 13 17.5 17 16 L17 23.5 C13 25 9 23.5 6 27 Z" fill="#2980b9" />
+          <path d="M19 22.5 C23 21 27 22.5 30 19.5 L30 26.5 C27 29.5 23 28 19 29.5 Z" fill="#ffc107" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Taskbar Pinned & Open App Buttons -->
+    <div id="taskbar-apps" class="taskbar-apps">
+      <!-- Windows Explorer Tab -->
+      <div class="taskbar-tab" id="taskbar-btn-explorer" onclick="taskbarTabClick('explorer')" title="Windows Explorer">
+        <span class="tab-icon explorer-icon-small"></span>
+        <div class="tab-glow"></div>
+      </div>
+
+      <!-- Notepad Tab -->
+      <div class="taskbar-tab" id="taskbar-btn-notepad" onclick="taskbarTabClick('notepad')" title="Notepad">
+        <span class="tab-icon notepad-icon-small"></span>
+        <div class="tab-glow"></div>
+      </div>
+
+      <!-- Calculator Tab -->
+      <div class="taskbar-tab" id="taskbar-btn-calculator" onclick="taskbarTabClick('calculator')" title="Calculator">
+        <span class="tab-icon calculator-icon-small"></span>
+        <div class="tab-glow"></div>
+      </div>
+    </div>
+
+    <!-- System Tray / Notification Area -->
+    <div class="system-tray">
+      <div class="tray-btn tray-arrow" onclick="alert('Notification Area Icons: All services healthy.')" title="Show hidden icons">&#9650;</div>
+      <div class="tray-btn tray-flag" title="Action Center: No issues detected">
+        <span class="tray-icon icon-actioncenter"></span>
+      </div>
+      <div class="tray-btn tray-network" title="Network: Connected (Internet access)">
+        <span class="tray-icon icon-network"></span>
+      </div>
+      <div class="tray-btn tray-volume" onclick="toggleVolumeFlyout(event)" title="Speakers: 80%">
+        <span class="tray-icon icon-volume"></span>
+      </div>
+      <div class="tray-btn tray-clock" onclick="toggleCalendarFlyout(event)" title="Date and time settings">
+        <span class="clock-time" id="tray-time">12:00 PM</span>
+        <span class="clock-date" id="tray-date">9/23/2026</span>
+      </div>
+      <!-- Show Desktop Peek Button -->
+      <div class="show-desktop-btn" onclick="toggleShowDesktop()" onmouseenter="aeroPeekDesktop(true)" onmouseleave="aeroPeekDesktop(false)" title="Show desktop"></div>
+    </div>
+
+  </div><!-- /taskbar -->
+
+  <script src="script.js"></script>
+</body>
+</html>
