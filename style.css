@@ -500,9 +500,9 @@ body {
   object-fit: cover;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.28;
+  opacity: 0.45;
+  filter: invert(0.93) hue-rotate(180deg) contrast(1.1);
   transition: opacity 0.5s ease;
-  filter: contrast(1.15);
 }
 
 [data-theme="dark"] #ascii-bg-canvas {
@@ -518,7 +518,7 @@ body {
   height: 100vh;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 25%, rgba(250, 249, 246, 0.72) 0%, rgba(250, 249, 246, 0.9) 70%, rgba(250, 249, 246, 0.98) 100%);
+  background: radial-gradient(circle at 50% 25%, rgba(250, 249, 246, 0.4) 0%, rgba(250, 249, 246, 0.72) 70%, rgba(250, 249, 246, 0.92) 100%);
   transition: background 0.3s ease;
 }
 

@@ -7355,14 +7355,24 @@ function marineDrive() {
       full = false;
     }
 
+    let lastTickTime = performance.now();
+
     function tick(now) {
-      if (!isPlaying) return;
+      if (!isPlaying) {
+        rafId = 0;
+        return;
+      }
+      lastTickTime = now || performance.now();
       rafId = requestAnimationFrame(tick);
-      const dt = now - lastTime;
+      const dt = lastTickTime - lastTime;
       if (dt < 1000 / targetFps - 2) return;
-      lastTime = now;
+      lastTime = lastTickTime;
       t += Math.min(dt, 100) / 1000;
-      draw();
+      try {
+        draw();
+      } catch (err) {
+        console.error('ASCII draw error:', err);
+      }
     }
 
     function setScene(sceneId) {
@@ -7385,12 +7395,14 @@ function marineDrive() {
       frameFn = piece.make({});
       resize();
       draw();
+      start();
     }
 
     function start() {
       isPlaying = true;
       if (!rafId) {
         lastTime = performance.now();
+        lastTickTime = lastTime;
         rafId = requestAnimationFrame(tick);
       }
     }
@@ -7431,10 +7443,15 @@ function marineDrive() {
 
     // Watchdog to guarantee the animation is running always
     setInterval(() => {
-      if (!document.hidden && !rafId) {
-        start();
+      if (isPlaying && !document.hidden) {
+        const stalled = performance.now() - lastTickTime > 1500;
+        if (!rafId || stalled) {
+          if (rafId) cancelAnimationFrame(rafId);
+          rafId = 0;
+          start();
+        }
       }
-    }, 2000);
+    }, 1000);
 
     return {
       setScene,
