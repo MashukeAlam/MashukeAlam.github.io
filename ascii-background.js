@@ -7388,8 +7388,8 @@ function marineDrive() {
     }
 
     function start() {
-      if (!isPlaying) {
-        isPlaying = true;
+      isPlaying = true;
+      if (!rafId) {
         lastTime = performance.now();
         rafId = requestAnimationFrame(tick);
       }
@@ -7416,12 +7416,25 @@ function marineDrive() {
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        if (rafId) cancelAnimationFrame(rafId);
-      } else if (isPlaying) {
-        lastTime = performance.now();
-        rafId = requestAnimationFrame(tick);
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = 0;
+        }
+      } else {
+        start();
       }
     });
+
+    window.addEventListener('focus', () => {
+      start();
+    });
+
+    // Watchdog to guarantee the animation is running always
+    setInterval(() => {
+      if (!document.hidden && !rafId) {
+        start();
+      }
+    }, 2000);
 
     return {
       setScene,
@@ -7434,7 +7447,7 @@ function marineDrive() {
   }
 
   // =============================================================
-  // Initialization & UI Controls
+  // Initialization - Select Random Scene and Run Always
   // =============================================================
   function init() {
     const canvas = document.getElementById('ascii-bg-canvas');
@@ -7442,93 +7455,12 @@ function marineDrive() {
 
     const renderer = createAsciiRenderer(canvas);
 
-    // Initial scene from localStorage or default to aurora-fjord
-    const savedScene = localStorage.getItem('ascii-bg-scene') || 'aurora-fjord';
-    const initialScene = SCENES[savedScene] ? savedScene : 'aurora-fjord';
-    renderer.setScene(initialScene);
+    // Pick one random scene on every visit / page refresh
+    const sceneKeys = Object.keys(SCENES);
+    const randomScene = sceneKeys[Math.floor(Math.random() * sceneKeys.length)] || 'aurora-fjord';
+
+    renderer.setScene(randomScene);
     renderer.start();
-
-    // Scene name icons map
-    const SCENE_NAMES = {
-      'aurora-fjord': { name: 'Aurora Fjord', icon: '🌌' },
-      'night-coast': { name: 'Night Coast', icon: '🌊' },
-      'alpine-dawn': { name: 'Alpine Dawn', icon: '🏔️' },
-      'kyoto-dusk': { name: 'Kyoto Dusk', icon: '⛩️' },
-      'earthrise': { name: 'Earthrise', icon: '🌍' },
-      'ocean-sunset': { name: 'Ocean Sunset', icon: '🌅' },
-      'storm-plains': { name: 'Storm Plains', icon: '⚡' },
-      'desert-night': { name: 'Desert Night', icon: '🏜️' }
-    };
-
-    // UI Menu Controls
-    const toggleBtn = document.getElementById('ascii-bg-toggle');
-    const dropdown = document.getElementById('ascii-bg-dropdown');
-    const iconSpan = document.querySelector('.ascii-bg-icon');
-    const labelSpan = document.querySelector('.ascii-bg-label');
-    const pauseBtn = document.getElementById('ascii-bg-pause-btn');
-    const hideBtn = document.getElementById('ascii-bg-hide-btn');
-
-    function updateLabel(id) {
-      const info = SCENE_NAMES[id] || { name: id, icon: '✨' };
-      if (iconSpan) iconSpan.textContent = info.icon;
-      if (labelSpan) labelSpan.textContent = info.name;
-
-      if (dropdown) {
-        dropdown.querySelectorAll('[data-scene]').forEach(btn => {
-          btn.classList.toggle('active', btn.getAttribute('data-scene') === id);
-        });
-      }
-    }
-
-    updateLabel(initialScene);
-
-    if (toggleBtn && dropdown) {
-      toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        dropdown.classList.toggle('open');
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!dropdown.contains(e.target) && e.target !== toggleBtn) {
-          dropdown.classList.remove('open');
-        }
-      });
-    }
-
-    // Switch scene clicks
-    if (dropdown) {
-      dropdown.querySelectorAll('[data-scene]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const sceneId = btn.getAttribute('data-scene');
-          renderer.setScene(sceneId);
-          updateLabel(sceneId);
-          localStorage.setItem('ascii-bg-scene', sceneId);
-          canvas.style.opacity = '';
-          dropdown.classList.remove('open');
-        });
-      });
-    }
-
-    // Pause button
-    if (pauseBtn) {
-      pauseBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const playing = renderer.togglePlay();
-        pauseBtn.textContent = playing ? '⏸ Pause Motion' : '▶ Resume Motion';
-      });
-    }
-
-    // Hide/show background
-    let isHidden = false;
-    if (hideBtn) {
-      hideBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        isHidden = !isHidden;
-        canvas.style.display = isHidden ? 'none' : 'block';
-        hideBtn.textContent = isHidden ? '👁 Show Background' : '👁 Hide Background';
-      });
-    }
 
     // Expose global controller
     window.AsciiBackground = renderer;
