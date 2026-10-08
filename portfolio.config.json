@@ -136,6 +136,12 @@
     "description": "A collection of live algorithms, canvas physics simulations, and browser-based experiments built from scratch.",
     "items": [
       {
+        "icon": "🌌",
+        "title": "ASCII Observatory",
+        "description": "13 procedural animated ASCII landscapes with real-time dithering, color palettes, and shader physics.",
+        "url": "ascii-scenes.html"
+      },
+      {
         "icon": "🌊",
         "title": "Wave Simulator",
         "description": "Physics simulation of propagating longitudinal and transverse wave particles on HTML5 Canvas.",
