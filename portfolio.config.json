@@ -131,44 +131,14 @@
   },
   "lab": {
     "sectionTag": "// Explorations & Archive",
-    "sectionTitle": "The Interactive CS Lab",
-    "description": "A collection of live algorithms, canvas physics simulations, and browser-based experiments built from scratch.",
+    "sectionTitle": "Interactive Simulation",
+    "description": "Interactive desktop simulation and retro browser environment built from scratch.",
     "items": [
       {
-        "icon": "🌊",
-        "title": "Wave Simulator",
-        "description": "Physics simulation of propagating longitudinal and transverse wave particles on HTML5 Canvas.",
-        "url": "Wave_sim/index.html"
-      },
-      {
-        "icon": "📍",
-        "title": "A* & Dijkstra Visualizer",
-        "description": "Interactive pathfinding grid exploring heuristic search algorithm traversals and obstacle avoidance.",
-        "url": "Conways_Game_Of_Life/a_star.html"
-      },
-      {
-        "icon": "🔢",
-        "title": "Softmax Visualizer",
-        "description": "Visualizer demonstrating probability distribution transformations in neural network activation.",
-        "url": "softmax.html"
-      },
-      {
-        "icon": "💣",
-        "title": "Canvas Minesweeper",
-        "description": "Pure JavaScript canvas implementation of the classic grid-based logic and deduction game.",
-        "url": "Mines/index.html"
-      },
-      {
-        "icon": "⏱️",
-        "title": "7-Segment Display",
-        "description": "Interactive digital logic simulator emulating electronic seven-segment display units.",
-        "url": "7_segment/index.html"
-      },
-      {
-        "icon": "🗓️",
-        "title": "Weeks of Life",
-        "description": "Perspective visualizer graphing elapsed and remaining weeks across a human lifetime.",
-        "url": "weeks-left.html"
+        "icon": "🪟",
+        "title": "Windows 7 Aero OS",
+        "description": "Interactive Windows 7 desktop simulation with Aero Glass, File Explorer, Notepad, Calculator, Start Menu, and context menus.",
+        "url": "windows7/index.html"
       }
     ]
   },

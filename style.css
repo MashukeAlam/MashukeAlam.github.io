@@ -393,6 +393,7 @@ body {
 .lab-item.featured-lab {
   border-color: #8bb3e0;
   background: linear-gradient(180deg, var(--bg-card) 0%, rgba(139, 179, 224, 0.08) 100%);
+  grid-column: 1 / -1;
 }
 
 .lab-item.featured-lab:hover {
