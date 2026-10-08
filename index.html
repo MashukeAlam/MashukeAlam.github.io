@@ -18,7 +18,9 @@
 </head>
 <body>
 
-      
+  <!-- Ambient Animated ASCII Background Canvas & Vignette Overlay -->
+  <canvas id="ascii-bg-canvas" aria-hidden="true"></canvas>
+  <div class="ascii-bg-overlay" aria-hidden="true"></div>
 
   <div class="layout-container">
     
@@ -39,6 +41,29 @@
           </ul>
         </nav>
 
+        <!-- Ambient ASCII Background Selector -->
+        <div class="ascii-bg-menu-container">
+          <button id="ascii-bg-toggle" class="ascii-bg-toggle-btn" aria-label="Select ASCII background scene" title="ASCII Background Scene">
+            <span class="ascii-bg-icon">🌌</span>
+            <span class="ascii-bg-label">Aurora</span>
+            <svg class="ascii-bg-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div id="ascii-bg-dropdown" class="ascii-bg-dropdown">
+            <div class="ascii-bg-dropdown-header">Ambient ASCII Background</div>
+            <button type="button" data-scene="aurora-fjord" class="ascii-bg-option active">🌌 Aurora Fjord</button>
+            <button type="button" data-scene="night-coast" class="ascii-bg-option">🌊 Night Coast</button>
+            <button type="button" data-scene="alpine-dawn" class="ascii-bg-option">🏔️ Alpine Dawn</button>
+            <button type="button" data-scene="kyoto-dusk" class="ascii-bg-option">⛩️ Kyoto Dusk</button>
+            <button type="button" data-scene="earthrise" class="ascii-bg-option">🌍 Earthrise</button>
+            <button type="button" data-scene="ocean-sunset" class="ascii-bg-option">🌅 Ocean Sunset</button>
+            <button type="button" data-scene="storm-plains" class="ascii-bg-option">⚡ Storm Plains</button>
+            <button type="button" data-scene="desert-night" class="ascii-bg-option">🏜️ Desert Night</button>
+            <div class="ascii-bg-dropdown-divider"></div>
+            <button type="button" id="ascii-bg-pause-btn" class="ascii-bg-option">⏸ Pause Motion</button>
+            <button type="button" id="ascii-bg-hide-btn" class="ascii-bg-option">👁 Hide Background</button>
+          </div>
+        </div>
+
         <!-- Quiet Theme Switcher -->
         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme" title="Toggle theme">
           <svg id="theme-sun-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -56,10 +81,9 @@
           Designing high-throughput backend architectures and interactive systems.
         </h1>
         <p class="hero-sub">
-          I'm a software engineer focused on distributed systems, non-blocking network frameworks, and clean data abstractions. Outside of core systems, I explore browser physics simulations, procedural ASCII art, and retro interface design.
+          I'm a software engineer focused on distributed systems, non-blocking network frameworks, and clean data abstractions. Outside of core systems, I explore browser physics simulations and retro interface design.
         </p>
         <div class="hero-links">
-          <a href="ascii-scenes.html" class="text-link">ASCII Art <span class="arrow-icon">&#8599;</span></a>
           <a href="mailto:jimmashuke@gmail.com" class="text-link">Email <span class="arrow-icon">&#8599;</span></a>
           <a href="https://github.com/MashukeAlam" target="_blank" rel="noopener noreferrer" class="text-link">GitHub <span class="arrow-icon">&#8599;</span></a>
           <a href="https://www.linkedin.com/in/mashukjim/" target="_blank" rel="noopener noreferrer" class="text-link">LinkedIn <span class="arrow-icon">&#8599;</span></a>
@@ -170,52 +194,8 @@
           A sandbox of browser simulations, canvas physics, and interface experiments built from scratch.
         </p>
 
-        <!-- Live Interactive ASCII Terminal Feature -->
-        <div class="ascii-terminal-feature">
-          <div class="ascii-terminal-header">
-            <div class="ascii-term-dots">
-              <span class="term-dot close"></span>
-              <span class="term-dot min"></span>
-              <span class="term-dot max"></span>
-              <span class="term-title">ascii-observatory.sh &mdash; animated generative art</span>
-            </div>
-            <div class="ascii-term-controls">
-              <button id="main-ascii-mono-btn" class="term-pill-btn" title="Toggle Monochrome matrix mode">Mono</button>
-              <button id="main-ascii-play-btn" class="term-pill-btn active" title="Play or pause animation">&#10074;&#10074;</button>
-              <a href="ascii-scenes.html" class="term-pill-btn term-link-btn" title="Explore all 13 scenes in full gallery">All 13 Scenes &nearr;</a>
-            </div>
-          </div>
-
-          <div class="ascii-canvas-container" id="main-ascii-viewport">
-            <!-- Scene Canvas Mount -->
-          </div>
-
-          <div class="ascii-terminal-footer">
-            <div class="ascii-scene-picker">
-              <span class="picker-label">Scene:</span>
-              <div class="picker-pills" id="main-scene-pills">
-                <!-- Populated dynamically via JS -->
-              </div>
-            </div>
-            <div class="ascii-scene-caption">
-              <span id="main-scene-desc">aurora curtains rippling over a still fjord, a cabin lit on the shore</span>
-              <a href="ascii-scenes.html" style="color: var(--accent); text-decoration: none; font-size: 0.78rem; font-family: var(--font-mono);">Open Full Observatory &rarr;</a>
-            </div>
-          </div>
-        </div>
-
         <div class="lab-grid">
           
-          <a href="ascii-scenes.html" class="lab-item featured-ascii-lab">
-            <div class="lab-item-header">
-              <span class="lab-title">&#127756; ASCII Observatory</span>
-              <span class="lab-badge">13 Scenes</span>
-            </div>
-            <p class="lab-desc">
-              Real-time procedural ASCII art landscapes rendering thousands of glyphs with 4&times;4 Bayer dithering on HTML5 Canvas.
-            </p>
-          </a>
-
           <a href="windows7/index.html" class="lab-item featured-lab">
             <div class="lab-item-header">
               <span class="lab-title">&#129695; Windows 7 Aero OS</span>
@@ -375,69 +355,8 @@
     })();
   </script>
 
-  <!-- Interactive ASCII Showcase Controller -->
-  <script type="module">
-    import { SCENES } from './ascii/scenes.js';
-    import { AsciiScenePlayer } from './ascii/player.js';
-
-    const viewport = document.getElementById('main-ascii-viewport');
-    const pillsContainer = document.getElementById('main-scene-pills');
-    const descEl = document.getElementById('main-scene-desc');
-    const monoBtn = document.getElementById('main-ascii-mono-btn');
-    const playBtn = document.getElementById('main-ascii-play-btn');
-
-    if (viewport && pillsContainer) {
-      // Pick top 6 showcase scenes for clean pills
-      const topScenes = SCENES.slice(0, 6);
-
-      const player = new AsciiScenePlayer(viewport, {
-        basePath: './ascii/pieces/',
-        initialScene: 'aurora-fjord',
-        mono: false,
-        onSceneChange: (scene) => {
-          if (descEl) descEl.textContent = scene.note;
-          pillsContainer.querySelectorAll('.scene-pill').forEach(btn => {
-            btn.classList.toggle('active', btn.getAttribute('data-id') === scene.id);
-          });
-        },
-        onStateChange: (state) => {
-          if (playBtn) {
-            playBtn.innerHTML = state.isPlaying ? '&#10074;&#10074;' : '&#9658;';
-            playBtn.classList.toggle('active', state.isPlaying);
-          }
-          if (monoBtn) {
-            monoBtn.classList.toggle('active', state.mono);
-          }
-        }
-      });
-
-      topScenes.forEach(scene => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = `scene-pill ${scene.id === 'aurora-fjord' ? 'active' : ''}`;
-        btn.setAttribute('data-id', scene.id);
-        btn.textContent = `${scene.icon} ${scene.title}`;
-        btn.addEventListener('click', () => {
-          player.loadAndPlay(scene.id);
-        });
-        pillsContainer.appendChild(btn);
-      });
-
-      if (monoBtn) {
-        monoBtn.addEventListener('click', () => {
-          player.toggleMono();
-        });
-      }
-
-      if (playBtn) {
-        playBtn.addEventListener('click', () => {
-          player.togglePlay();
-        });
-      }
-
-      player.init();
-    }
-  </script>
+  <!-- Ambient Animated ASCII Art Background Engine -->
+  <script src="ascii-background.js"></script>
 
 </body>
 </html>

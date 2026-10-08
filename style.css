@@ -100,6 +100,7 @@ body {
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
+  z-index: 10;
 }
 
 .content-column {
@@ -488,174 +489,145 @@ body {
 }
 
 /* ==========================================================================
-   Interactive ASCII Terminal Showcase (on index.html)
+   Ambient Animated ASCII Art Background
    ========================================================================== */
-.ascii-terminal-feature {
-  background: #090c14;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 2rem;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-[data-theme="dark"] .ascii-terminal-feature {
-  border-color: #2e303e;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
-}
-
-.ascii-terminal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.65rem 1rem;
-  background: #06080e;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: #94a3b8;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+#ascii-bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.28;
+  transition: opacity 0.5s ease;
+  filter: contrast(1.15);
 }
 
-.ascii-term-dots {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+[data-theme="dark"] #ascii-bg-canvas {
+  opacity: 0.65;
+  filter: contrast(1.1);
 }
-.term-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
+
+.ascii-bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 25%, rgba(250, 249, 246, 0.72) 0%, rgba(250, 249, 246, 0.9) 70%, rgba(250, 249, 246, 0.98) 100%);
+  transition: background 0.3s ease;
+}
+
+[data-theme="dark"] .ascii-bg-overlay {
+  background: radial-gradient(circle at 50% 25%, rgba(20, 20, 22, 0.45) 0%, rgba(20, 20, 22, 0.8) 70%, rgba(20, 20, 22, 0.96) 100%);
+}
+
+/* Ambient Scene Selector in Header */
+.ascii-bg-menu-container {
+  position: relative;
   display: inline-block;
 }
-.term-dot.close { background: #ef4444; }
-.term-dot.min { background: #eab308; }
-.term-dot.max { background: #22c55e; }
 
-.term-title {
-  margin-left: 0.4rem;
-  color: #cbd5e1;
-  font-weight: 500;
-}
-
-.ascii-term-controls {
-  display: flex;
+.ascii-bg-toggle-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-}
-.term-pill-btn {
-  background: rgba(255, 255, 255, 0.08);
-  color: #e2e8f0;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 0.22rem 0.6rem;
-  border-radius: 4px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.15s ease;
+  transition: var(--transition);
   user-select: none;
 }
-.term-pill-btn:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-.term-pill-btn.active {
-  background: #22c55e;
-  color: #05080f;
-  border-color: #22c55e;
-  font-weight: 600;
-}
-.term-link-btn {
-  color: #6ee7b7;
-  border-color: rgba(110, 231, 183, 0.3);
-}
-.term-link-btn:hover {
-  background: rgba(110, 231, 183, 0.15);
-  color: #a7f3d0;
+
+.ascii-bg-toggle-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-focus);
 }
 
-.ascii-canvas-container {
-  width: 100%;
-  min-height: 320px;
-  background: #05080f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.ascii-canvas-container canvas {
-  display: block;
-  width: 100% !important;
-  height: auto !important;
+.ascii-bg-caret {
+  opacity: 0.6;
+  transition: transform 0.2s ease;
 }
 
-.ascii-terminal-footer {
-  padding: 0.75rem 1rem;
-  background: #06080e;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
+.ascii-bg-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  width: 190px;
+  padding: 0.4rem;
+  display: none;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 2px;
+  z-index: 1000;
+  animation: dropdownFadeIn 0.15s ease;
 }
 
-.ascii-scene-picker {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+[data-theme="dark"] .ascii-bg-dropdown {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  border-color: #2e2e34;
 }
-.picker-label {
+
+.ascii-bg-dropdown.open {
+  display: flex;
+}
+
+@keyframes dropdownFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ascii-bg-dropdown-header {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: #64748b;
+  font-size: 0.68rem;
   text-transform: uppercase;
+  color: var(--text-faint);
+  padding: 0.35rem 0.6rem 0.2rem 0.6rem;
   letter-spacing: 0.04em;
 }
-.picker-pills {
-  display: flex;
-  gap: 0.35rem;
-  flex-wrap: wrap;
-}
-.scene-pill {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  padding: 0.2rem 0.55rem;
+
+.ascii-bg-option {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  transition: background 0.12s ease;
+  width: 100%;
 }
-.scene-pill:hover {
-  background: rgba(255, 255, 255, 0.14);
-  color: #f1f5f9;
+
+.ascii-bg-option:hover {
+  background: var(--bg-hover);
+  color: var(--accent);
 }
-.scene-pill.active {
-  background: var(--accent);
-  color: #ffffff;
-  border-color: var(--accent);
+
+.ascii-bg-option.active {
+  background: var(--accent-soft);
+  color: var(--accent);
   font-weight: 500;
 }
 
-.ascii-scene-caption {
-  font-size: 0.82rem;
-  color: #94a3b8;
-  font-style: italic;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.lab-item.featured-ascii-lab {
-  border-color: #38bdf8;
-  background: linear-gradient(180deg, var(--bg-card) 0%, rgba(56, 189, 248, 0.08) 100%);
-}
-.lab-item.featured-ascii-lab:hover {
-  border-color: #0284c7;
+.ascii-bg-dropdown-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 0.25rem 0;
 }
