@@ -102,16 +102,15 @@
         ]
       },
       {
-        "title": "IdealMumin",
+        "title": "Asmaul Husna",
         "featured": false,
         "icon": "box",
-        "description": "Cross-platform mobile application delivering Quranic resources, recitations, and translation APIs developed using React Native and Expo.",
-        "githubUrl": "https://github.com/MashukeAlam/IdealMumin",
-        "liveUrl": "",
+        "description": "Reflect on the 99 Names of Allah with daily reminders, duas, and translations.",
+        "githubUrl": "",
+        "liveUrl": "https://play.google.com/store/apps/details?id=com.jim.asmaulhusna",
         "techTags": [
-          { "name": "React Native", "highlight": true },
-          { "name": "Expo", "highlight": false },
-          { "name": "TypeScript", "highlight": false },
+          { "name": "Android", "highlight": true },
+          { "name": "Google Play", "highlight": false },
           { "name": "Mobile", "highlight": false }
         ]
       },

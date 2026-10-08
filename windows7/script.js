@@ -252,7 +252,7 @@ const VFS = {
     name: "Projects",
     children: [
       "D:/Projects/marshallgo.txt",
-      "D:/Projects/IdealMumin.txt"
+      "D:/Projects/AsmaulHusna.txt"
     ]
   },
   "D:/Projects/marshallgo.txt": {
@@ -262,12 +262,12 @@ const VFS = {
     date: "8/24/2026 11:30 AM",
     content: "marshallgo: High-performance Go web framework for scalable REST APIs."
   },
-  "D:/Projects/IdealMumin.txt": {
+  "D:/Projects/AsmaulHusna.txt": {
     type: "file",
-    name: "IdealMumin.txt",
-    size: "280 bytes",
+    name: "AsmaulHusna.txt",
+    size: "295 bytes",
     date: "8/24/2026 11:30 AM",
-    content: "IdealMumin: React Native mobile application for prayer times and Quran."
+    content: "Asmaul Husna: Android application for reflecting on the 99 Names of Allah with daily reminders, duas, and translations."
   },
   "D:/Wallpapers": {
     type: "folder",
