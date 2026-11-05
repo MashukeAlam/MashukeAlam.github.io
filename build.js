@@ -274,8 +274,9 @@ ${footerLinksHtml}
     })();
   </script>
 
-  <!-- Ambient Animated ASCII Background Engine -->
-  <script src="ascii-background.js?v=2.3"></script>
+  <!-- Ambient Animated ASCII Background Engine & Active Scene -->
+  <script src="assets/scenes/aurora-fjord.js"></script>
+  <script src="assets/js/ascii-engine.js"></script>
 
 </body>
 </html>
