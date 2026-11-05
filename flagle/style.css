@@ -163,6 +163,7 @@ body {
   position: relative;
   width: 100%;
   max-width: 380px;
+  height: 240px;
   aspect-ratio: 3 / 2;
   border-radius: 8px;
   overflow: hidden;

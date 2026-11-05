@@ -1,8 +1,7 @@
 /**
- * CargoLoop (Garawell-style Loop Sort)
- * Trucks + Conveyor Loop Color Sorting Puzzle
- * Features: Truck tapping, conveyor circulation, automatic color-sorting docks,
- * ice cubes, mystery blocks, Web Audio synthesizer, and progressive levels.
+ * CargoLoop — Truck & Conveyor Color Sorting Puzzle
+ * Inspired by Garawell Games' Loop Sort
+ * Full cross-browser Canvas 2D engine with Web Audio, tactile feedback, and multi-level puzzles.
  */
 
 (function () {
@@ -20,7 +19,27 @@
   const modalStars = document.getElementById('modal-stars');
   const modalActionBtn = document.getElementById('modal-action-btn');
 
-  // Web Audio Synthesizer
+  // Cross-browser safe rounded rectangle drawer
+  function drawRoundRect(c, x, y, w, h, r) {
+    if (typeof c.roundRect === 'function') {
+      c.beginPath();
+      c.roundRect(x, y, w, h, r);
+    } else {
+      c.beginPath();
+      c.moveTo(x + r, y);
+      c.lineTo(x + w - r, y);
+      c.quadraticCurveTo(x + w, y, x + w, y + r);
+      c.lineTo(x + w, y + h - r);
+      c.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      c.lineTo(x + r, y + h);
+      c.quadraticCurveTo(x, y + h, x, y + h - r);
+      c.lineTo(x, y + r);
+      c.quadraticCurveTo(x, y, x + r, y);
+      c.closePath();
+    }
+  }
+
+  // Audio Synthesizer
   let soundEnabled = true;
   let audioCtx = null;
 
@@ -55,17 +74,17 @@
   }
 
   function playUnloadSound() {
-    playTone(280, 'triangle', 0.1, 0.2);
+    playTone(320, 'triangle', 0.1, 0.25);
   }
 
-  function playDockSound(pitchMultiplier = 1) {
-    playTone(520 * pitchMultiplier, 'sine', 0.2, 0.3);
+  function playDockSound(pitchMult = 1) {
+    playTone(520 * pitchMult, 'sine', 0.2, 0.3);
   }
 
   function playTruckCompleteSound() {
     if (!soundEnabled) return;
     [440, 554, 659].forEach((f, i) => {
-      setTimeout(() => playTone(f, 'triangle', 0.25, 0.25), i * 80);
+      setTimeout(() => playTone(f, 'triangle', 0.22, 0.25), i * 90);
     });
   }
 
@@ -78,24 +97,22 @@
 
   function playFailSound() {
     if (!soundEnabled) return;
-    [320, 260, 200].forEach((f, i) => {
-      setTimeout(() => playTone(f, 'sawtooth', 0.22, 0.25), i * 110);
+    [300, 240, 190].forEach((f, i) => {
+      setTimeout(() => playTone(f, 'sawtooth', 0.25, 0.25), i * 110);
     });
   }
 
-  // Palettes
+  // Color Definitions
   const COLOR_PALETTE = {
-    red: { fill: '#ef4444', top: '#f87171', border: '#b91c1c', light: '#fee2e2' },
-    blue: { fill: '#3b82f6', top: '#60a5fa', border: '#1d4ed8', light: '#dbeafe' },
-    green: { fill: '#10b981', top: '#34d399', border: '#047857', light: '#d1fae5' },
-    yellow: { fill: '#f59e0b', top: '#fbbf24', border: '#b45309', light: '#fef3c7' },
-    purple: { fill: '#8b5cf6', top: '#a78bfa', border: '#6d28d9', light: '#ede9fe' }
+    red: { name: 'Red', fill: '#ef4444', top: '#f87171', border: '#b91c1c', glow: 'rgba(239, 68, 68, 0.4)' },
+    blue: { name: 'Blue', fill: '#3b82f6', top: '#60a5fa', border: '#1d4ed8', glow: 'rgba(59, 130, 246, 0.4)' },
+    green: { name: 'Green', fill: '#10b981', top: '#34d399', border: '#047857', glow: 'rgba(16, 185, 129, 0.4)' },
+    yellow: { name: 'Yellow', fill: '#f59e0b', top: '#fbbf24', border: '#b45309', glow: 'rgba(245, 158, 11, 0.4)' }
   };
 
   let currentLevel = 1;
-  const maxLevels = 10;
+  const maxLevels = 8;
 
-  // Level State
   let trucks = [];
   let beltCubes = [];
   let particles = [];
@@ -105,7 +122,7 @@
   let isLevelFailed = false;
 
   const maxBeltCapacity = 7;
-  const beltSpeed = 0.0028;
+  const beltSpeed = 0.0026;
 
   // Geometry cache
   let cx = 0, cy = 0, rx = 0, ry = 0;
@@ -113,20 +130,22 @@
   function resize() {
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
+    const w = rect.width > 50 ? rect.width : (canvas.parentElement ? canvas.parentElement.clientWidth : 420);
+    const h = rect.height > 50 ? rect.height : (canvas.parentElement ? canvas.parentElement.clientHeight : 520);
+
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
 
     cx = canvas.width / 2;
     cy = canvas.height / 2;
-    rx = Math.min(canvas.width * 0.32, 160 * dpr);
-    ry = Math.min(canvas.height * 0.26, 130 * dpr);
+    rx = Math.min(canvas.width * 0.25, 105 * dpr);
+    ry = Math.min(canvas.height * 0.22, 90 * dpr);
 
     updateTruckPositions();
   }
 
-  // Parametric conveyor path: t in [0, 1)
   function getConveyorPoint(t) {
-    const angle = t * Math.PI * 2 - Math.PI / 2; // clockwise starting top
+    const angle = t * Math.PI * 2 - Math.PI / 2;
     return {
       x: cx + rx * Math.cos(angle),
       y: cy + ry * Math.sin(angle),
@@ -134,73 +153,44 @@
     };
   }
 
-  // Level configurations
+  // Level Setups
   function getLevelConfig(lvl) {
     if (lvl === 1) {
-      return {
-        trucks: [
-          { color: 'red', capacity: 3, initialCubes: ['blue', 'red', 'red'], t: 0.25 },
-          { color: 'blue', capacity: 3, initialCubes: ['red', 'blue', 'blue'], t: 0.75 }
-        ]
-      };
+      // 2 Trucks: Red & Blue (Top and Bottom)
+      return [
+        { color: 'red', capacity: 3, initialCubes: ['blue', 'red', 'red'], t: 0.0 },
+        { color: 'blue', capacity: 3, initialCubes: ['red', 'blue', 'blue'], t: 0.5 }
+      ];
     } else if (lvl === 2) {
-      return {
-        trucks: [
-          { color: 'red', capacity: 3, initialCubes: ['green', 'blue', 'red'], t: 0.16 },
-          { color: 'blue', capacity: 3, initialCubes: ['red', 'green', 'blue'], t: 0.50 },
-          { color: 'green', capacity: 3, initialCubes: ['blue', 'red', 'green'], t: 0.83 }
-        ]
-      };
+      // 3 Trucks: Red, Blue, Green
+      return [
+        { color: 'red', capacity: 3, initialCubes: ['green', 'blue', 'red'], t: 0.0 },
+        { color: 'blue', capacity: 3, initialCubes: ['red', 'green', 'blue'], t: 0.35 },
+        { color: 'green', capacity: 3, initialCubes: ['blue', 'red', 'green'], t: 0.65 }
+      ];
     } else if (lvl === 3) {
-      // Introduces Mystery Cube
-      return {
-        trucks: [
-          { color: 'red', capacity: 3, initialCubes: ['mystery:green', 'blue', 'red'], t: 0.16 },
-          { color: 'blue', capacity: 3, initialCubes: ['mystery:red', 'green', 'blue'], t: 0.50 },
-          { color: 'green', capacity: 3, initialCubes: ['mystery:blue', 'red', 'green'], t: 0.83 }
-        ]
-      };
+      // 3 Trucks with Mystery '?' Cubes
+      return [
+        { color: 'red', capacity: 3, initialCubes: ['mystery:green', 'blue', 'red'], t: 0.0 },
+        { color: 'blue', capacity: 3, initialCubes: ['mystery:red', 'green', 'blue'], t: 0.35 },
+        { color: 'green', capacity: 3, initialCubes: ['mystery:blue', 'red', 'green'], t: 0.65 }
+      ];
     } else if (lvl === 4) {
-      // 4 Trucks with mixed loads
-      return {
-        trucks: [
-          { color: 'red', capacity: 3, initialCubes: ['yellow', 'green', 'blue'], t: 0.125 },
-          { color: 'blue', capacity: 3, initialCubes: ['red', 'yellow', 'green'], t: 0.375 },
-          { color: 'green', capacity: 3, initialCubes: ['blue', 'red', 'yellow'], t: 0.625 },
-          { color: 'yellow', capacity: 3, initialCubes: ['green', 'blue', 'red'], t: 0.875 }
-        ]
-      };
-    } else if (lvl === 5) {
-      // Introduces Ice Cube 🧊 (needs 1 lap to thaw)
-      return {
-        trucks: [
-          { color: 'red', capacity: 3, initialCubes: ['ice:blue', 'red', 'green'], t: 0.16 },
-          { color: 'blue', capacity: 3, initialCubes: ['ice:green', 'blue', 'red'], t: 0.50 },
-          { color: 'green', capacity: 3, initialCubes: ['ice:red', 'green', 'blue'], t: 0.83 }
-        ]
-      };
+      // 4 Trucks: Red, Blue, Green, Yellow
+      return [
+        { color: 'red', capacity: 3, initialCubes: ['yellow', 'green', 'blue'], t: 0.0 },
+        { color: 'blue', capacity: 3, initialCubes: ['red', 'yellow', 'green'], t: 0.25 },
+        { color: 'green', capacity: 3, initialCubes: ['blue', 'red', 'yellow'], t: 0.5 },
+        { color: 'yellow', capacity: 3, initialCubes: ['green', 'blue', 'red'], t: 0.75 }
+      ];
     } else {
-      // Procedural higher levels
-      const colors = ['red', 'blue', 'green', 'yellow'];
-      const count = 4;
-      const allCubes = [];
-      colors.forEach(c => {
-        for (let i = 0; i < 3; i++) allCubes.push(c);
-      });
-      // Shuffle
-      for (let i = allCubes.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [allCubes[i], allCubes[j]] = [allCubes[j], allCubes[i]];
-      }
-
-      const generated = colors.map((c, idx) => ({
-        color: c,
-        capacity: 3,
-        initialCubes: allCubes.splice(0, 3),
-        t: (idx + 0.5) / count
-      }));
-
-      return { trucks: generated };
+      // Level 5+: Mystery and Ice Cubes
+      return [
+        { color: 'red', capacity: 3, initialCubes: ['ice:blue', 'mystery:yellow', 'red'], t: 0.0 },
+        { color: 'blue', capacity: 3, initialCubes: ['ice:green', 'mystery:red', 'blue'], t: 0.25 },
+        { color: 'green', capacity: 3, initialCubes: ['ice:yellow', 'mystery:blue', 'green'], t: 0.5 },
+        { color: 'yellow', capacity: 3, initialCubes: ['ice:red', 'mystery:green', 'yellow'], t: 0.75 }
+      ];
     }
   }
 
@@ -210,7 +200,7 @@
 
     const config = getLevelConfig(lvl);
 
-    trucks = config.trucks.map((cfg, idx) => {
+    trucks = config.map((cfg, idx) => {
       const cargo = cfg.initialCubes.map(spec => {
         let isMystery = false;
         let isIce = false;
@@ -233,12 +223,13 @@
       });
 
       return {
-        id: idx,
+        id: idx + 1,
         colorKey: cfg.color,
         capacity: cfg.capacity,
         t: cfg.t,
-        cargo, // current cubes on the truck
+        cargo,
         isComplete: false,
+        bounce: 1.0,
         x: 0,
         y: 0,
         clickRadius: 40
@@ -257,19 +248,18 @@
 
   function updateTruckPositions() {
     const dpr = window.devicePixelRatio || 1;
-    const distanceOffset = 68 * dpr;
+    const distanceOffset = 46 * dpr;
 
     trucks.forEach(truck => {
       const beltPt = getConveyorPoint(truck.t);
       const angle = truck.t * Math.PI * 2 - Math.PI / 2;
 
-      // Position truck slightly outside the conveyor track along normal
       truck.x = beltPt.x + Math.cos(angle) * distanceOffset;
       truck.y = beltPt.y + Math.sin(angle) * distanceOffset;
       truck.beltX = beltPt.x;
       truck.beltY = beltPt.y;
       truck.angle = angle;
-      truck.clickRadius = 36 * dpr;
+      truck.clickRadius = 38 * dpr;
     });
   }
 
@@ -289,40 +279,34 @@
     }
   }
 
-  // Tapping a truck unloads its top cube onto the belt
   function unloadTruck(truck) {
     if (!isPlaying || isLevelWon || isLevelFailed) return;
     if (truck.cargo.length === 0) return;
 
-    // Check if belt has space
+    // Tactile squash & bounce animation on tap
+    truck.bounce = 1.25;
+
+    // Check if belt is completely full
     if (beltCubes.length >= maxBeltCapacity) {
       playTone(160, 'sawtooth', 0.1, 0.2);
       return;
     }
 
-    // Check if belt entry point is blocked
-    const entryT = truck.t;
-    const isEntryBlocked = beltCubes.some(c => {
-      const diff = Math.abs(c.t - entryT);
-      return diff < 0.08 || diff > 0.92;
-    });
-
-    if (isEntryBlocked) {
-      playTone(160, 'sawtooth', 0.1, 0.2);
-      return;
-    }
-
-    // Unload the top/front cube
+    // Unload foremost cube
     const cube = truck.cargo.pop();
-    if (cube.isMystery) {
-      cube.isMystery = false; // reveal on drop
+    if (cube.isMystery) cube.isMystery = false;
+
+    // Slight entry offset if another cube is near the ramp to prevent overlap
+    let entryT = truck.t;
+    const nearConflict = beltCubes.some(c => Math.abs(c.t - entryT) < 0.05);
+    if (nearConflict) {
+      entryT = (entryT + 0.04) % 1.0;
     }
 
     beltCubes.push({
       colorKey: cube.colorKey,
       isIce: cube.isIce,
       iceLaps: cube.iceLaps,
-      startT: entryT,
       t: entryT,
       lapDistance: 0
     });
@@ -332,7 +316,6 @@
   }
 
   function checkTruckCompletion(truck) {
-    // A truck is complete if it has all matching cubes of its color
     if (truck.cargo.length === truck.capacity) {
       const allMatch = truck.cargo.every(c => c.colorKey === truck.colorKey && !c.isIce);
       if (allMatch && !truck.isComplete) {
@@ -350,14 +333,14 @@
     isPlaying = false;
     playWinSound();
 
-    modalTitle.textContent = 'All Trucks Sorted!';
-    modalDesc.textContent = `Clean conveyor routing! Ready for Level ${currentLevel + 1}?`;
+    modalTitle.textContent = 'Level Complete!';
+    modalDesc.textContent = `All trucks sorted by color! Ready for Level ${currentLevel + 1}?`;
     modalStars.textContent = '⭐⭐⭐';
     modalActionBtn.textContent = 'Next Level';
     modalOverlay.classList.add('active');
   }
 
-  function triggerFail(reason = 'Conveyor Loop Jammed!') {
+  function triggerFail(reason = 'Belt Full & No Matching Trucks Open!') {
     isLevelFailed = true;
     isPlaying = false;
     playFailSound();
@@ -374,13 +357,18 @@
 
     beltOffset = (beltOffset + 1) % 40;
 
-    // Advance cubes on the conveyor loop
+    // Smooth bounce decay on trucks
+    trucks.forEach(t => {
+      if (t.bounce > 1.0) t.bounce += (1.0 - t.bounce) * 0.15;
+    });
+
+    // Advance cubes along conveyor
     for (let i = beltCubes.length - 1; i >= 0; i--) {
       const cube = beltCubes[i];
       cube.t = (cube.t + beltSpeed) % 1.0;
       cube.lapDistance += beltSpeed;
 
-      // Handle ice cube thawing after 1 lap
+      // Melt ice after 1 full lap
       if (cube.isIce && cube.lapDistance >= 1.0) {
         cube.isIce = false;
         const pt = getConveyorPoint(cube.t);
@@ -388,13 +376,13 @@
         playTone(600, 'sine', 0.1, 0.2);
       }
 
-      // If cube is not frozen, check if it passes a truck of its matching color
+      // Check if cube matches a truck with open capacity
       if (!cube.isIce) {
         for (const truck of trucks) {
           if (truck.colorKey === cube.colorKey && truck.cargo.length < truck.capacity) {
             const diff = Math.abs(cube.t - truck.t);
-            if (diff < 0.03 || diff > 0.97) {
-              // Cube docks into the matching truck!
+            if (diff < 0.035 || diff > 0.965) {
+              // Cube docks into target truck!
               truck.cargo.push({
                 colorKey: cube.colorKey,
                 isMystery: false,
@@ -414,58 +402,57 @@
       }
     }
 
-    // Check if ALL trucks are complete and belt is empty
+    // Check Win
     const allDone = trucks.every(t => t.isComplete);
     if (allDone && beltCubes.length === 0) {
       triggerWin();
       return;
     }
 
-    // Check if belt is at capacity and NO cube can dock anywhere (deadlock)
+    // Check Deadlock
     if (beltCubes.length >= maxBeltCapacity) {
       const canAnyCubeDock = beltCubes.some(c => {
-        if (c.isIce) return true; // could thaw
+        if (c.isIce) return true;
         const targetTruck = trucks.find(t => t.colorKey === c.colorKey);
         return targetTruck && targetTruck.cargo.length < targetTruck.capacity;
       });
 
       if (!canAnyCubeDock) {
-        triggerFail('No matching open trucks for remaining belt cubes!');
+        triggerFail('All open trucks are blocked!');
       }
     }
 
-    // Update particles
+    // Particles
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
       p.x += p.vx;
       p.y += p.vy;
-      p.alpha -= 0.025;
+      p.alpha -= 0.03;
       if (p.alpha <= 0) particles.splice(i, 1);
     }
   }
 
-  // Rendering
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const dpr = window.devicePixelRatio || 1;
     const cubeSize = 22 * dpr;
 
-    // 1. Draw Conveyor Belt Track
+    // 1. Conveyor Belt Track
     ctx.beginPath();
-    ctx.lineWidth = 26 * dpr;
+    ctx.lineWidth = 24 * dpr;
     ctx.strokeStyle = '#1e293b';
     ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.lineWidth = 3 * dpr;
+    ctx.lineWidth = 2 * dpr;
     ctx.strokeStyle = '#38bdf8';
     ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
     ctx.stroke();
 
-    // Belt motion indicator rollers
-    const numRollers = 24;
+    // Rollers
+    const numRollers = 20;
     for (let i = 0; i < numRollers; i++) {
       const t = (i / numRollers + (beltOffset / 40) / numRollers) % 1.0;
       const pt = getConveyorPoint(t);
@@ -475,47 +462,46 @@
       ctx.fill();
     }
 
-    // 2. Draw Trucks & Parking Bays
+    // 2. Trucks
     trucks.forEach(truck => {
       const pal = COLOR_PALETTE[truck.colorKey];
 
-      // Draw connection ramp from truck to conveyor
+      // Connecting ramp
       ctx.beginPath();
-      ctx.lineWidth = 6 * dpr;
+      ctx.lineWidth = 5 * dpr;
       ctx.strokeStyle = '#334155';
       ctx.moveTo(truck.x, truck.y);
       ctx.lineTo(truck.beltX, truck.beltY);
       ctx.stroke();
 
-      // Draw Truck Body
       ctx.save();
       ctx.translate(truck.x, truck.y);
+      ctx.scale(truck.bounce, truck.bounce);
 
-      // Shadow
-      ctx.beginPath();
-      ctx.ellipse(0, 8 * dpr, 34 * dpr, 20 * dpr, 0, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
-      ctx.fill();
+      // Glow if truck is interactive
+      if (!truck.isComplete && truck.cargo.length > 0) {
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 36 * dpr, 24 * dpr, 0, 0, Math.PI * 2);
+        ctx.fillStyle = pal.glow;
+        ctx.fill();
+      }
 
-      // Truck Bed Platform
+      // Truck Platform Base
       ctx.fillStyle = '#334155';
-      ctx.beginPath();
-      ctx.roundRect(-30 * dpr, -18 * dpr, 60 * dpr, 36 * dpr, 6 * dpr);
+      drawRoundRect(ctx, -28 * dpr, -18 * dpr, 56 * dpr, 36 * dpr, 6 * dpr);
       ctx.fill();
 
-      // Truck Cab (Colored)
+      // Truck Cab
       ctx.fillStyle = pal.fill;
-      ctx.beginPath();
-      ctx.roundRect(-28 * dpr, -16 * dpr, 18 * dpr, 32 * dpr, 4 * dpr);
+      drawRoundRect(ctx, -26 * dpr, -16 * dpr, 18 * dpr, 32 * dpr, 4 * dpr);
       ctx.fill();
 
-      // Cab Windshield
+      // Windshield
       ctx.fillStyle = '#0f172a';
-      ctx.beginPath();
-      ctx.roundRect(-26 * dpr, -11 * dpr, 12 * dpr, 22 * dpr, 2 * dpr);
+      drawRoundRect(ctx, -24 * dpr, -11 * dpr, 12 * dpr, 22 * dpr, 2 * dpr);
       ctx.fill();
 
-      // Completion Checkmark or Capacity Counter
+      // Status indicator
       if (truck.isComplete) {
         ctx.fillStyle = '#10b981';
         ctx.font = `bold ${16 * dpr}px sans-serif`;
@@ -523,30 +509,37 @@
         ctx.textBaseline = 'middle';
         ctx.fillText('✔', 8 * dpr, 0);
       } else {
-        ctx.fillStyle = '#94a3b8';
+        ctx.fillStyle = '#f8fafc';
         ctx.font = `bold ${11 * dpr}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(`${truck.cargo.length}/${truck.capacity}`, 8 * dpr, 0);
       }
 
-      // Draw Cargo Cubes on Truck
+      // Cargo Cubes on Truck
       truck.cargo.forEach((c, idx) => {
         const cxPos = -4 * dpr + idx * (10 * dpr);
-        const cyPos = 0;
-        drawCube(cxPos, cyPos, c, 14 * dpr);
+        drawCube(cxPos, 0, c, 13 * dpr);
       });
+
+      // Tap hint badge if level 1 and truck has cargo
+      if (!truck.isComplete && truck.cargo.length > 0) {
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = `bold ${9 * dpr}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillText('TAP', 0, -22 * dpr);
+      }
 
       ctx.restore();
     });
 
-    // 3. Draw Conveyor Belt Cubes
+    // 3. Cubes on Conveyor Loop
     beltCubes.forEach(cube => {
       const pt = getConveyorPoint(cube.t);
       drawCube(pt.x, pt.y, cube, cubeSize);
     });
 
-    // 4. Draw Particles
+    // 4. Particles
     particles.forEach(p => {
       ctx.save();
       ctx.globalAlpha = p.alpha;
@@ -557,9 +550,9 @@
       ctx.restore();
     });
 
-    // Capacity indicator badge in loop center
+    // Central Capacity Counter
     ctx.fillStyle = beltCubes.length >= maxBeltCapacity ? '#ef4444' : '#94a3b8';
-    ctx.font = `bold ${12 * dpr}px sans-serif`;
+    ctx.font = `bold ${11 * dpr}px sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(`BELT: ${beltCubes.length}/${maxBeltCapacity}`, cx, cy);
@@ -586,28 +579,28 @@
 
     const pal = COLOR_PALETTE[cube.colorKey] || COLOR_PALETTE.red;
 
-    // Cube Base
+    // Base
     ctx.fillStyle = pal.fill;
     ctx.fillRect(x - half, y - half, size, size);
 
-    // Cube 3D Bevel Highlight
+    // Bevel top
     ctx.fillStyle = pal.top;
     ctx.fillRect(x - half, y - half, size, size * 0.35);
 
-    // Outline
+    // Border
     ctx.strokeStyle = pal.border;
     ctx.lineWidth = 1.5 * dpr;
     ctx.strokeRect(x - half, y - half, size, size);
 
     // Ice overlay
     if (cube.isIce) {
-      ctx.fillStyle = 'rgba(219, 234, 254, 0.65)';
+      ctx.fillStyle = 'rgba(219, 234, 254, 0.7)';
       ctx.fillRect(x - half, y - half, size, size);
       ctx.strokeStyle = '#93c5fd';
       ctx.strokeRect(x - half, y - half, size, size);
 
       ctx.fillStyle = '#1e3a8a';
-      ctx.font = `${size * 0.5}px sans-serif`;
+      ctx.font = `${size * 0.55}px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('❄', x, y);
@@ -621,21 +614,39 @@
   }
 
   // Pointer Interaction
-  canvas.addEventListener('pointerdown', e => {
-    e.preventDefault();
+  function handlePointer(clientX, clientY) {
+    initAudio();
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
-    const clickX = (e.clientX - rect.left) * dpr;
-    const clickY = (e.clientY - rect.top) * dpr;
+    const clickX = (clientX - rect.left) * dpr;
+    const clickY = (clientY - rect.top) * dpr;
 
-    // Check which truck was clicked
+    let clickedTruck = null;
+    let minDist = Infinity;
+
     for (const truck of trucks) {
-      const dx = clickX - truck.x;
-      const dy = clickY - truck.y;
-      if (Math.hypot(dx, dy) <= truck.clickRadius + 12 * dpr) {
-        unloadTruck(truck);
-        break;
+      const dist = Math.hypot(clickX - truck.x, clickY - truck.y);
+      if (dist < truck.clickRadius + 18 * dpr && dist < minDist) {
+        minDist = dist;
+        clickedTruck = truck;
       }
+    }
+
+    if (clickedTruck) {
+      unloadTruck(clickedTruck);
+    }
+  }
+
+  canvas.addEventListener('pointerdown', e => {
+    e.preventDefault();
+    handlePointer(e.clientX, e.clientY);
+  });
+
+  // Number key shortcuts: 1, 2, 3, 4
+  window.addEventListener('keydown', e => {
+    const num = parseInt(e.key, 10);
+    if (num >= 1 && num <= trucks.length) {
+      unloadTruck(trucks[num - 1]);
     }
   });
 
@@ -659,6 +670,7 @@
 
   window.addEventListener('resize', resize);
 
+  // Initialize
   resize();
   setupLevel(1);
   requestAnimationFrame(loop);
