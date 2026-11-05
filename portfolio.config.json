@@ -1,201 +1,135 @@
 {
   "meta": {
-    "title": "Mashuke Alam Jim | Senior Software Engineer",
-    "description": "Senior Software Engineer specializing in backend systems, distributed architectures, and full-stack web applications.",
-    "themeColor": "#09090b",
-    "canonicalUrl": "https://mashukealam.github.io/"
+    "title": "Mashuke Alam Jim | Software Engineer",
+    "description": "Software engineer specializing in high-concurrency backend architectures, distributed systems, and creative web experiments.",
+    "canonicalUrl": "https://mashukealam.github.io/",
+    "author": "Mashuke Alam Jim",
+    "themeColorLight": "#faf9f6",
+    "themeColorDark": "#141416",
+    "ogImage": "https://mashukealam.github.io/pic_rect.webp",
+    "ogImageAlt": "Mashuke Alam Jim - Software Engineer"
   },
   "brand": {
-    "badgeText": "J",
-    "name": "Mashuke Alam Jim"
+    "name": "Mashuke Alam Jim",
+    "title": "Senior Software Engineer"
   },
   "nav": [
-    { "label": "Me", "href": "#about" },
-    { "label": "Projects", "href": "#projects" },
+    { "label": "Work", "href": "#work" },
     { "label": "Lab", "href": "#lab" },
-    { "label": "Skills", "href": "#skills" },
+    { "label": "About", "href": "#about" },
     { "label": "Contact", "href": "#contact" }
   ],
   "hero": {
-    "status": "Available for technical discussions & collaboration",
-    "headline": "Building high-performance <span class=\"gradient-text\">software & systems</span>.",
-    "role": "> Senior Software Engineer",
-    "bio": "Passionate about scalable backend architectures, high-throughput web frameworks, distributed systems, and crafting responsive, intuitive user experiences.",
-    "actions": [
-      {
-        "label": "Get in Touch",
-        "href": "mailto:jimmashuke@gmail.com",
-        "primary": true,
-        "type": "email"
-      },
-      {
-        "label": "GitHub",
-        "href": "https://github.com/MashukeAlam",
-        "primary": false,
-        "type": "github"
-      },
-      {
-        "label": "LinkedIn",
-        "href": "https://www.linkedin.com/in/mashukjim/",
-        "primary": false,
-        "type": "linkedin"
-      }
+    "heading": "Mashuke Alam Jim — Software Engineer",
+    "sub": "Designing high-throughput backend architectures and interactive systems. Focused on distributed systems, non-blocking network frameworks, and clean data abstractions. Outside of core systems, I explore browser physics simulations and retro interface design.",
+    "links": [
+      { "label": "Email", "url": "mailto:jimmashuke@gmail.com", "external": false },
+      { "label": "GitHub", "url": "https://github.com/MashukeAlam", "external": true, "relMe": true },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/mashukjim/", "external": true, "relMe": true }
     ]
   },
-  "projects": {
-    "sectionTag": "// Engineering & Code",
-    "sectionTitle": "Featured Projects",
+  "work": {
+    "sectionLabel": "Selected Work",
     "items": [
       {
         "title": "marshallgo",
-        "featured": true,
-        "icon": "bolt",
-        "description": "A high-performance Golang web framework engineered for rapid backend development, clean routing abstractions, and minimal overhead for microservices and API gateways.",
-        "githubUrl": "https://github.com/MashukeAlam/marshallgo",
-        "liveUrl": "",
-        "techTags": [
-          { "name": "Go", "highlight": true },
-          { "name": "Web Framework", "highlight": false },
-          { "name": "REST APIs", "highlight": false },
-          { "name": "High Concurrency", "highlight": false }
-        ]
+        "tagline": "Go • Web Framework",
+        "url": "https://github.com/MashukeAlam/marshallgo",
+        "description": "High-performance Golang web framework engineered for rapid backend development, clean routing abstractions, and minimal overhead for microservices and API gateways.",
+        "tags": ["Go", "Microservices", "REST"]
       },
       {
         "title": "SkyDrop",
-        "featured": false,
-        "icon": "box",
-        "description": "Peer-to-peer real-time image and file sharing platform built with WebRTC, Socket.IO, Node.js, and React for direct local transfers.",
-        "githubUrl": "https://github.com/MashukeAlam/skydrop",
-        "liveUrl": "",
-        "techTags": [
-          { "name": "Node.js", "highlight": true },
-          { "name": "Socket.IO", "highlight": false },
-          { "name": "React", "highlight": false },
-          { "name": "WebSockets", "highlight": false }
-        ]
-      },
-      {
-        "title": "driftworld",
-        "featured": false,
-        "icon": "box",
-        "description": "An interactive modern web experience exploring responsive typography and layout mechanics built with TypeScript and deployed on Vercel.",
-        "githubUrl": "https://github.com/MashukeAlam/driftworld",
-        "liveUrl": "https://driftworld.vercel.app",
-        "techTags": [
-          { "name": "TypeScript", "highlight": true },
-          { "name": "Vercel", "highlight": false },
-          { "name": "Frontend", "highlight": false }
-        ]
+        "tagline": "Node.js • WebRTC",
+        "url": "https://github.com/MashukeAlam/skydrop",
+        "description": "Peer-to-peer real-time file and image transfer engine using direct WebRTC data channels with Socket.IO signaling.",
+        "tags": ["TypeScript", "WebRTC", "React"]
       },
       {
         "title": "manimations",
-        "featured": false,
-        "icon": "box",
-        "description": "Mathematical animation engine built with Python and Manim, creating programmatic visualizations of mathematical proofs, algorithms, and geometry.",
-        "githubUrl": "https://github.com/MashukeAlam/manimations",
-        "liveUrl": "",
-        "techTags": [
-          { "name": "Python", "highlight": true },
-          { "name": "Manim", "highlight": false },
-          { "name": "Graphics", "highlight": false },
-          { "name": "Algorithms", "highlight": false }
-        ]
+        "tagline": "Python • Manim",
+        "url": "https://github.com/MashukeAlam/manimations",
+        "description": "Programmatic mathematical visualization engine rendering algorithmic proofs, graph traversals, and geometric concepts.",
+        "tags": ["Python", "Graphics", "Algorithms"]
+      },
+      {
+        "title": "driftworld",
+        "tagline": "Frontend • Vercel",
+        "url": "https://driftworld.vercel.app",
+        "description": "Exploration into responsive typography systems, spatial viewport interactions, and minimal component architectures.",
+        "tags": ["TypeScript", "Vercel"]
       },
       {
         "title": "Asmaul Husna",
-        "featured": false,
-        "icon": "box",
+        "tagline": "Android • Google Play",
+        "url": "https://play.google.com/store/apps/details?id=com.jim.asmaulhusna",
         "description": "Reflect on the 99 Names of Allah with daily reminders, duas, and translations.",
-        "githubUrl": "",
-        "liveUrl": "https://play.google.com/store/apps/details?id=com.jim.asmaulhusna",
-        "techTags": [
-          { "name": "Android", "highlight": true },
-          { "name": "Google Play", "highlight": false },
-          { "name": "Mobile", "highlight": false }
-        ]
+        "tags": ["Android", "Google Play", "Mobile"]
       },
       {
         "title": "discord-freedb",
-        "featured": false,
-        "icon": "box",
-        "description": "A creative serverless document database adapter turning Discord webhook channels into persistent cloud document stores with full CRUD operations.",
-        "githubUrl": "https://github.com/MashukeAlam/express-discord-freedb",
-        "liveUrl": "https://express-discord-freedb.vercel.app",
-        "techTags": [
-          { "name": "Node.js", "highlight": true },
-          { "name": "Express", "highlight": false },
-          { "name": "Database", "highlight": false }
-        ]
+        "tagline": "Node.js • Express",
+        "url": "https://github.com/MashukeAlam/express-discord-freedb",
+        "description": "Lightweight serverless document database adapter utilizing Discord webhook channels for persistent document storage.",
+        "tags": ["Node.js", "Database"]
       }
     ]
   },
   "lab": {
-    "sectionTag": "// Explorations & Archive",
-    "sectionTitle": "Interactive Simulation",
-    "description": "Interactive desktop simulation and retro browser environment built from scratch.",
+    "sectionLabel": "Interactive Lab",
+    "intro": "Interactive desktop simulation and retro browser environment built from scratch.",
     "items": [
       {
         "icon": "🪟",
+        "badge": "Featured Simulation",
         "title": "Windows 7 Aero OS",
-        "description": "Interactive Windows 7 desktop simulation with Aero Glass, File Explorer, Notepad, Calculator, Start Menu, and context menus.",
-        "url": "windows7/index.html"
+        "url": "windows7/index.html",
+        "description": "Interactive Windows 7 desktop simulation with Aero Glass, File Explorer, Notepad, Calculator, Start Menu, and context menus."
       }
     ]
   },
-  "skills": {
-    "sectionTag": "// Technical Matrix",
-    "sectionTitle": "Skills & Technologies",
+  "about": {
+    "sectionLabel": "Foundations & Stack",
     "categories": [
       {
-        "title": "Languages & Runtimes",
-        "icon": "code",
-        "items": [
-          
-          "TypeScript",
-          "JavaScript (Node.js)",
+        "title": "Languages",
+        "skills": [
+          "Go (Golang)",
+          "TypeScript / Node.js",
           "Python",
           "C# / .NET",
-          "Ruby",
-"Go (Golang)",
           "C++"
         ]
       },
       {
-        "title": "Frontend, Mobile & Frameworks",
-        "icon": "layers",
-        "items": [
-          "React",
-          "Next.js",
-          "React Native / Expo",
-          "HTML5 Canvas",
-          "Tailwind CSS",
-          "Express.js"
+        "title": "Systems & Architecture",
+        "skills": [
+          "Distributed Systems",
+          "Microservices",
+          "REST & gRPC APIs",
+          "WebSockets & WebRTC",
+          "Docker & Containers"
         ]
       },
       {
-        "title": "Architecture, Data & Infrastructure",
-        "icon": "database",
-        "items": [
-          "PostgreSQL",
-          "MongoDB",
-          "Redis",
-          "WebSockets / WebRTC",
-          "RESTful & GraphQL APIs",
-          "Docker",
-          "Git & CI/CD"
+        "title": "Data & Web",
+        "skills": [
+          "PostgreSQL & MongoDB",
+          "Redis Caching",
+          "React & Next.js",
+          "HTML5 Canvas",
+          "React Native"
         ]
       }
     ]
   },
   "contact": {
-    "headline": "Let's build something together.",
-    "description": "Whether you want to discuss distributed systems, collaborate on open-source projects, or connect for opportunities, my inbox is open.",
     "email": "jimmashuke@gmail.com",
-    "footerCopy": "© 2026 Mashuke Alam Jim. All rights reserved.",
-    "socials": [
-      { "label": "GitHub", "url": "https://github.com/MashukeAlam" },
-      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/mashukjim/" },
-      { "label": "Email", "url": "mailto:jimmashuke@gmail.com" }
+    "copyright": "© 2026 Mashuke Alam Jim. Crafted with care.",
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/MashukeAlam", "external": true, "relMe": true },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/mashukjim/", "external": true, "relMe": true },
+      { "label": "jimmashuke@gmail.com", "url": "mailto:jimmashuke@gmail.com", "external": false }
     ]
   }
 }
