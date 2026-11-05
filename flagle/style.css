@@ -1,0 +1,442 @@
+/* ==========================================================================
+   Flagle — Daily World Flag Deduction Game
+   ========================================================================== */
+
+:root {
+  --bg-color: #faf9f6;
+  --bg-card: #ffffff;
+  --text-main: #1c1917;
+  --text-muted: #78716c;
+  --border-color: #d6d3d1;
+  --tile-bg: #292524;
+  --tile-text: #f5f5f4;
+  
+  --color-success: #2d6a4f;
+  --color-warm: #d97706;
+  --color-cold: #78716c;
+  
+  --key-bg: #e7e5e4;
+  --key-text: #1c1917;
+  --input-bg: #ffffff;
+  --dropdown-bg: #ffffff;
+  --dropdown-hover: #f5f5f4;
+
+  --modal-overlay: rgba(0, 0, 0, 0.45);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Menlo", monospace;
+}
+
+[data-theme="dark"] {
+  --bg-color: #141416;
+  --bg-card: #1c1c1f;
+  --text-main: #f5f5f4;
+  --text-muted: #a8a29e;
+  --border-color: #29292e;
+  --tile-bg: #1e1e22;
+  --tile-text: #f5f5f4;
+  
+  --color-success: #52b788;
+  --color-warm: #f59e0b;
+  --color-cold: #3a3a3c;
+  
+  --key-bg: #29292e;
+  --key-text: #f5f5f4;
+  --input-bg: #1c1c1f;
+  --dropdown-bg: #1c1c1f;
+  --dropdown-hover: #29292e;
+
+  --modal-overlay: rgba(0, 0, 0, 0.7);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Header */
+.app-header {
+  width: 100%;
+  max-width: 520px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.back-link:hover {
+  color: var(--text-main);
+  background: var(--key-bg);
+}
+
+.header-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin-left: 0.5rem;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.icon-btn:hover {
+  color: var(--text-main);
+  background: var(--key-bg);
+}
+
+.mode-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: var(--key-bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s;
+}
+
+.mode-badge:hover {
+  color: var(--text-main);
+}
+
+/* Main Container */
+.game-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 1.25rem 1rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Flag Stage */
+.flag-stage {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 3 / 2;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--border-color);
+  background: #f0efe9;
+}
+
+.flag-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Reveal Grid (6 Tiles: 2x3) */
+.tile-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 2px;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.flag-tile {
+  background: var(--tile-bg);
+  color: var(--tile-text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  user-select: none;
+}
+
+.flag-tile.revealed {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+/* Input Area */
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+}
+
+.input-row {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+}
+
+.country-input {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.country-input:focus {
+  border-color: var(--color-success);
+}
+
+.guess-btn {
+  padding: 0 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: var(--color-success);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.guess-btn:hover {
+  opacity: 0.9;
+}
+
+.guess-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Suggestions Dropdown */
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: var(--dropdown-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  max-height: 210px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+
+.suggestion-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.15s;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover, .suggestion-item.active {
+  background: var(--dropdown-hover);
+}
+
+/* Guesses List */
+.guesses-list {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guess-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  0% { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.guess-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.guess-metrics {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.distance-tag {
+  color: var(--text-muted);
+}
+
+.arrow-tag {
+  font-size: 1.15rem;
+}
+
+.proximity-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--color-cold);
+}
+
+.proximity-badge.warm {
+  background: var(--color-warm);
+}
+
+.proximity-badge.exact {
+  background: var(--color-success);
+}
+
+/* Modals & Confetti */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--modal-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 440px;
+  padding: 1.75rem;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.modal-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.share-btn {
+  width: 100%;
+  margin-top: 1.25rem;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--color-success);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}

@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /wordle/
+Allow: /flagle/
+Allow: /loopsort/
 Allow: /windows7/
 Allow: /privacy*.html
 

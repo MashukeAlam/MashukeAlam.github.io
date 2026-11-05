@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Loop Sort — Hyper-Casual Conveyor Color Puzzle | Mashuke Alam Jim</title>
+  <meta name="description" content="Satisfying color sorting arcade game. Release colored marbles into the conveyor loop and match them into docking bays without jamming the circuit.">
+  <link rel="canonical" href="https://mashukealam.github.io/loopsort/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Loop Sort — Hyper-Casual Conveyor Color Puzzle">
+  <meta property="og:description" content="Satisfying, tactile color sorting puzzle. Tap to release marbles and clear the loop!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mashukealam.github.io/loopsort/">
+  <meta property="og:image" content="https://mashukealam.github.io/pic_rect.webp">
+
+  <meta name="theme-color" content="#0f172a">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+
+  <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+<body>
+
+  <header class="game-header">
+    <div class="header-left">
+      <a href="../index.html" class="back-link" title="Return to Portfolio">&larr; Portfolio</a>
+      <span id="level-badge" class="level-badge">Level 1</span>
+    </div>
+
+    <div class="header-right">
+      <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound" title="Toggle Sound">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+      </button>
+      <button id="restart-btn" class="icon-btn" aria-label="Restart Level" title="Restart Level">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="stage-container">
+    <canvas id="game-canvas"></canvas>
+
+    <!-- Modal Win / Fail Overlay -->
+    <div id="modal-overlay" class="modal-overlay">
+      <div class="modal-card">
+        <h2 id="modal-title">Level Complete!</h2>
+        <div id="modal-stars" class="stars-row">⭐⭐⭐</div>
+        <p id="modal-desc">All colors sorted smoothly!</p>
+        <button id="modal-action-btn" class="modal-btn">Next Level</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="control-bar">
+    <button id="release-btn" class="action-btn">Tap to Release Marble</button>
+  </footer>
+
+  <script src="game.js"></script>
+</body>
+</html>

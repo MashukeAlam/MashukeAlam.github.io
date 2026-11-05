@@ -289,6 +289,9 @@ console.log('✅ Generated index.html from portfolio.config.json');
 const today = new Date().toISOString().split('T')[0];
 const pages = [
   { loc: 'https://mashukealam.github.io/', priority: '1.0', changefreq: 'weekly' },
+  { loc: 'https://mashukealam.github.io/wordle/index.html', priority: '0.9', changefreq: 'daily' },
+  { loc: 'https://mashukealam.github.io/flagle/index.html', priority: '0.9', changefreq: 'daily' },
+  { loc: 'https://mashukealam.github.io/loopsort/index.html', priority: '0.9', changefreq: 'weekly' },
   { loc: 'https://mashukealam.github.io/windows7/index.html', priority: '0.8', changefreq: 'monthly' },
   { loc: 'https://mashukealam.github.io/privacy.html', priority: '0.3', changefreq: 'yearly' },
   { loc: 'https://mashukealam.github.io/privacy-husna.html', priority: '0.3', changefreq: 'yearly' },
