@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | Mashuke Alam Jim</title>
+  <meta name="description" content="The requested page could not be found. Return to Mashuke Alam Jim's portfolio.">
+  <meta name="robots" content="noindex, follow">
+  
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f6">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141416">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css?v=2.3">
+  <style>
+    .not-found-wrap {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .not-found-code {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .not-found-title {
+      font-size: 2.25rem;
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .not-found-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout-container">
+    <header class="site-header">
+      <div class="site-brand">
+        <a href="index.html" class="brand-name">Mashuke Alam Jim</a>
+        <span class="brand-title">Senior Software Engineer</span>
+      </div>
+
+      <div class="nav-cluster">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#work" class="nav-link">Work</a></li>
+            <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="content-column">
+      <div class="not-found-wrap">
+        <span class="not-found-code">404 // Not Found</span>
+        <h1 class="not-found-title">Lost in hyperspace.</h1>
+        <p class="not-found-desc">
+          The coordinate or experiment you are looking for has been moved, archived, or does not exist.
+        </p>
+        <div>
+          <a href="index.html" class="text-link">&larr; Return to Homepage</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

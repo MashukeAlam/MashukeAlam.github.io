@@ -1,0 +1,34 @@
+User-agent: *
+Allow: /
+Allow: /windows7/
+Allow: /privacy*.html
+
+Disallow: /7_segment/
+Disallow: /Conways_Game_Of_Life/
+Disallow: /Mines/
+Disallow: /Special_Dates/
+Disallow: /Studysense/
+Disallow: /TicTacToe/
+Disallow: /UIU_Calender/
+Disallow: /Wave_sim/
+Disallow: /Youtube_Videos/
+Disallow: /blog-ds/
+Disallow: /howmuch/
+Disallow: /newtab/
+Disallow: /userfinder/
+Disallow: /game_math.html
+Disallow: /snake.html
+Disallow: /typingrace.html
+Disallow: /passwordgenerator.html
+Disallow: /rain.html
+Disallow: /tetris.html
+Disallow: /pi_approx.html
+Disallow: /softmax.html
+Disallow: /weeks-left.html
+Disallow: /animation_prac.html
+Disallow: /assist.html
+Disallow: /ben10.html
+Disallow: /nointernet.html
+Disallow: /logo.html
+
+Sitemap: https://mashukealam.github.io/sitemap.xml

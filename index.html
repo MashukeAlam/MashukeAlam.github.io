@@ -1,24 +1,79 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mashuke Alam Jim | Software Engineer</title>
   <meta name="description" content="Software engineer specializing in high-concurrency backend architectures, distributed systems, and creative web experiments.">
-  <meta name="theme-color" content="#faf9f6">
+  <meta name="author" content="Mashuke Alam Jim">
+  <link rel="canonical" href="https://mashukealam.github.io/">
+  
+  <!-- Dual Theme Color for system appearance -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f6">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141416">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   
   <!-- Open Graph -->
+  <meta property="og:site_name" content="Mashuke Alam Jim | Software Engineer">
   <meta property="og:title" content="Mashuke Alam Jim | Software Engineer">
   <meta property="og:description" content="Software engineer specializing in high-concurrency backend architectures, distributed systems, and creative web experiments.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mashukealam.github.io/">
+  <meta property="og:image" content="https://mashukealam.github.io/pic_rect.webp">
+  <meta property="og:image:alt" content="Mashuke Alam Jim - Software Engineer">
 
-  <link rel="stylesheet" href="style.css?v=2.2">
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mashuke Alam Jim | Software Engineer">
+  <meta name="twitter:description" content="Software engineer specializing in high-concurrency backend architectures, distributed systems, and creative web experiments.">
+  <meta name="twitter:image" content="https://mashukealam.github.io/pic_rect.webp">
+
+  <!-- Prevent Theme Flash -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mashuke Alam Jim",
+  "jobTitle": "Senior Software Engineer",
+  "url": "https://mashukealam.github.io/",
+  "sameAs": [
+    "https://github.com/MashukeAlam",
+    "https://www.linkedin.com/in/mashukjim/"
+  ],
+  "knowsAbout": [
+    "Go",
+    "Distributed Systems",
+    "Microservices",
+    "TypeScript",
+    "Node.js",
+    "WebSockets",
+    "WebRTC",
+    "Docker",
+    "PostgreSQL",
+    "Redis"
+  ]
+}
+  </script>
+
+  <link rel="stylesheet" href="style.css?v=2.3">
 </head>
 <body>
 
-  <!-- Ambient Animated ASCII Background Canvas & Vignette Overlay -->
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Ambient Animated ASCII Background Canvas & Overlay -->
   <canvas id="ascii-bg-canvas" aria-hidden="true"></canvas>
   <div class="ascii-bg-overlay" aria-hidden="true"></div>
 
@@ -41,42 +96,41 @@
           </ul>
         </nav>
 
-        <!-- Quiet Theme Switcher -->
+        <!-- Theme Switcher Button -->
         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme" title="Toggle theme">
-          <svg id="theme-sun-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-          <svg id="theme-moon-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg id="theme-sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg id="theme-moon-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         </button>
       </div>
     </header>
 
     <!-- Main Content Column -->
-    <main class="content-column">
+    <main id="main-content" class="content-column">
       
       <!-- Hero / Introduction -->
       <section class="hero-section" id="intro">
         <h1 class="hero-heading">
-          Designing high-throughput backend architectures and interactive systems.
+          Mashuke Alam Jim — Software Engineer
         </h1>
         <p class="hero-sub">
-          I'm a software engineer focused on distributed systems, non-blocking network frameworks, and clean data abstractions. Outside of core systems, I explore browser physics simulations and retro interface design.
+          Designing high-throughput backend architectures and interactive systems. Focused on distributed systems, non-blocking network frameworks, and clean data abstractions. Outside of core systems, I explore browser physics simulations and retro interface design.
         </p>
         <div class="hero-links">
           <a href="mailto:jimmashuke@gmail.com" class="text-link">Email <span class="arrow-icon">&#8599;</span></a>
-          <a href="https://github.com/MashukeAlam" target="_blank" rel="noopener noreferrer" class="text-link">GitHub <span class="arrow-icon">&#8599;</span></a>
-          <a href="https://www.linkedin.com/in/mashukjim/" target="_blank" rel="noopener noreferrer" class="text-link">LinkedIn <span class="arrow-icon">&#8599;</span></a>
+          <a href="https://github.com/MashukeAlam" class="text-link" target="_blank" rel="noopener noreferrer me">GitHub <span class="arrow-icon">&#8599;</span></a>
+          <a href="https://www.linkedin.com/in/mashukjim/" class="text-link" target="_blank" rel="noopener noreferrer me">LinkedIn <span class="arrow-icon">&#8599;</span></a>
         </div>
       </section>
 
       <!-- Selected Work / Projects -->
       <section class="section" id="work">
-        <span class="section-label">Selected Work</span>
+        <h2 class="section-label">Selected Work</h2>
         
         <div class="project-list">
-          
           <a href="https://github.com/MashukeAlam/marshallgo" target="_blank" rel="noopener noreferrer" class="project-item">
             <div class="project-header-row">
               <span class="project-title">marshallgo <span class="arrow-icon">&#8599;</span></span>
-              <span class="project-tagline">Go &bull; Web Framework</span>
+              <span class="project-tagline">Go • Web Framework</span>
             </div>
             <p class="project-desc">
               High-performance Golang web framework engineered for rapid backend development, clean routing abstractions, and minimal overhead for microservices and API gateways.
@@ -91,7 +145,7 @@
           <a href="https://github.com/MashukeAlam/skydrop" target="_blank" rel="noopener noreferrer" class="project-item">
             <div class="project-header-row">
               <span class="project-title">SkyDrop <span class="arrow-icon">&#8599;</span></span>
-              <span class="project-tagline">Node.js &bull; WebRTC</span>
+              <span class="project-tagline">Node.js • WebRTC</span>
             </div>
             <p class="project-desc">
               Peer-to-peer real-time file and image transfer engine using direct WebRTC data channels with Socket.IO signaling.
@@ -106,7 +160,7 @@
           <a href="https://github.com/MashukeAlam/manimations" target="_blank" rel="noopener noreferrer" class="project-item">
             <div class="project-header-row">
               <span class="project-title">manimations <span class="arrow-icon">&#8599;</span></span>
-              <span class="project-tagline">Python &bull; Manim</span>
+              <span class="project-tagline">Python • Manim</span>
             </div>
             <p class="project-desc">
               Programmatic mathematical visualization engine rendering algorithmic proofs, graph traversals, and geometric concepts.
@@ -121,7 +175,7 @@
           <a href="https://driftworld.vercel.app" target="_blank" rel="noopener noreferrer" class="project-item">
             <div class="project-header-row">
               <span class="project-title">driftworld <span class="arrow-icon">&#8599;</span></span>
-              <span class="project-tagline">Frontend &bull; Vercel</span>
+              <span class="project-tagline">Frontend • Vercel</span>
             </div>
             <p class="project-desc">
               Exploration into responsive typography systems, spatial viewport interactions, and minimal component architectures.
@@ -135,7 +189,7 @@
           <a href="https://play.google.com/store/apps/details?id=com.jim.asmaulhusna" target="_blank" rel="noopener noreferrer" class="project-item">
             <div class="project-header-row">
               <span class="project-title">Asmaul Husna <span class="arrow-icon">&#8599;</span></span>
-              <span class="project-tagline">Android &bull; Google Play</span>
+              <span class="project-tagline">Android • Google Play</span>
             </div>
             <p class="project-desc">
               Reflect on the 99 Names of Allah with daily reminders, duas, and translations.
@@ -150,7 +204,7 @@
           <a href="https://github.com/MashukeAlam/express-discord-freedb" target="_blank" rel="noopener noreferrer" class="project-item">
             <div class="project-header-row">
               <span class="project-title">discord-freedb <span class="arrow-icon">&#8599;</span></span>
-              <span class="project-tagline">Node.js &bull; Express</span>
+              <span class="project-tagline">Node.js • Express</span>
             </div>
             <p class="project-desc">
               Lightweight serverless document database adapter utilizing Discord webhook channels for persistent document storage.
@@ -160,35 +214,32 @@
               <span class="meta-pill">Database</span>
             </div>
           </a>
-
         </div>
       </section>
 
       <!-- The Lab / Creative Experiments -->
       <section class="section" id="lab">
-        <span class="section-label">Interactive Lab</span>
+        <h2 class="section-label">Interactive Lab</h2>
         <p class="lab-intro">
           Interactive desktop simulation and retro browser environment built from scratch.
         </p>
 
         <div class="lab-grid">
-          
           <a href="windows7/index.html" class="lab-item featured-lab">
             <div class="lab-item-header">
-              <span class="lab-title">&#129695; Windows 7 Aero OS</span>
+              <span class="lab-title">🪟 Windows 7 Aero OS</span>
               <span class="lab-badge">Featured Simulation</span>
             </div>
             <p class="lab-desc">
               Interactive Windows 7 desktop simulation with Aero Glass, File Explorer, Notepad, Calculator, Start Menu, and context menus.
             </p>
           </a>
-
         </div>
       </section>
 
       <!-- Technical Foundations -->
       <section class="section" id="about">
-        <span class="section-label">Foundations &amp; Stack</span>
+        <h2 class="section-label">Foundations &amp; Stack</h2>
         
         <div class="stack-grid">
           <div>
@@ -229,11 +280,11 @@
       <!-- Footer & Contact -->
       <footer class="site-footer" id="contact">
         <div>
-          <span>&copy; 2026 Mashuke Alam Jim. Crafted with care.</span>
+          <span>© 2026 Mashuke Alam Jim. Crafted with care.</span>
         </div>
         <div class="footer-links">
-          <a href="https://github.com/MashukeAlam" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-          <a href="https://www.linkedin.com/in/mashukjim/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+          <a href="https://github.com/MashukeAlam" class="footer-link" target="_blank" rel="noopener noreferrer me">GitHub</a>
+          <a href="https://www.linkedin.com/in/mashukjim/" class="footer-link" target="_blank" rel="noopener noreferrer me">LinkedIn</a>
           <a href="mailto:jimmashuke@gmail.com" class="footer-link">jimmashuke@gmail.com</a>
         </div>
       </footer>
@@ -241,7 +292,7 @@
     </main>
   </div>
 
-  <!-- Minimal Theme Switcher Script -->
+  <!-- Minimal Theme Toggle Script -->
   <script>
     (function() {
       const toggle = document.getElementById('theme-toggle');
@@ -249,19 +300,7 @@
       const moonIcon = document.getElementById('theme-moon-icon');
       const html = document.documentElement;
 
-      // Check stored preference or system preference
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        setTheme(savedTheme);
-      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        setTheme('dark');
-      } else {
-        setTheme('light');
-      }
-
-      function setTheme(theme) {
-        html.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
+      function updateIcons(theme) {
         if (theme === 'dark') {
           sunIcon.style.display = 'block';
           moonIcon.style.display = 'none';
@@ -271,15 +310,20 @@
         }
       }
 
+      updateIcons(html.getAttribute('data-theme') || 'light');
+
       toggle.addEventListener('click', () => {
         const current = html.getAttribute('data-theme');
-        setTheme(current === 'dark' ? 'light' : 'dark');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateIcons(next);
       });
     })();
   </script>
 
-  <!-- Ambient Animated ASCII Art Background Engine -->
-  <script src="ascii-background.js?v=2.2"></script>
+  <!-- Ambient Animated ASCII Background Engine -->
+  <script src="ascii-background.js?v=2.3"></script>
 
 </body>
 </html>
