@@ -396,7 +396,7 @@
   // Sharing
   document.getElementById('share-btn').addEventListener('click', () => {
     const isWon = guesses.length > 0 && guesses[guesses.length - 1].isCorrect;
-    let text = `Flagle ${mode === 'daily' ? '#' + getDailyCountry().dayNumber : 'Practice'} ${isWon ? guesses.length : 'X'}/6\n\n`;
+    let text = `FlagFinder ${mode === 'daily' ? '#' + getDailyCountry().dayNumber : 'Practice'} ${isWon ? guesses.length : 'X'}/6\n\n`;
     
     guesses.forEach(g => {
       if (g.isCorrect) text += '🟩🟩🟩🟩🟩 100%\n';

@@ -381,7 +381,7 @@
 
   // Sharing
   document.getElementById('share-btn').addEventListener('click', () => {
-    let text = `Wordle ${mode === 'daily' ? '#' + getDailyWord().dayNumber : 'Practice'} ${guesses[guesses.length - 1] === targetWord ? guesses.length : 'X'}/6\n\n`;
+    let text = `WordGrid ${mode === 'daily' ? '#' + getDailyWord().dayNumber : 'Practice'} ${guesses[guesses.length - 1] === targetWord ? guesses.length : 'X'}/6\n\n`;
     guesses.forEach(guess => {
       const evalRow = evaluateGuess(guess, targetWord);
       evalRow.forEach(state => {

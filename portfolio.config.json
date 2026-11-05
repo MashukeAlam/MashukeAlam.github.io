@@ -89,23 +89,23 @@
       {
         "icon": "🟩",
         "badge": "Daily Word Game",
-        "title": "Wordle Minimalist",
+        "title": "WordGrid",
         "url": "wordle/index.html",
         "description": "Daily 5-letter word deduction game with QWERTY keyboard tracking, streak statistics, and shareable spoiler-free emoji cards."
       },
       {
         "icon": "🌍",
         "badge": "Geo Trivia",
-        "title": "Flagle World",
+        "title": "FlagFinder",
         "url": "flagle/index.html",
         "description": "World flag deduction puzzle. Guess the mystery nation in 6 tries with tile reveals, distance calculations, and compass directional arrows."
       },
       {
-        "icon": "🌀",
-        "badge": "Arcade Puzzle",
-        "title": "Loop Sort: Orbit",
+        "icon": "🚚",
+        "badge": "Truck Sort Puzzle",
+        "title": "CargoLoop",
         "url": "loopsort/index.html",
-        "description": "Fast-paced, tactile conveyor loop color sorter built with 60 FPS Canvas physics, harmonic audio synthesizer, and 15 progressive levels."
+        "description": "Truck and conveyor belt color sorting puzzle. Tap trucks to unload cargo onto the moving loop and sort all trucks by color."
       }
     ]
   },

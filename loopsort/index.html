@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Loop Sort — Hyper-Casual Conveyor Color Puzzle | Mashuke Alam Jim</title>
-  <meta name="description" content="Satisfying color sorting arcade game. Release colored marbles into the conveyor loop and match them into docking bays without jamming the circuit.">
+  <title>CargoLoop — Truck & Conveyor Color Sort Puzzle | Mashuke Alam Jim</title>
+  <meta name="description" content="Tap trucks to release colored cubes onto the conveyor loop and match them into corresponding trucks without jamming the belt. Inspired by Garawell Games' Loop Sort.">
   <link rel="canonical" href="https://mashukealam.github.io/loopsort/">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Loop Sort — Hyper-Casual Conveyor Color Puzzle">
-  <meta property="og:description" content="Satisfying, tactile color sorting puzzle. Tap to release marbles and clear the loop!">
+  <meta property="og:title" content="CargoLoop — Truck & Conveyor Color Sort Puzzle">
+  <meta property="og:description" content="Tap trucks to unload cubes onto the moving conveyor loop and sort all trucks by color!">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mashukealam.github.io/loopsort/">
   <meta property="og:image" content="https://mashukealam.github.io/pic_rect.webp">
@@ -17,7 +17,7 @@
   <meta name="theme-color" content="#0f172a">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 
-  <link rel="stylesheet" href="style.css?v=1.0">
+  <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 <body>
 
@@ -38,22 +38,22 @@
   </header>
 
   <main class="stage-container">
+    <div style="text-align: center; margin-top: 6px; font-size: 0.85rem; color: #94a3b8;">
+      Tap a <strong>truck</strong> to unload its cube onto the conveyor loop!
+    </div>
+
     <canvas id="game-canvas"></canvas>
 
     <!-- Modal Win / Fail Overlay -->
     <div id="modal-overlay" class="modal-overlay">
       <div class="modal-card">
-        <h2 id="modal-title">Level Complete!</h2>
+        <h2 id="modal-title">All Trucks Sorted!</h2>
         <div id="modal-stars" class="stars-row">⭐⭐⭐</div>
         <p id="modal-desc">All colors sorted smoothly!</p>
         <button id="modal-action-btn" class="modal-btn">Next Level</button>
       </div>
     </div>
   </main>
-
-  <footer class="control-bar">
-    <button id="release-btn" class="action-btn">Tap to Release Marble</button>
-  </footer>
 
   <script src="game.js"></script>
 </body>
